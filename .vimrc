@@ -72,7 +72,10 @@ Bundle "ck3g/vim-change-hash-syntax"
 Bundle "tpope/vim-bundler"
 
 " Search
+Bundle "justinmk/vim-sneak"
 Bundle "rking/ag.vim"
+Bundle "vim-scripts/IndexedSearch"
+Bundle "nelstrom/vim-visual-star-search"
 Bundle "skwp/greplace.vim"
 
 " Misc
@@ -322,10 +325,6 @@ hi! Visual ctermbg=233
 hi! Type gui=bold
 hi! EasyMotionTarget guifg=#4CE660 gui=bold
 
-" ==== NERD tree
-" Cmd-Shift-N for nerd tree
-nmap <D-N> :NERDTreeToggle<CR>
-
 " move up/down quickly by using Cmd-j, Cmd-k
 " which will move us around by functions
 nnoremap <silent> <D-j> }
@@ -391,12 +390,6 @@ if has("gui_running")
   end
 else
   let g:CSApprox_loaded = 1
-
-  " For people using a terminal that is not Solarized
-  if exists("g:yadr_using_unsolarized_terminal")
-    let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
-  end
 endif
 
 colorscheme solarized
@@ -500,6 +493,7 @@ nnoremap <silent> ,orb :normal varar%<esc><esc>
 " NERDTree
 " Auto open nerd tree on startup
 let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:nerdtree_tabs_open_on_console_startup = 0
 " Focus in the main content window
 let g:nerdtree_tabs_focus_on_files = 1
 
@@ -743,8 +737,7 @@ endif
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command =
-        \ 'ag %s --files-with-matches -g "" --ignore \.git$\|\.hg$\|\.svn$"'
+  let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -761,6 +754,9 @@ let g:ctrlp_by_filename = 1
 " Don't jump to already open window. This is annoying if you are maintaining
 " several Tab workspaces and want to open two windows into the same file.
 let g:ctrlp_switch_buffer = 0
+
+let g:ctrlp_max_files = 0
+let g:ctrlp_show_hidden = 1
 
 " We don't want to use Ctrl-p as the mapping because
 " it interferes with YankRing (paste, then hit ctrl-p)
@@ -794,3 +790,82 @@ map ,jT :CtrlP test<CR>
 "Cmd-Shift-(M)ethod - jump to a method (tag in current file)
 "Ctrl-m is not good - it overrides behavior of Enter
 noremap <silent> <D-M> :CtrlPBufTag<CR>
+
+" Search
+
+function! GetVisual()
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+
+  return selection
+endfunction
+
+"grep the current word using K (mnemonic Kurrent)
+nnoremap <silent> K :Ag <cword><CR>
+
+"grep visual selection
+vnoremap K :<C-U>execute "Ag " . GetVisual()<CR>
+
+"grep current word up to the next exclamation point using ,K
+nnoremap ,K viwf!:<C-U>execute "Ag " . GetVisual()<CR>
+
+"grep for 'def foo'
+nnoremap <silent> ,gd :Ag 'def <cword>'<CR>
+
+",gg = Grep! - using Ag the silver searcher
+" open up a grep line, with a quote started for the search
+nnoremap ,gg :Ag ""<left>
+
+"Grep Current Partial
+function! AgCurrentPartial()
+  let l:fileNameWithoutExtension = expand('%:t:r')
+  let l:fileNameWithoutUnderscore =
+  substitute(l:fileNameWithoutExtension, '^_','','g')
+  let l:grepPattern = "render.*[\\\'\\\"].*" .
+  l:fileNameWithoutUnderscore . "[\\\'\\\"]$"
+  exec 'Ag "' . l:grepPattern . '"'
+endfunction
+
+command! AgCurrentPartial call AgCurrentPartial()
+"
+nnoremap ,gcp :AgCurrentPartial<CR>
+
+"Grep for usages of the current file
+nnoremap ,gcf :exec "Ag " . expand("%:t:r")<CR>
+
+" Ag
+" Stolen from Steve Losh vimrc:
+" https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
+" Open a Quickfix window for the last search.
+nnoremap <silent> <leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Ag for the last search.
+nnoremap <silent> <leader>qa/ :execute "Ag! '" .  substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+
+" GUI options
+" Disable the scrollbars (NERDTree)
+set guioptions-=r
+set guioptions-=L
+
+" Disable the macvim toolbar
+set guioptions-=T
+
+" Surround
+" via: http://whynotwiki.com/Vim
+" Ruby
+" Use v or # to get a variable interpolation (inside of a string)}
+" ysiw#   Wrap the token under the cursor in #{}
+" v...s#  Wrap the selection in #{}
+let g:surround_113 = "#{\r}"   " v
+let g:surround_35  = "#{\r}"   " #
+
+" Select text in an ERb file with visual mode and then press s- or s=
+" Or yss- to do entire line.
+let g:surround_45 = "<% \r %>"    " -
+let g:surround_61 = "<%= \r %>"   " =
