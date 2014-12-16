@@ -40,6 +40,7 @@ Bundle "skwp/vim-colors-solarized"
 Bundle "itchyny/lightline.vim"
 
 " Git
+Bundle "godlygeek/csapprox"
 Bundle "gregsexton/gitv"
 Bundle "mattn/gist-vim"
 Bundle "tpope/vim-fugitive"
