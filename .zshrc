@@ -9,7 +9,6 @@ alias glog="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
 alias passgen='ruby ~/code/rb/password_generator/password_generator.rb'
 
-export TERM="screen-256color"
 alias tmux="tmux -2"
 alias vim="mvim -v"
 alias archey="archey -c"

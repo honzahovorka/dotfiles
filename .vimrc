@@ -1,31 +1,7 @@
+set enc=utf-8
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
-" Enable per project .vimrc
-set exrc
-set secure
-
-" ================ General Config ====================
-set number                      "Line numbers are good
-set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000                "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
-
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
-"turn on syntax highlighting
-syntax on
-
-" Change leader to a comma because the backslash is too far away
-let mapleader=","
 
 " =============== Vundle Initialization ===============
 set rtp+=~/.vim/bundle/vundle/
@@ -99,24 +75,94 @@ Bundle "tpope/vim-unimpaired"
 Bundle "vim-scripts/lastpos.vim"
 Bundle "vim-scripts/sudo.vim"
 
+" Enable per project .vimrc
+set exrc
+set secure
+
+" ================ General Config ====================
+set number                      "Line numbers are good
+set backspace=indent,eol,start  "Allow backspace in insert mode
+set history=1000                "Store lots of :cmdline history
+set showcmd                     "Show incomplete cmds down the bottom
+set showmode                    "Show current mode down the bottom
+set gcr=a:blinkon0              "Disable cursor blink
+set visualbell                  "No sounds
+set autoread                    "Reload files changed outside vim
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+"turn on syntax highlighting
+syntax on
+filetype plugin indent on
+
+" Change leader to a comma because the backslash is too far away
+let mapleader=","
+
 " ================ turn off swap files ==============
 set noswapfile
 set nobackup
 set nowb
 
 " ================ Indentation ======================
-set autoindent
+set autoindent " set auto indent
 set smartindent
 set smarttab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
-set expandtab
+set expandtab " use spaces, not tab characters
 
-filetype plugin on
-filetype indent on
+" ================ Search Settings  =================
+set incsearch       " Find the next match as we type the search
+set hlsearch        " Hilight searches by default
+set viminfo='100,f1 " Save up to 100 marks, enable capital marks
+set ignorecase      " Ignore case when searching...
+set smartcase       " ...unless we type a capital
+
+" ================ Folds ============================
+set foldmethod=indent   "fold based on indent
+set foldnestmax=3       "deepest fold is 3 levels
+set nofoldenable        "dont fold by default
+
+" ================ Completion =======================
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*/node_modules/*
+set wildignore+=*.keep
+set wildignore+=*/.git/*,*/.hg/*
+
+" ================ Scrolling ========================
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
+
+" ================ Slow terminal ========================
+" http://superuser.com/a/625994
+let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
+set nocursorline        " Don't paint cursor line
+set nocursorcolumn      " Don't paint cursor column
+set lazyredraw          " Wait to redraw
+set scrolljump=8        " Scroll 8 lines at a time at bottom/top
+let html_no_rendering=1 " Don't render italic, bold, links in HTML"
+
+set showmatch                     " show bracket matches
+set mouse=a                       " enable mouse support
 
 " Display tabs and trailing spaces visually
+set list
 set list listchars=tab:»·,trail:·,eol:¬,extends:❯,precedes:❮
 map <Leader>nl :set nolist<CR>
 map <Leader>sl :set list<CR>
@@ -125,7 +171,6 @@ set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
 " ================ github.com/sjl/dotfiles ===========
-"
 " Make sure Vim returns to the same line when you reopen a file.
 augroup line_return
     au!
@@ -201,42 +246,7 @@ let g:rails_projections = {
 " http://stackoverflow.com/a/5357194/653660
 nmap <silent> cp "_cw<C-R>"<Esc>
 
-" ================ Folds ============================
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-
-" ================ Completion =======================
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-
-" ================ Scrolling ========================
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-" ================ Slow terminal ========================
-" http://superuser.com/a/625994
-let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
-set noshowmatch         " Don't match parentheses/brackets
-set nocursorline        " Don't paint cursor line
-set nocursorcolumn      " Don't paint cursor column
-set lazyredraw          " Wait to redraw
-set scrolljump=8        " Scroll 8 lines at a time at bottom/top
-let html_no_rendering=1 " Don't render italic, bold, links in HTML"
-
 " ================ Custom Settings ========================
-
 " Better key maps for switching between controller and view
 nnoremap ,vv :Rview<cr>
 nnoremap ,cc :Rcontroller<cr>
@@ -253,6 +263,9 @@ nnoremap <silent> ,gf   :vertical botright wincmd F<CR>
 nnoremap <silent> <C-F> :vertical botright wincmd F<CR>
 
 " Solarized theme
+colorscheme solarized
+set background=dark
+
 hi! link txtBold Identifier
 hi! link zshVariableDef Identifier
 hi! link zshFunction Function
@@ -326,6 +339,28 @@ hi! Visual ctermbg=233
 hi! Type gui=bold
 hi! EasyMotionTarget guifg=#4CE660 gui=bold
 
+" Make it beautiful - colors and fonts
+if has("gui_running")
+  "tell the term has 256 colors
+  set t_Co=256
+
+  " Show tab number (useful for Cmd-1, Cmd-2.. mapping)
+  " For some reason this doesn't work as a regular set command,
+  " (the numbers don't show up) so I made it a VimEnter event
+  autocmd VimEnter * set guitablabel=%N:\ %t\ %M
+  set lines=60
+  set columns=190
+
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ XL\ 12,Inconsolata\ 15,Monaco\ 12
+  else
+    set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
+  end
+else
+  let g:CSApprox_loaded = 1
+endif
+
+
 " move up/down quickly by using Cmd-j, Cmd-k
 " which will move us around by functions
 nnoremap <silent> <D-j> }
@@ -364,37 +399,6 @@ nnoremap <D-Down> <C-w>-
 nnoremap <D-Left> <C-w><
 nnoremap <D-Right>  <C-w>>
 
-" ============================
-" Tabularize - alignment
-" ============================
-" Hit Cmd-Shift-A then type a character you want to align by
-nmap <D-A> :Tabularize /
-vmap <D-A> :Tabularize /
-
-" Make it beautiful - colors and fonts
-if has("gui_running")
-  "tell the term has 256 colors
-  set t_Co=256
-
-  " Show tab number (useful for Cmd-1, Cmd-2.. mapping)
-  " For some reason this doesn't work as a regular set command,
-  " (the numbers don't show up) so I made it a VimEnter event
-  autocmd VimEnter * set guitablabel=%N:\ %t\ %M
-
-  set lines=60
-  set columns=190
-
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ XL\ 12,Inconsolata\ 15,Monaco\ 12
-  else
-    set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
-  end
-else
-  let g:CSApprox_loaded = 1
-endif
-
-colorscheme solarized
-set background=dark
 
 " Strip trailing whitespaces
 " via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
@@ -465,13 +469,6 @@ nnoremap C-y :YRShow<CR>
 " w!! to write a file as sudo
 " stolen from Steve Losh
 cmap w!! w !sudo tee % >/dev/null
-
-" ================ Search Settings  =================
-set incsearch       " Find the next match as we type the search
-set hlsearch        " Hilight searches by default
-set viminfo='100,f1 " Save up to 100 marks, enable capital marks
-set ignorecase      " Ignore case when searching...
-set smartcase       " ...unless we type a capital
 
 " If you visually select something and hit paste
 " that thing gets yanked into your buffer. This
@@ -625,17 +622,7 @@ imap <c-l> <space>=><space>
 "Go to last edit location with ,.
 nnoremap ,. '.
 
-"When typing a string, your quotes auto complete. Move past the quote
-"while still in insert mode by hitting Ctrl-a. Example:
-"
-" type 'foo<c-a>
-"
-" the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
-" put the cursor right after the quote
-imap <C-a> <esc>wa
-
 " ==== NERD tree
-" Cmd-Shift-N for nerd tree
 nmap wm :NERDTreeToggle<CR>
 " Open the project tree and expose current file in the nerdtree with Ctrl-\
 nnoremap <silent> <C-\> :NERDTreeFind<CR>:vertical res 30<CR>
@@ -654,7 +641,6 @@ nnoremap <silent> ,x :bn<CR>
 " Window/Tab/Split Manipulation
 " ==============================
 " Move between split windows by using the four directions H, L, K, J
-" NOTE: This has moved to vim/settings/vim-tmux-navigator.vim.
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <C-k> <C-w>k
@@ -676,14 +662,12 @@ nnoremap <silent> ss <C-w>s
 
 " create <%= foo %> erb tags using Ctrl-k in edit mode
 imap <silent> <C-K> <%=   %><Esc>3hi
-
 " create <%= foo %> erb tags using Ctrl-j in edit mode
 imap <silent> <C-J> <%  %><Esc>2hi
 
 " ============================
 " Shortcuts for everyday tasks
 " ============================
-
 " copy current filename into system clipboard - mnemonic: (c)urrent(f)ilename
 " this is helpful to paste someone the path you're looking at
 nnoremap <silent> ,cf :let @* = expand("%:~")<CR>
@@ -722,45 +706,30 @@ vmap ,a :Tabularize /
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
-" Get the current highlight group. Useful for then remapping the color
-map ,hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" .  synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" .  synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
-
-" ,hp = html preview
-map <silent> ,hp :!open -a Safari %<CR><CR>
-
-" Session autorsave
+" Session autosave
 let g:session_autosave = 'no'
 
 " CtrlP
-if exists("g:ctrlp_user_command")
-  unlet g:ctrlp_user_command
-endif
-
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-else
-  " Fall back to using git ls-files if Ag is not available
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
-
-" Default to filename searches - so that appctrl will find application
-" controller
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
+" Default to filename searches - so that appctrl will find application controller
 let g:ctrlp_by_filename = 1
-
 " Don't jump to already open window. This is annoying if you are maintaining
 " several Tab workspaces and want to open two windows into the same file.
 let g:ctrlp_switch_buffer = 0
-
-let g:ctrlp_max_files = 0
+" Show dotfiles
 let g:ctrlp_show_hidden = 1
+" " Set no file limit
+let g:ctrlp_max_files = 0
+" " Do not clear filenames cache
+let g:ctrlp_clear_cache_on_exit = 0
+
+let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
 
 " We don't want to use Ctrl-p as the mapping because
-" it interferes with YankRing (paste, then hit ctrl-p)
 let g:ctrlp_map = ',t'
 nnoremap <silent> ,t :CtrlP<CR>
 
@@ -849,24 +818,5 @@ nnoremap <silent> <leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " Ag for the last search.
 nnoremap <silent> <leader>qa/ :execute "Ag! '" .  substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
-" GUI options
-" Disable the scrollbars (NERDTree)
-set guioptions-=r
-set guioptions-=L
-
-" Disable the macvim toolbar
-set guioptions-=T
-
-" Surround
-" via: http://whynotwiki.com/Vim
-" Ruby
-" Use v or # to get a variable interpolation (inside of a string)}
-" ysiw#   Wrap the token under the cursor in #{}
-" v...s#  Wrap the selection in #{}
-let g:surround_113 = "#{\r}"   " v
-let g:surround_35  = "#{\r}"   " #
-
-" Select text in an ERb file with visual mode and then press s- or s=
-" Or yss- to do entire line.
-let g:surround_45 = "<% \r %>"    " -
-let g:surround_61 = "<%= \r %>"   " =
+" At the bottom of file
+au BufNewFile,BufRead *.coffee set filetype=coffee
