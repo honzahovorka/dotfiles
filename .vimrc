@@ -33,6 +33,7 @@ Bundle "groenewege/vim-less.git"
 Bundle "itspriddle/vim-jquery.git"
 Bundle "kchmck/vim-coffee-script"
 Bundle "garbas/vim-snipmate.git"
+Bundle 'mattn/emmet-vim'
 
 " Project
 Bundle "jistr/vim-nerdtree-tabs.git"
@@ -47,6 +48,7 @@ Bundle "vim-ruby/vim-ruby.git"
 Bundle "Keithbsmiley/rspec.vim"
 Bundle "ck3g/vim-change-hash-syntax"
 Bundle "tpope/vim-bundler"
+Bundle 'thoughtbot/vim-rspec'
 
 " Search
 Bundle "justinmk/vim-sneak"
@@ -74,6 +76,9 @@ Bundle "tpope/vim-surround.git"
 Bundle "tpope/vim-unimpaired"
 Bundle "vim-scripts/lastpos.vim"
 Bundle "vim-scripts/sudo.vim"
+Bundle 'tpope/vim-obsession'
+Bundle 'jgdavey/tslime.vim'
+Bundle "godlygeek/tabular"
 
 " Enable per project .vimrc
 set exrc
@@ -817,6 +822,15 @@ nnoremap <silent> <leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Ag for the last search.
 nnoremap <silent> <leader>qa/ :execute "Ag! '" .  substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+
+let g:rspec_command = 'call Send_to_Tmux("zeus rspec {spec}\n")'
+map <Leader>rt :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+map <Leader>ra :call RunAllSpecs()<CR>
+
+" Emmet
+let g:user_emmet_leader_key='<C-Z>'
 
 " At the bottom of file
 au BufNewFile,BufRead *.coffee set filetype=coffee
