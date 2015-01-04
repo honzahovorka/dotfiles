@@ -27,11 +27,6 @@ Bundle "mhinz/vim-signify"
 " Languages
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "pangloss/vim-javascript"
-Bundle "othree/javascript-libraries-syntax.vim"
-Bundle "groenewege/vim-less.git"
-Bundle "itspriddle/vim-jquery.git"
-Bundle "kchmck/vim-coffee-script"
 Bundle "garbas/vim-snipmate.git"
 Bundle 'mattn/emmet-vim'
 
@@ -49,6 +44,16 @@ Bundle "Keithbsmiley/rspec.vim"
 Bundle "ck3g/vim-change-hash-syntax"
 Bundle "tpope/vim-bundler"
 Bundle 'thoughtbot/vim-rspec'
+
+" Javascript
+Bundle "pangloss/vim-javascript"
+Bundle 'jelera/vim-javascript-syntax'
+Bundle "othree/javascript-libraries-syntax.vim"
+Bundle "itspriddle/vim-jquery.git"
+Bundle "kchmck/vim-coffee-script"
+
+" CSS
+Bundle "groenewege/vim-less.git"
 
 " Search
 Bundle "justinmk/vim-sneak"
@@ -79,6 +84,7 @@ Bundle "vim-scripts/sudo.vim"
 Bundle 'tpope/vim-obsession'
 Bundle 'jgdavey/tslime.vim'
 Bundle "godlygeek/tabular"
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " Enable per project .vimrc
 set exrc
@@ -163,7 +169,7 @@ set lazyredraw          " Wait to redraw
 set scrolljump=8        " Scroll 8 lines at a time at bottom/top
 let html_no_rendering=1 " Don't render italic, bold, links in HTML"
 
-set showmatch                     " show bracket matches
+set noshowmatch                   " don't jump between matching brackets
 set mouse=a                       " enable mouse support
 
 " Display tabs and trailing spaces visually
@@ -172,8 +178,9 @@ set list listchars=tab:»·,trail:·,eol:¬,extends:❯,precedes:❮
 map <Leader>nl :set nolist<CR>
 map <Leader>sl :set list<CR>
 
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
+set nowrap       " Don't wrap lines
+set linebreak    " Wrap lines at convenient points
+set paste        " Don't try to ident paste
 
 " ================ github.com/sjl/dotfiles ===========
 " Make sure Vim returns to the same line when you reopen a file.
@@ -831,6 +838,8 @@ map <Leader>ra :call RunAllSpecs()<CR>
 
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_expandabbr_key='<Tab>'
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " At the bottom of file
 au BufNewFile,BufRead *.coffee set filetype=coffee
