@@ -12,6 +12,8 @@ alias passgen='ruby ~/code/rb/password_generator/password_generator.rb'
 alias tmux="tmux -2"
 alias vim="mvim -v"
 alias archey="archey -c"
+alias l="ls -al"
+alias vi=vim
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:~/bin:~/Users/honzahovorka/pear/bin:$PATH"
