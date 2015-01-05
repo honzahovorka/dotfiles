@@ -180,7 +180,11 @@ map <Leader>sl :set list<CR>
 
 set nowrap       " Don't wrap lines
 set linebreak    " Wrap lines at convenient points
-set paste        " Don't try to ident paste
+
+" Paste
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>k
 
 " ================ github.com/sjl/dotfiles ===========
 " Make sure Vim returns to the same line when you reopen a file.
