@@ -14,6 +14,13 @@ alias vim="mvim -v"
 alias archey="archey -c"
 alias l="ls -al"
 alias vi=vim
+alias rguard="bin/guard"
+
+# http://linhmtran168.github.io/blog/2013/12/15/ditching-oh-my-zsh-for-prezto/
+alias tma='tmux attach -d -t'
+alias tmn='tmux new -s $(basename $(pwd))'
+alias tml='tmux list-sessions'
+
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:~/bin:~/Users/honzahovorka/pear/bin:$PATH"
