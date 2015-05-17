@@ -15,12 +15,23 @@ alias archey="archey -c"
 alias l="ls -al"
 alias vi=vim
 alias rguard="bin/guard"
+alias gst="git status"
+alias gph="git push heroku master"
+
+alias chrome='open -a Google\ Chrome --args --disable-async-dns'
 
 # http://linhmtran168.github.io/blog/2013/12/15/ditching-oh-my-zsh-for-prezto/
 alias tma='tmux attach -d -t'
 alias tmn='tmux new -s $(basename $(pwd))'
 alias tml='tmux list-sessions'
+alias tmk="tmux kill-session -t $1"
 
+# https://jonsuh.com/blog/bash-command-line-shortcuts/
+alias clr="clear" # Clear your terminal screen
+alias flush="sudo discoveryutil udnsflushcaches" # Flush DNS (Yosemite)
+alias ip="curl icanhazip.com" # Your public IP address
+alias o="open ." # Open the current directory in Finder
+alias ut="uptime" # Computer uptime
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:~/bin:~/Users/honzahovorka/pear/bin:$PATH"
@@ -35,6 +46,9 @@ export LANG=en_US.UTF-8
 # http://superuser.com/a/838840
 ulimit -n 65536
 ulimit -u 2048
+
+# tmuxinator completion
+source ~/.zsh/tmuxinator.zsh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
