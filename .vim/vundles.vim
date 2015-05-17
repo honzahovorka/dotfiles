@@ -12,6 +12,7 @@ Bundle "itchyny/lightline.vim"
 " Git
 Bundle "godlygeek/csapprox"
 Bundle "gregsexton/gitv"
+Bundle "mattn/webapi-vim"
 Bundle "mattn/gist-vim"
 Bundle "tpope/vim-fugitive"
 Bundle "tpope/vim-git"
@@ -24,6 +25,7 @@ Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate.git"
 Bundle "honza/vim-snippets"
 Bundle "mattn/emmet-vim"
+Bundle "elixir-lang/vim-elixir"
 
 " Project
 Bundle "jistr/vim-nerdtree-tabs.git"
@@ -39,6 +41,7 @@ Bundle "vim-ruby/vim-ruby.git"
 Bundle "Keithbsmiley/rspec.vim"
 Bundle "ck3g/vim-change-hash-syntax"
 Bundle "tpope/vim-bundler"
+Bundle 'thoughtbot/vim-rspec'
 
 " Javascript
 Bundle "pangloss/vim-javascript"
@@ -46,6 +49,7 @@ Bundle "jelera/vim-javascript-syntax"
 Bundle "othree/javascript-libraries-syntax.vim"
 Bundle "itspriddle/vim-jquery.git"
 Bundle "kchmck/vim-coffee-script"
+Bundle "othree/yajs.vim"
 
 " CSS
 Bundle "groenewege/vim-less.git"
