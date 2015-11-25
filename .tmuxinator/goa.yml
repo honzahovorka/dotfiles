@@ -10,7 +10,7 @@ root: ~/projects/www/GOA
 # pre: sudo /etc/rc.d/mysqld start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: rvm use 2.2.2@goa
+pre_window: rvm use 2.2.3@goa
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -23,14 +23,13 @@ pre_window: rvm use 2.2.2@goa
 
 windows:
   - editor:
-      layout: 6929,425x109,0,0[425x94,0,0,0,425x14,0,95{307x14,0,95,2,117x14,308,95,3}]
+      layout: 0120,425x112,0,0[425x96,0,0,0,425x15,0,97,7]
       panes:
         - vim
-        - sleep 10; zeus rake spec
-        - zeus start
-  - console: sleep 10; zeus c
+        - bundle exec rake spec
+  - console:
   - server: foreman start
   - redis: redis-server /usr/local/etc/redis.conf
   - logs: tail -f log/development.log
-  - git: gws
+  - git:
   - heroku: heroku logs -t
