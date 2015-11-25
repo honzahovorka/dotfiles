@@ -9,3 +9,5 @@ do
   rm -rf ~/.git
   rm -f ~/LICENSE
 done
+
+ln -s $(pwd)/nvim ~/.config/nvim
