@@ -84,21 +84,11 @@ set mouse=a                       " enable mouse support
 " Display tabs and trailing spaces visually
 set list
 set list listchars=tab:»·,trail:·,eol:¬,extends:❯,precedes:❮
-map <Leader>nl :set nolist<CR>
-map <Leader>sl :set list<CR>
-
 set nowrap       " Don't wrap lines
 set linebreak    " Wrap lines at convenient points
 
-so ~/.config/nvim/appearance.vim
-
-" =============== Settings ===============
-so ~/.config/nvim/settings.vim
-
 " slow vim in terminal
 let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
-set nocursorline        " Don't paint cursor line
-set nocursorcolumn      " Don't paint cursor column
 set lazyredraw          " Wait to redraw
 set ttyfast
 set scrolljump=8        " Scroll 8 lines at a time at bottom/top
@@ -106,9 +96,9 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 set clipboard=unnamed
 
-" Hack to get C-h working in neovim
-" https://github.com/neovim/neovim/issues/2048
-nmap <BS> <C-W>h
+so ~/.config/nvim/appearance.vim
+so ~/.config/nvim/settings.vim
+so ~/.config/nvim/mappings.vim
 
 " Python3 support for neovim
 let g:python3_host_prog = '/usr/local/bin/python3'
