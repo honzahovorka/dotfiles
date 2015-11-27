@@ -222,14 +222,7 @@ let g:ctrlp_max_files = 0
 " Do not clear filenames cache
 let g:ctrlp_clear_cache_on_exit = 0
 
-unlet g:ctrlp_user_command
-let g:ctrlp_user_command = {
-  \ 'types': {
-    \ 1: ['.git', 'git --git-dir=%s/.git ls-files -oc --exclude-standard'],
-    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-  \ 'fallback': 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-  \ }
+let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
 
 " We don't want to use Ctrl-p as the mapping because
 let g:ctrlp_map = ',t'
