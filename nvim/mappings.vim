@@ -27,6 +27,7 @@ nnoremap ,cc :Rcontroller<cr>
 " Open the Ag command and place the cursor into the quotes
 nmap ,ag :Ag ""<Left>
 nmap ,af :AgFile ""<Left>
+nmap ,aw :Ag "<cword>"<cr>
 
 " Automatically jump to a file at the correct line number
 " i.e. if your cursor is over /some/path.rb:50 then using 'gf' on it will take

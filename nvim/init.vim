@@ -96,6 +96,9 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 set clipboard=unnamed
 
+" path for ruby develepment
+set path+=lib/**,spec/**
+
 so ~/.config/nvim/appearance.vim
 so ~/.config/nvim/settings.vim
 so ~/.config/nvim/mappings.vim
