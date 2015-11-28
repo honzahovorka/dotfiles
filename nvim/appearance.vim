@@ -74,7 +74,7 @@ hi! CursorLine cterm=NONE gui=NONE
 hi! Visual ctermbg=233
 hi! Type gui=bold
 hi! EasyMotionTarget guifg=#4CE660 gui=bold
-"
+
 " Make it beautiful - colors and fonts
 if has("gui_running")
   "tell the term has 256 colors

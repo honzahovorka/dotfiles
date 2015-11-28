@@ -5,7 +5,6 @@ Plug 'chrisbra/color_highlight'
 Plug 'skwp/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 
-"
 Plug 'godlygeek/csapprox'
 Plug 'gregsexton/gitv'
 Plug 'mattn/webapi-vim'

@@ -96,6 +96,9 @@ let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
 set clipboard=unnamed
 
+set textwidth=80
+set colorcolumn=+1
+
 " path for ruby develepment
 set path+=lib/**,spec/**
 
