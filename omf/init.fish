@@ -1,78 +1,75 @@
 set -x EDITOR /usr/local/bin/nvim
 
-balias clr 'clear'
-
-balias l 'ls -al'
-
-balias tmux 'tmux -2'
-balias v 'nvim'
+alias tmux 'tmux -2'
+alias vim 'nvim'
+alias v 'nvim'
 
 # Hub
-balias git hub
+alias git hub
 
 # git
-balias g git
-balias gb 'git branch'
-balias gbc 'git checkout -b'
-balias gbl 'git branch -v'
-balias gbx 'git branch -d'
-balias gbX 'git branch -D'
-balias gbm 'git branch -m'
-balias gc 'git commit --verbose'
-balias gcm 'git commit --message'
-balias gr 'git rebase'
-balias gra 'git rebase --abort'
-balias grc 'git rebase --continue'
-balias gri 'git rebase --interactive'
-balias grs 'git rebase --skip'
-balias gs 'git stash'
-balias gsa 'git stash apply'
-balias gsx 'git stash drop'
-balias gsl 'git stash list'
-balias gsd 'git stash show --patch --stat'
-balias gsp 'git stash pop'
-balias gsr 'git-stash-recover'
-balias gst 'git status'
-balias gp 'git push'
-balias gph 'git push heroku master'
-balias ga 'git add'
-balias gA 'git add --all'
-balias gpr 'git pull --rebase'
-balias gco 'git checkout'
-balias gcom 'git checkout master'
+alias g git
+alias gb 'git branch'
+alias gbc 'git checkout -b'
+alias gbl 'git branch -v'
+alias gbx 'git branch -d'
+alias gbX 'git branch -D'
+alias gbm 'git branch -m'
+alias gc 'git commit --verbose'
+alias gcm 'git commit --message'
+alias gr 'git rebase'
+alias gra 'git rebase --abort'
+alias grc 'git rebase --continue'
+alias gri 'git rebase --interactive'
+alias grs 'git rebase --skip'
+alias gs 'git stash'
+alias gsa 'git stash apply'
+alias gsx 'git stash drop'
+alias gsl 'git stash list'
+alias gsd 'git stash show --patch --stat'
+alias gsp 'git stash pop'
+alias gsr 'git-stash-recover'
+alias gst 'git status'
+alias gp 'git push'
+alias gph 'git push heroku master'
+alias ga 'git add'
+alias gA 'git add --all'
+alias gpr 'git pull --rebase'
+alias gco 'git checkout'
+alias gcom 'git checkout master'
 
 # Homebrew
-balias brewc 'brew cleanup'
-balias brewi 'brew install'
-balias brewl 'brew list'
-balias brews 'brew search'
-balias brewu 'brew update; and brew upgrade'
-balias brewx 'brew remove'
+alias brewc 'brew cleanup'
+alias brewi 'brew install'
+alias brewl 'brew list'
+alias brews 'brew search'
+alias brewu 'brew update; and brew upgrade'
+alias brewx 'brew remove'
 
 # Bundler
-balias be 'bundle exec'
-balias ber 'bundle exec rails'
-balias bi 'bundle install'
-balias bu 'bundle update'
+alias be 'bundle exec'
+alias ber 'bundle exec rails'
+alias bi 'bundle install'
+alias bu 'bundle update'
 
 # Tmux
-balias tma 'tmux attach -d -t'
-balias tmn 'tmux new -s (basename (pwd))'
-balias tml 'tmux list-sessions'
-balias tmk 'tmux kill-session -t $1'
-balias mux tmuxinator
+alias tma 'tmux attach -d -t'
+alias tmn 'tmux new -s (basename (pwd))'
+alias tml 'tmux list-sessions'
+alias tmk 'tmux kill-session -t $1'
 
 # Custom
-balias mk 'mkdir $1; cd $1'
-balias preview "fzf --preview 'bat --color \"always\" {}'"
-balias cat bat
-balias du "ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-balias help tldr
-balias tf terraform
+alias mk 'mkdir $1; cd $1'
+alias preview "fzf --preview 'bat --color \"always\" {}'"
+alias cat bat
+alias du "ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias help tldr
+alias tf terraform
 
-balias md 'glow'
-balias c 'clear'
+alias md 'glow'
+alias c 'clear'
+alias clr 'clear'
 
-balias l 'exa -l'
-balias ll 'exa -l'
-balias la 'exa -la'
+alias l 'exa -la'
+alias ll 'exa -l'
+alias la 'exa -la'

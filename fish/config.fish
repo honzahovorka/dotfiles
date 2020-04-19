@@ -2,7 +2,7 @@
 set -gx OMF_PATH "/Users/honzahovorka/.local/share/omf"
 
 # Customize Oh My Fish configuration path.
-#set -gx OMF_CONFIG "/Users/honzahovorka/.config/omf"
+set -gx OMF_CONFIG "/Users/honzahovorka/.config/omf"
 
 # FZF command
 set -x FZF_DEFAULT_COMMAND 'rg --files --no-ignore-vcs --hidden'
