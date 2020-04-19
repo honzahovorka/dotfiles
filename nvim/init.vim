@@ -15,6 +15,7 @@ set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
+set updatetime=100
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -69,7 +70,7 @@ set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*/node_modules/*
 set wildignore+=*.keep
-" set wildignore+=*/.git/*,*/.hg/*
+set wildignore+=*/.git/*,*/.hg/*
 
 " ================ Scrolling ========================
 set scrolloff=8                   " start scrolling when we're 8 lines away from margins
@@ -94,20 +95,15 @@ set ttyfast
 set scrolljump=8        " Scroll 8 lines at a time at bottom/top
 let html_no_rendering=1 " Don't render italic, bold, links in HTML
 
-set clipboard=unnamed
-
-set textwidth=80
-set colorcolumn=+1
-
-" path for ruby develepment
-set path+=lib/**,spec/**
+set textwidth=120
+set colorcolumn=0
 
 so ~/.config/nvim/appearance.vim
 so ~/.config/nvim/settings.vim
 so ~/.config/nvim/mappings.vim
+so ~/.config/nvim/coc.vim
+so ~/.config/nvim/fzf.vim
 
 " Python3 support for neovim
+let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
-
-" At the bottom of file
-au BufNewFile,BufRead *.coffee set filetype=coffee

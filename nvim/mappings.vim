@@ -5,24 +5,15 @@ map <Leader>sl :set list<CR>
 map <tab> %
 
 " Move to the begining of the line and to the end of the line
-noremap H ^
-noremap L g_
+"noremap H ^
+"noremap L g_
 
 " Map semicilon to colon
 nnoremap ; :
 "
-" Reload ctags
-map <Leader>tar :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg --languages=-sql<CR><CR>
-map <Leader>tap :!ctags --extra=+f --exclude=.hg --exclude=log --exclude=libs --exclude=temp -R * ~/code/php/libs/Nette/*<CR><CR>
-map <Leader>ta :!ctags --extra=+f --exclude=.hg --exclude=.git -R *<CR><CR>
-
 " change word from register
 " http://stackoverflow.com/a/5357194/653660
 nmap <silent> cp "_cw<C-R>"<Esc>
-
-" Better key maps for switching between controller and view
-nnoremap ,vv :Rview<cr>
-nnoremap ,cc :Rcontroller<cr>
 
 " Open the Ag command and place the cursor into the quotes
 nmap ,ag :Ag ""<Left>
@@ -58,9 +49,6 @@ vnoremap p "_dP
 " hit ,f to find the definition of the current class
 " this uses ctags. the standard way to get this is Ctrl-]
 nnoremap <silent> ,f <C-]>
-
-" use ,F to jump to tag in a vertical split
-nnoremap <silent> ,F :let word=expand("<cword>")<CR>:vsp<CR>:wincmd w<cr>:exec("tag ". word)<cr>
 
 " Navigate to the block surrounding this one
 nnoremap <silent> ,orb :normal varar%<esc><esc>
@@ -121,14 +109,6 @@ vmap ,{ c{<C-R>"}<ESC>
 
 map ,` ysiw`
 
-"Go to last edit location with ,.
-nnoremap ,. '.
-
-" NERDtree
-nmap <silent><Leader>n :NERDTreeToggle<CR>
-" Open the project tree and expose current file in the nerdtree
-nmap <silent><Leader>nf :NERDTreeFind<CR>:vertical res 30<CR>
-
 " ,q to toggle quickfix window (where you have stuff like Ag)
 " ,oq to open it back up (rare)
 nmap <silent> ,qc :cclose<CR>
@@ -139,11 +119,6 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-j> <C-w>j
-
-" create <%= foo %> erb tags using Ctrl-k in edit mode
-imap <silent> <C-K> <%=   %><Esc>3hi
-" create <%= foo %> erb tags using Ctrl-j in edit mode
-imap <silent> <C-J> <%  %><Esc>2hi
 
 " copy current filename into system clipboard - mnemonic: (c)urrent(f)ilename
 " this is helpful to paste someone the path you're looking at
@@ -164,11 +139,6 @@ noremap ,hl :set hlsearch! hlsearch?<CR>
 nnoremap ' `
 nnoremap ` '
 
-" Tabularize - alignment
-" Hit Cmd-Shift-A then type a character you want to align by
-nmap ,a :Tabularize /
-vmap ,a :Tabularize /
-
 " keep visually selected block when aligning
 vmap < <gv
 vmap > >gv
@@ -185,9 +155,6 @@ map <Down> <Nop>
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
 
-" Vimux
-map <Leader>c :VimuxPromptCommand<cr>
-
 " Fugitive Shortcuts
 nmap <silent> <leader>gs :Gstatus<cr>
 nmap <leader>ge :Gedit<cr>
@@ -195,6 +162,35 @@ nmap <silent><leader>gr :Gread<cr>
 nmap <silent><leader>gb :Gblame<cr>
 nmap <silent><leader>gd :Gdiff<cr>
 
+" <leader><leader> toggles between buffers
+nnoremap <space><space> <c-^>
+
 " Hack to get C-h working in neovim
 " https://github.com/neovim/neovim/issues/2048
 nmap <BS> <C-W>h
+
+" FZF
+nnoremap <silent> <leader>f :FZF<CR>
+nnoremap <silent> <leader>e :call FzfFilePreview()<CR>
+
+" Get rid of ESC
+imap jj <Esc>
+
+" Open hotkeys
+map <C-p> :Files<CR>
+nnoremap <C-g> :Rg<Cr>
+nmap <leader>g :Rg<CR>
+nmap <leader>. :Files<CR>
+nmap <leader>; :Buffers<CR>
+
+" Very magic search by default
+nnoremap ? ?\v
+nnoremap / /\v
+cnoremap %s/ %sm/
+
+" Ctrl+/ to toggle comments
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+
+" hange a word and then to change the next occurrence of it you can just do '.'
+nnoremap <leader>x *``cgn

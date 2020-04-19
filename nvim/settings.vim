@@ -30,32 +30,6 @@ set shell=/bin/bash
 " Use ack instead of grep
 set grepprg=ack
 
-" [rails.vim] projections - typing `:Efactory users` will open the users factory
-" https://github.com/pjg/dotfiles
-let g:rails_projections = {
-      \ "test/factories/*.rb": {
-      \   "command":   "factory",
-      \   "affinity":  "collection",
-      \   "alternate": "app/models/%i.rb",
-      \   "related":   "db/schema.rb#%s",
-      \   "test":      "test/models/%i_test.rb",
-      \   "template":  "FactoryGirl.define do\n  factory :%i do\n  end\nend",
-      \   "keywords":  "factory sequence"
-      \ },
-      \ "spec/factories/*.rb": {
-      \   "command":   "factory",
-      \   "affinity":  "collection",
-      \   "alternate": "app/models/%i.rb",
-      \   "related":   "db/schema.rb#%s",
-      \   "test":      "spec/models/%i_test.rb",
-      \   "template":  "FactoryGirl.define do\n  factory :%i do\n  end\nend",
-      \   "keywords":  "factory sequence"
-      \ }
-      \}
-
-" ================ Custom Rails commands ===========
-command! Rroutes :e config/routes.rb
-
 " Strip trailing whitespaces
 " via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
 " Strip trailing whitespace
@@ -105,183 +79,68 @@ endfunction
 
 command! -nargs=* Wrap :call SetupWrapping()<CR>
 
-" NERDTree
-" Auto open nerd tree on startup
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:nerdtree_tabs_open_on_console_startup = 0
-" Focus in the main content window
-let g:nerdtree_tabs_focus_on_files = 1
-
-let g:NERDTreeWinSize = 30
-let g:NERDTreeShowHidden = 1
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_smart_case = 1
-" Default # of completions is 100, that's crazy.
-let g:deoplete#max_list = 5
-" Set minimum syntax keyword length.
-let g:deoplete#auto_completion_start_length = 3
-" This makes sure we use deoplete completefunc instead of
-" the one in rails.vim, otherwise this plugin will crap out.
-let g:deoplete#force_overwrite_completefunc = 1
-" Define keyword.
-if !exists('g:deoplete#keyword_patterns')
-  let g:deoplete#keyword_patterns = {}
-endif
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
+" Open Startify and NERDTree automatically when vim starts up if no files were specified
+autocmd VimEnter * if !argc() | Startify | winc h | endif
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+set omnifunc=ale#completion#OmniFunc
 
-" Lightline
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightLineFugitive'
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_powerline_fonts = 1
 
-function! LightLineFugitive()
-  let string = ''
-  let string .= LightLineHunks()
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = '⭠ '  " edit here for cool mark
-      let _ = fugitive#head()
-      let string .= strlen(_) ? mark._ : ''
-      return string
-    endif
-  catch
-  endtry
-  return string
-endfunction
-
-function! LightLineHunks()
-  if exists('*GitGutterGetHunkSummary')
-    if !get(g:, 'gitgutter_enabled', 0)
-      return ''
-    endif
-    let non_zero_only = 1
-    let hunks = GitGutterGetHunkSummary()
-    let string = ''
-    let hunk_symbols = ['+', '~', '-']
-    if !empty(hunks)
-      for i in [0, 1, 2]
-        if non_zero_only == 0 || hunks[i] > 0
-          let string .= printf('%s%s ', hunk_symbols[i], hunks[i])
-        endif
-      endfor
-    endif
-    return string
-  else
-    return ''
-  endif
-endfunction
-"
 " Use status bar even with single buffer
 set laststatus=2
 
 " Session autosave
 let g:session_autosave = 'no'
 
-" CtrlP
-let g:ctrlp_max_height = 30
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_reversed = 0
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
-" Default to filename searches - so that appctrl will find application controller
-let g:ctrlp_by_filename = 1
-" Don't jump to already open window. This is annoying if you are maintaining
-" several Tab workspaces and want to open two windows into the same file.
-let g:ctrlp_switch_buffer = 0
-" Show dotfiles
-let g:ctrlp_show_hidden = 1
-" Set no file limit
-let g:ctrlp_max_files = 0
-" Do not clear filenames cache
-let g:ctrlp_clear_cache_on_exit = 0
+let g:indentLine_fileTypeExclude = ['startify', 'vifm']
 
-let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+" ALE
+"
+" Enable rust autoformatting
+let g:ale_fix_on_save = 1
 
-" We don't want to use Ctrl-p as the mapping because
-let g:ctrlp_map = ',t'
-nnoremap <silent> ,t :CtrlP<CR>
+let g:ale_linters = {
+\  'javascript': ['eslint', 'fecs', 'jscs', 'jshint', 'standard', 'xo'],
+\  'rust': ['cargo', 'rustc', 'rls'],
+\  'go': ['gopls', 'golint', 'gofmt'],
+\  'elixir': ['credo', 'dialyxir', 'dogma', 'elixir-ls', 'mix'],
+\}
 
-" Additional mapping for buffer search
-nnoremap <silent> ,b :CtrlPBuffer<cr>
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'rust': ['rustfmt'],
+\   'go': ['gofmt'],
+\}
 
-" Cmd-Shift-P to clear the cache
-nnoremap <silent> <D-P> :ClearCtrlPCache<cr>
+"let g:ale_fixers.typescript = ['eslint']
 
-" Idea from :http://www.charlietanksley.net/blog/blog/2011/10/18/vim-navigation-with-lustyexplorer-and-lustyjuggler/
-" Open CtrlP starting from a particular path, making it much
-" more likely to find the correct thing first. mnemonic 'jump to [something]'
-map ,ja :CtrlP app/assets<CR>
-map ,jm :CtrlP app/models<CR>
-map ,jc :CtrlP app/controllers<CR>
-map ,jv :CtrlP app/views<CR>
-map ,jh :CtrlP app/helpers<CR>
-map ,jl :CtrlP lib<CR>
-map ,jp :CtrlP public<CR>
-map ,js :CtrlP spec<CR>
-map ,jf :CtrlP fast_spec<CR>
-map ,jd :CtrlP db<CR>
-map ,jC :CtrlP config<CR>
-map ,jV :CtrlP vendor<CR>
-map ,jF :CtrlP factories<CR>
-map ,jT :CtrlP test<CR>
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
 
-"Cmd-Shift-(M)ethod - jump to a method (tag in current file)
-"Ctrl-m is not good - it overrides behavior of Enter
-noremap <silent> <D-M> :CtrlPBufTag<CR>
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '%severity%: [%linter%] %s'
 
-let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
-map <Leader>rt :call RunCurrentSpecFile()<CR>
-map <Leader>rs :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
-map <Leader>ra :call RunAllSpecs()<CR>
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '➤'
+let g:ale_sign_info = '🛈'
 
-" Emmet
-" let g:user_emmet_install_global = 0
-" autocmd FileType html,css,eruby EmmetInstall
-" autocmd FileType html,css,eruby imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-" autocmd FileType html,css,eruby let g:user_emmet_expandabbr_key='<Tab>'
-
-let g:user_emmet_leader_key='<C-Z>'
-
-" ================ Syntastic ====================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_ruby_checkers = ['mri']
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {'regex': 'possibly useless use of a variable in void context'}
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" vim-rooter
+let g:rooter_patterns = ['Makefile', 'make', 'Rakefile', '.git/']
