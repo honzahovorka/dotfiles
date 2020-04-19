@@ -1,0 +1,110 @@
+# OSX       taken from: https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
+# ----------------------------------------------------------------------------------------------
+.DS_Store
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows   taken from: https://github.com/github/gitignore/blob/master/Global/Windows.gitignore
+# ----------------------------------------------------------------------------------------------
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Tags      taken from: https://github.com/github/gitignore/blob/master/Global/Tags.gitignore
+# ----------------------------------------------------------------------------------------------
+# Ignore tags created by etags, ctags, gtags (GNU global) and cscope
+TAGS
+!TAGS/
+tags
+!tags/
+gtags.files
+GTAGS
+GRTAGS
+GPATH
+cscope.files
+cscope.out
+cscope.in.out
+cscope.po.out
+
+# Vim       taken from: https://github.com/github/gitignore/blob/master/Global/vim.gitignore
+# ----------------------------------------------------------------------------------------------
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# SASS
+# ----------------------------------------------------------------------------------------------
+.sass-cache
+
+# POW and RVM
+# ----------------------------------------------------------------------------------------------
+.rvmrc
+.ruby-gemset
+.ruby-version
+.powenv
+.powrc
+
+# Rails
+# ---------------------------------------------------------------------------------------------
+.env
+tmp/*
+
+# PHP
+# ---------------------------------------------------------------------------------------------
+^nbproject$
+config\.local\.neon
+
+tests/tests/*/*/output
+tests/tests/Nette/coverage.dat
+tests/tests/tmp
+tests/tests/test.log
+temp/cache/*
+www/css/css_*
+www/js/js_*
+temp/sessions/sess_*
+www/photos/*
+www/upload/*
+libs/Vendors/MPDF54/ttfontdata/*.dat
+libs/Vendors/MPDF54/ttfontdata/*.php
+log/*
+www/files/[0-9]*
+.dev/database.mwb.beforefix
+.dev/database.mwb.bak
+www/uploads/*
+www/data/[0-9]*
+temp/mailattachments/*
+.dev/effectplus.mwb.bak
+temp/btfj.dat
+.hgignore
+.vimrc
+nbproject/*
+.idea/
+temp/cache/_*
+temp/_*
+temp/btfj.dat
+app/config/local.neon
+
+# Front end
+# ---------------------------------------------------------------------------------------------
+node_modules/
+bower_components/
+*.log
+.tern-port
+.tern-project
+
+# Dotfiles
+# ---------------------------------------------------------------------------------------------
+nvim/plugged/*
+.vim/bundle/*
+
+# Redis
+# ---------------------------------------------------------------------------------------------
+dump.rdb

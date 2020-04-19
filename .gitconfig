@@ -52,6 +52,9 @@
   simple = log --pretty=format:\" * %s\"
   shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
 
+  # last commit
+  lc = show HEAD --show-signature
+
   # pull
   pl = pull                         # pull
 
@@ -89,6 +92,11 @@
   svnr = svn rebase
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
+	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+
+  hidden = !git ls-files -v | grep ^[a-z]
+  hide = update-index --assume-unchanged
+  unhide = update-index --no-assume-unchanged
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
@@ -110,8 +118,8 @@
   default = upstream
 [core]
   autocrlf = false
-  editor = vim
-  excludesfile = ~/.gitignore
+	editor = /usr/local/bin/nvim
+	excludesfile = /Users/honzahovorka/.gitignore
 [advice]
   statusHints = false
 [diff]
@@ -132,14 +140,13 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
-  name = Honza Hovorka
-  email = honza.hovorka@gmail.com
-[credential]
-  helper = osxkeychain
+	name = Honza Hovorka
+	email = honza.hovorka@gmail.com
+	signingkey = 3EE79C32BD351229
 [http]
   sslVerify = false
 [github]
-  user = hexicz
+  user = honzahovorka
 [ghi]
   token = !security find-internet-password -a hexicz -s github.com -l 'ghi token' -w
 [filter "media"]
@@ -150,3 +157,8 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[gui]
+	recentrepo = /Users/honzahovorka/projects/www/GOA
+[commit]
+	template = /Users/honzahovorka/.stCommitMsg
+	gpgsign = true
