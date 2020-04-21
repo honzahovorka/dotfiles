@@ -107,40 +107,7 @@ set laststatus=2
 let g:session_autosave = 'no'
 
 let g:indentLine_fileTypeExclude = ['startify', 'vifm']
-
-" ALE
-"
-" Enable rust autoformatting
-let g:ale_fix_on_save = 1
-
-let g:ale_linters = {
-\  'javascript': ['eslint', 'fecs', 'jscs', 'jshint', 'standard', 'xo'],
-\  'rust': ['cargo', 'rustc', 'rls'],
-\  'go': ['gopls', 'golint', 'gofmt'],
-\  'elixir': ['credo', 'dialyxir', 'dogma', 'elixir-ls', 'mix'],
-\}
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'rust': ['rustfmt'],
-\   'go': ['gofmt'],
-\}
-
-"let g:ale_fixers.typescript = ['eslint']
-
-" Set this setting in vimrc if you want to fix files automatically on save.
-" This is off by default.
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_save = 1
-
-let g:ale_echo_msg_error_str = 'Error'
-let g:ale_echo_msg_warning_str = 'Warning'
-let g:ale_echo_msg_format = '%severity%: [%linter%] %s'
-
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '➤'
-let g:ale_sign_info = '🛈'
+autocmd TermEnter * IndentLinesDisable
 
 " vim-rooter
 let g:rooter_patterns = ['Makefile', 'make', 'Rakefile', '.git/']
