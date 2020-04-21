@@ -59,10 +59,9 @@ alias tml 'tmux list-sessions'
 alias tmk 'tmux kill-session -t $1'
 
 # Custom
-alias mk 'mkdir $1; cd $1'
-alias preview "fzf --preview 'bat --color \"always\" {}'"
+alias mk mkcd # custom fish function
 alias cat bat
-alias du "ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias du 'ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias help tldr
 alias tf terraform
 
@@ -73,3 +72,8 @@ alias clr 'clear'
 alias l 'exa -la'
 alias ll 'exa -l'
 alias la 'exa -la'
+
+# FZF
+alias fzfi 'rg --files --hidden --follow -g "!{node_modules,.git}" | fzf --height 40%'
+alias preview 'fzfi --preview "bat --color \"always\" {}"'
+alias fo 'v (fzfi)'
