@@ -13,7 +13,7 @@ done
 
 echo " "
 echo "syncing ~/.config folders"
-for folder in nvim fish omf vifm
+for folder in nvim fish omf vifm alacritty
 do
   mv ~/.config/$folder $backup 2>/dev/null
   echo " $folder"
