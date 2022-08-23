@@ -11,29 +11,22 @@ set -x FZF_DEFAULT_COMMAND 'rg --files --no-ignore-vcs --hidden'
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
 # GO
-set -x GOPATH $HOME/projects/go
+set -x GOPATH $HOME/Code/go
+set -x GOROOT /usr/local/opt/go/libexec
+
+set -x PATH $PATH $GOROOT/bin $GOPATH/bin
+
+# LazyGit
+set -x LG_CONFIG_FILE "/Users/honzahovorka/.config/lazygit/config.yml"
+
+# Node.js
+export N_PREFIX=$HOME/.n
+set -x PATH $N_PREFIX/bin:$PATH
 
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
-# start TMUX with every new session
-# if status is-interactive
-# and not set -q TMUX
-#     exec tmux
-# end
-# clear
-
-funcsave clean_docker
-
 set -gx  LC_ALL en_US.UTF-8
 
-source $HOME/.cargo/env
-
-set -x THEFUCK_OVERRIDDEN_ALIASES 'git'
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.fish ]; and . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish ]; and . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish
+set PATH $HOME/.cargo/bin $PATH
+# set PATH $HOME/.local/share/nvim/ $PATH

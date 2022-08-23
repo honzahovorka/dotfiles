@@ -1,7 +1,10 @@
 package fuck
+package fzf
 package hub
 package node
 package rbenv
 package thefuck
+package z
 theme agnoster
 theme default
+theme robbyrussell

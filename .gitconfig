@@ -118,7 +118,7 @@
   default = upstream
 [core]
   autocrlf = false
-	editor = /usr/local/bin/nvim
+	editor = /opt/homebrew/bin/nvim
 	excludesfile = /Users/honzahovorka/.gitignore
 [advice]
   statusHints = false
@@ -162,3 +162,7 @@
 [commit]
 	template = /Users/honzahovorka/.stCommitMsg
 	gpgsign = true
+[init]
+	defaultBranch = main
+[gpg]
+	program = gpg

@@ -1,4 +1,4 @@
-set -x EDITOR /usr/local/bin/nvim
+set -x EDITOR /opt/homebrew/bin/nvim
 
 alias tmux 'tmux -2'
 alias vim 'nvim'
@@ -69,9 +69,9 @@ alias md 'glow'
 alias c 'clear'
 alias clr 'clear'
 
-alias l 'exa -la'
+alias l 'exa -la --icons'
 alias ll 'exa -l'
-alias la 'exa -la'
+alias la 'exa -la --icons'
 
 # FZF
 alias fzfi 'rg --files --hidden --follow -g "!{node_modules,.git}" | fzf --height 40%'
