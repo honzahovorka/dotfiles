@@ -1,8 +1,8 @@
-local cmp = require'cmp'
-local lspkind = require'lspkind'
+local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt="menuone,noinsert,noselect"
+vim.o.completeopt = 'menuone,noinsert,noselect'
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -21,32 +21,32 @@ cmp.setup({
     ['<C-n>'] = cmp.mapping({
       c = function()
         if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         else
-            vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
+          vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
         end
       end,
       i = function(fallback)
         if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         else
-            fallback()
+          fallback()
         end
       end
     }),
     ['<C-p>'] = cmp.mapping({
       c = function()
         if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
         else
-            vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
+          vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
         end
       end,
       i = function(fallback)
         if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
         else
-            fallback()
+          fallback()
         end
       end
     }),
@@ -55,18 +55,16 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'cmp_tabnine' },
+    -- { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
     { name = 'path' },
-    --{ name = 'luasnip' },
-    -- { name = 'ultisnips' },
     { name = 'buffer', keyword_length = 5 },
   }),
 
   snippet = {
     expand = function(args)
       --require('luasnip').lsp_expand(args.body)
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn['UltiSnips#Anon'](args.body) -- For `ultisnips` users.
     end,
   },
 

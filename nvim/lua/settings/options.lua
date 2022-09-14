@@ -38,9 +38,6 @@ vim.opt.whichwrap:append('<,>,[,],h,l')
 vim.opt.iskeyword:append('-')
 vim.o.hlsearch = false
 
-vim.cmd [[colorscheme github_light]]
-
-
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()

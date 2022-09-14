@@ -10,13 +10,14 @@ vim.g.maplocalleader = ' '
 
 
 keymap('i', 'jj', '<ESC>', opts)
+keymap('n', '<space><space>', '<C-^>', opts)
 
 -- Splits
 keymap('n', 'vv', '<C-w>v', opts)
 keymap('n', 'ss', '<C-w>s', opts)
 
 -- Better paste
-keymap('v', 'p', "'_dP", opts)
+keymap('v', '<leader>p', "'_dP", opts)
 
 -- Stay in indent mode
 keymap('v', '<', '<gv', opts)

@@ -1,10 +1,6 @@
-local nvim_lsp = require'lspconfig'
-local protocol = require'vim.lsp.protocol'
+local nvim_lsp = require('lspconfig')
 
-vim.lsp.set_log_level("debug")
-
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
+nvim_lsp.diagnosticls.setup({
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   init_options = {
     linters = {
@@ -50,4 +46,4 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'eslint_d',
     }
   }
-}
+})

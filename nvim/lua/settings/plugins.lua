@@ -1,8 +1,6 @@
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
   vim.cmd [[packadd packer.nvim]]
 end
@@ -17,22 +15,47 @@ require('packer').startup(function(use)
   use 'arkav/lualine-lsp-progress'
   use 'sindrets/diffview.nvim'
   use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
+  use 'f-person/git-blame.nvim'
   use 'projekt0n/github-nvim-theme'
+  use {
+    'sonph/onehalf',
+    rtp = 'vim',
+    config = function() vim.cmd('colorscheme onehalflight') end,
+    event = 'VimEnter',
+  }
+  use {
+    'catppuccin/nvim',
+    as = 'catppuccin',
+  }
   use 'cormacrelf/dark-notify'
+  use 'lukas-reineke/indent-blankline.nvim'
 
   -- Project
   use 'editorconfig/editorconfig-vim'
---  use 'airblade/vim-rooter'
   use 'vim-test/vim-test'
   use 'tpope/vim-unimpaired'
-  use 'tamago324/lir.nvim'
+  use {
+    'akinsho/toggleterm.nvim', tag = 'v2.*',
+  }
+  use {
+    'phaazon/hop.nvim', branch = 'v2',
+  }
+  use 'ThePrimeagen/harpoon'
 
   -- Languages
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end, 
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
+  use 'nvim-treesitter/nvim-treesitter-context'
   use 'simrat39/rust-tools.nvim'
   use 'crispgm/nvim-go'
 
@@ -46,10 +69,10 @@ require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'
 
   -- Telescope
-  use { 
+  use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-  } 
+  }
   use 'nvim-telescope/telescope-file-browser.nvim'
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -60,7 +83,7 @@ require('packer').startup(function(use)
   -- LSP support
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
-  use { 
+  use {
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp' },
   }
@@ -69,11 +92,10 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lua'
   use 'onsails/lspkind-nvim'
-  use 'tami5/lspsaga.nvim'
   use {
-    'tzachar/cmp-tabnine', 
-    after = "nvim-cmp",
-    run='./install.sh',
+    'tzachar/cmp-tabnine',
+    after = 'nvim-cmp',
+    run = './install.sh',
     requires = 'hrsh7th/nvim-cmp',
   }
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -83,31 +105,4 @@ require('packer').startup(function(use)
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
 
-  if is_bootstrap then
-    require('packer').sync()
-  end
 end)
-
--- stylua: ignore end
-
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
---
--- You'll need to restart nvim, and then it will work.
-if is_bootstrap then
-  print '=================================='
-  print '    Plugins are being installed'
-  print '    Wait until Packer completes,'
-  print '       then restart nvim'
-  print '=================================='
-  return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
-})
-

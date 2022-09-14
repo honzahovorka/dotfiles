@@ -4,7 +4,7 @@ local dn = require('dark_notify')
 dn.run({
     schemes = {
       -- you can use a different colorscheme for each
-      dark  = "github_dark",
-      light = "github_light",
+      dark  = 'onehalfdark',
+      light = 'onehalflight',
     },
 })
