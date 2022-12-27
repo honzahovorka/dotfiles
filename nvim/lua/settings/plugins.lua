@@ -12,9 +12,8 @@ require('packer').startup(function(use)
   -- Appearance
   use 'nvim-lua/popup.nvim'
   use 'nvim-lualine/lualine.nvim'
-  use 'arkav/lualine-lsp-progress'
+  use 'folke/lsp-colors.nvim'
   use 'sindrets/diffview.nvim'
-  use 'tpope/vim-fugitive'
   use {
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
@@ -57,7 +56,6 @@ require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-context'
   use 'simrat39/rust-tools.nvim'
-  use 'crispgm/nvim-go'
 
   -- Misc
   use 'AndrewRadev/splitjoin.vim'
@@ -78,7 +76,7 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
-
+  use 'nvim-telescope/telescope-ui-select.nvim'
 
   -- LSP support
   use 'neovim/nvim-lspconfig'

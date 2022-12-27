@@ -32,7 +32,7 @@ vim.opt.numberwidth = 2
 vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.fillchars.eob=' '
+vim.opt.fillchars.eob = ' '
 vim.opt.shortmess:append 'c'
 vim.opt.whichwrap:append('<,>,[,],h,l')
 vim.opt.iskeyword:append('-')

@@ -13,15 +13,15 @@ configs.setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = 'gnn',
+      node_incremental = 'grn',
+      scope_incremental = 'grc',
+      node_decremental = 'grm',
     },
   },
 
   indent = {
-    enable = true
+    enable = false
   }
 })
 
@@ -44,45 +44,10 @@ require('treesitter-context').setup({
       'switch',
       'case',
     },
-    -- Patterns for specific filetypes
-    -- If a pattern is missing, *open a PR* so everyone can benefit.
-    tex = {
-      'chapter',
-      'section',
-      'subsection',
-      'subsubsection',
-    },
     rust = {
       'impl_item',
       'struct',
       'enum',
-    },
-    scala = {
-      'object_definition',
-    },
-    vhdl = {
-      'process_statement',
-      'architecture_body',
-      'entity_declaration',
-    },
-    markdown = {
-      'section',
-    },
-    elixir = {
-      'anonymous_function',
-      'arguments',
-      'block',
-      'do_block',
-      'list',
-      'map',
-      'tuple',
-      'quoted_content',
-    },
-    json = {
-      'pair',
-    },
-    yaml = {
-      'block_mapping_pair',
     },
   },
   exact_patterns = {

@@ -55,21 +55,30 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    -- { name = 'cmp_tabnine' },
+    { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
     { name = 'path' },
     { name = 'buffer', keyword_length = 5 },
   }),
 
+  window = {
+		completion = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:Normal",
+		},
+		documentation = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      winhighlight = 'FloatBorder:NormalFloat',
+		},
+	},
+
   snippet = {
     expand = function(args)
-      --require('luasnip').lsp_expand(args.body)
       vim.fn['UltiSnips#Anon'](args.body) -- For `ultisnips` users.
     end,
   },
 
   experimental = {
-    native_menu = false,
     ghost_text = true,
   },
 
@@ -88,10 +97,10 @@ cmp.setup({
   }
 })
 
-vim.cmd [[
-  highlight link CmpItemAbbr Normal
-  highlight link CmpItemAbbrDeprecated Error
-  highlight link CmpItemAbbrMatchFuzzy MatchParen
-  highlight link CmpItemKind Function
-  highlight link CmpItemMenu Comment
-]]
+vim.cmd([[
+  hi! default link CmpItemAbbr Normal
+  hi! default link CmpItemAbbrDeprecated Error
+  hi! default link CmpItemAbbrMatch Function
+  hi! default link CmpItemKind Function
+  hi! default link CmpItemMenu Comment
+]])

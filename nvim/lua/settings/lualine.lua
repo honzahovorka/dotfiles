@@ -2,16 +2,21 @@ local lualine = require('lualine')
 
 local config = {
   options = {
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = '|',
+    section_separators = { left = '', right = '' },
+
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = {
+      { 'mode', separator = { left = '' }, right_padding = 2 },
+    },
     lualine_b = { 'filename' },
     lualine_c = {},
     lualine_x = { 'o:encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location' },
+    lualine_z = {
+      { 'location', separator = { right = '' }, left_padding = 2 },
+    },
   },
   inactive_sections = {
     lualine_a = {},
@@ -28,11 +33,6 @@ local function ins_left(component)
   table.insert(config.sections.lualine_c, component)
 end
 
--- Inserts a component in lualine_x ot right section
--- local function ins_right(component)
---   table.insert(config.sections.lualine_x, component)
--- end
-
 ins_left {
   'branch',
   icon = '',
@@ -48,14 +48,6 @@ ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
   symbols = { error = ' ', warn = ' ', info = ' ' },
-}
-
-ins_left {
-  'lsp_progress',
-  --display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
-  -- With spinner
-  display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
-  spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
 }
 
 lualine.setup(config)
