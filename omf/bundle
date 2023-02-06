@@ -1,5 +1,6 @@
 package fuck
 package fzf
+package https://github.com/catppuccin/fish
 package hub
 package node
 package rbenv

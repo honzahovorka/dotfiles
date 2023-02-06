@@ -19,3 +19,12 @@ do
   echo " $folder"
   ln -s $(pwd)/$folder ~/.config/$folder
 done
+
+echo " "
+echo "syncing ~/.tmux folders"
+for folder in tmux
+do
+  mv ~/.$folder $backup 2>/dev/null
+  echo " $folder"
+  ln -s $(pwd)/$folder ~/.$folder
+done

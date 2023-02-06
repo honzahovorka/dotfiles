@@ -4,6 +4,24 @@ local null_ls = require('null-ls')
 
 require('rust-tools').setup({})
 
+require('mason').setup()
+
+local lsp_servers = {
+  'tsserver',
+  'sumneko_lua',
+  'gopls',
+  'vimls',
+  'yamlls',
+  'terraformls',
+  'dockerls',
+  'jsonls',
+  'eslint',
+}
+
+require('mason-lspconfig').setup({
+  ensure_installed = lsp_servers,
+})
+
 vim.cmd [[autocmd ColorScheme * hi! link FloatBorder Normal]]
 vim.cmd [[autocmd ColorScheme * hi! link NormalFloat Normal]]
 
@@ -40,28 +58,18 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
-  buf_set_keymap('n', '<space>cd', '<cmd>lua vim.diagnostic.open_float({scope = "line"})<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '<space>sd', '<cmd>lua require("telescope.builtin").diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
   -- formatting
   if client.name == 'tsserver' then
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
-
     local ts_utils = require('nvim-lsp-ts-utils')
     ts_utils.setup({})
     ts_utils.setup_client(client)
-  end
-
-  if client.server_capabilities.document_formatting then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd bufwritepre <buffer> lua vim.lsp.buf.format()]]
-    vim.api.nvim_command [[augroup END]]
   end
 
   --protocol.SymbolKind = { }
@@ -113,7 +121,21 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = {vim.api.nvim_buf_get_name(0)},
+    title = ""
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
 nvim_lsp.tsserver.setup({
+  init_options = {
+    preferences = {
+      importModuleSpecifierPreference = 'relative'
+    }
+  },
   on_attach = on_attach,
   filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
   capabilities = capabilities,
@@ -130,7 +152,7 @@ nvim_lsp.gopls.setup({
 nvim_lsp.rust_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-	-- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+  -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
 })
 
 nvim_lsp.sumneko_lua.setup({
@@ -159,14 +181,20 @@ nvim_lsp.sumneko_lua.setup({
   },
 })
 
-null_ls.setup({
-  rootPatterns = { '.eslintrc.js' },
-  sources = {
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.formatting.prettier
-  },
+nvim_lsp.eslint.setup({
+  root_dir = require('lspconfig.util').root_pattern(
+    '.eslintrc.js',
+    'node_modules',
+    '.git'
+  ),
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier,
+  },
+  on_attach = on_attach,
+  capabilities = capabilities,
+})

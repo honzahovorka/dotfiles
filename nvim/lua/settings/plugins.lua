@@ -1,9 +1,23 @@
 -- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-  vim.cmd [[packadd packer.nvim]]
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({
+            'git',
+            'clone',
+            '--depth',
+            '1',
+            'https://github.com/wbthomason/packer.nvim',
+            install_path,
+        })
+        vim.cmd([[packadd packer.nvim]])
+        return true
+    end
+    return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 -- stylua: ignore start
 require('packer').startup(function(use)
@@ -23,13 +37,6 @@ require('packer').startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' },
   }
   use 'f-person/git-blame.nvim'
-  use 'projekt0n/github-nvim-theme'
-  use {
-    'sonph/onehalf',
-    rtp = 'vim',
-    config = function() vim.cmd('colorscheme onehalflight') end,
-    event = 'VimEnter',
-  }
   use {
     'catppuccin/nvim',
     as = 'catppuccin',
@@ -44,10 +51,9 @@ require('packer').startup(function(use)
   use {
     'akinsho/toggleterm.nvim', tag = 'v2.*',
   }
-  use {
-    'phaazon/hop.nvim', branch = 'v2',
-  }
   use 'ThePrimeagen/harpoon'
+  use 'ahmedkhalf/project.nvim'
+  use 'mbbill/undotree'
 
   -- Languages
   use {
@@ -55,6 +61,10 @@ require('packer').startup(function(use)
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
   use 'nvim-treesitter/nvim-treesitter-context'
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
   use 'simrat39/rust-tools.nvim'
 
   -- Misc
@@ -65,6 +75,7 @@ require('packer').startup(function(use)
   use 'godlygeek/tabular'
   use 'kyazdani42/nvim-web-devicons'
   use 'rcarriga/nvim-notify'
+  use 'wakatime/vim-wakatime'
 
   -- Telescope
   use {
@@ -77,8 +88,12 @@ require('packer').startup(function(use)
     run = 'make'
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
+  use 'nvim-telescope/telescope-project.nvim'
+  use 'cljoly/telescope-repo.nvim'
 
   -- LSP support
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
   use {
@@ -98,9 +113,13 @@ require('packer').startup(function(use)
   }
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  use 'j-hui/fidget.nvim'
 
   -- Snippets
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
 
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
