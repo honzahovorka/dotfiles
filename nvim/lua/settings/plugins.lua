@@ -43,6 +43,9 @@ require('packer').startup(function(use)
   }
   use 'cormacrelf/dark-notify'
   use 'lukas-reineke/indent-blankline.nvim'
+  use 'folke/zen-mode.nvim'
+  use 'folke/twilight.nvim'
+  use 'folke/trouble.nvim'
 
   -- Project
   use 'editorconfig/editorconfig-vim'
@@ -73,9 +76,8 @@ require('packer').startup(function(use)
   use 'vim-scripts/camelcasemotion'
   use 'tpope/vim-surround'
   use 'godlygeek/tabular'
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
   use 'rcarriga/nvim-notify'
-  use 'wakatime/vim-wakatime'
 
   -- Telescope
   use {
@@ -89,7 +91,6 @@ require('packer').startup(function(use)
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'nvim-telescope/telescope-project.nvim'
-  use 'cljoly/telescope-repo.nvim'
 
   -- LSP support
   use 'williamboman/mason.nvim'
@@ -111,6 +112,8 @@ require('packer').startup(function(use)
     run = './install.sh',
     requires = 'hrsh7th/nvim-cmp',
   }
+  use 'zbirenbaum/copilot.lua'
+  use 'zbirenbaum/copilot-cmp'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'j-hui/fidget.nvim'

@@ -1,6 +1,15 @@
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
+require('copilot_cmp').setup({})
+
+lspkind.init {
+  symbol_map = {
+    Copilot = "",
+  },
+}
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noinsert,noselect'
 
@@ -57,6 +66,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
+    { name = 'copilot' },
     { name = 'path' },
     { name = 'buffer', keyword_length = 5 },
   }),
@@ -86,12 +96,13 @@ cmp.setup({
     format = lspkind.cmp_format {
       with_text = true,
       menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        cmp_tabnine = "[tabnine]",
-        nvim_lua = "[api]",
-        path = "[path]",
-        ultisnips = "[snip]",
+        buffer = '[buf]',
+        nvim_lsp = '[LSP]',
+        cmp_tabnine = '[tabnine]',
+        nvim_lua = '[api]',
+        path = '[path]',
+        ultisnips = '[snip]',
+        copilot = '[copilot]',
       }
     }
   }

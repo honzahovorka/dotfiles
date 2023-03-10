@@ -8,7 +8,7 @@ require('mason').setup()
 
 local lsp_servers = {
   'tsserver',
-  'sumneko_lua',
+  'lua_ls',
   'gopls',
   'vimls',
   'yamlls',
@@ -155,7 +155,7 @@ nvim_lsp.rust_analyzer.setup({
   -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
 })
 
-nvim_lsp.sumneko_lua.setup({
+nvim_lsp.lua_ls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {

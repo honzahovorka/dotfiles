@@ -42,6 +42,7 @@ keymap('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
 keymap('n', '<leader>fp', ':Telescope project<CR>', opts)
 keymap('n', '<leader>fb', ':Telescope buffers<CR>', opts)
 keymap('n', '<leader>fo', ':Telescope oldfiles<CR>', opts)
+keymap('n', '<leader>ft', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', opts)
 keymap('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -66,3 +67,6 @@ keymap('n', '<Leader>u', ':UndotreeToggle<CR>', opts)
 
 keymap('n', '<C-k>', '<cmd>cnext<CR>zz', opts)
 keymap('n', '<C-j>', '<cmd>cprev<CR>zz', opts)
+
+keymap('n', '<leader>xx', '<cmd>TroubleToggle<cr>', opts)
+keymap('n', '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>', opts)
