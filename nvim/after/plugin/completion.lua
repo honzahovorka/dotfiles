@@ -5,10 +5,10 @@ require('copilot_cmp').setup({})
 
 lspkind.init {
   symbol_map = {
-    Copilot = "",
+    Copilot = '',
   },
 }
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noinsert,noselect'
@@ -64,7 +64,6 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
     { name = 'copilot' },
     { name = 'path' },
@@ -73,24 +72,14 @@ cmp.setup({
 
   window = {
 		completion = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:Normal",
+			border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:Normal',
 		},
 		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
       winhighlight = 'FloatBorder:NormalFloat',
 		},
 	},
-
-  snippet = {
-    expand = function(args)
-      vim.fn['UltiSnips#Anon'](args.body) -- For `ultisnips` users.
-    end,
-  },
-
-  experimental = {
-    ghost_text = true,
-  },
 
   formatting = {
     format = lspkind.cmp_format {
@@ -98,36 +87,34 @@ cmp.setup({
       menu = {
         buffer = '[buf]',
         nvim_lsp = '[LSP]',
-        cmp_tabnine = '[tabnine]',
         nvim_lua = '[api]',
         path = '[path]',
-        ultisnips = '[snip]',
         copilot = '[copilot]',
       }
     }
   }
 })
 
- cmp.setup.cmdline('/', {
-   mapping = cmp.mapping.preset.cmdline(),
-   sources = {
-     { name = 'buffer' }
-   }
- })
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
 
- cmp.setup.cmdline(':', {
-   mapping = cmp.mapping.preset.cmdline(),
-   sources = cmp.config.sources({
-     { name = 'path' }
-   }, {
-     {
-       name = 'cmdline',
-       option = {
-         ignore_cmds = { 'Man', '!' }
-       }
-     }
-   })
- })
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
 
 vim.cmd([[
   hi! default link CmpItemAbbr Normal

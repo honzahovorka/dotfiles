@@ -1,19 +1,39 @@
-require 'settings.options'
-require 'settings.keymaps'
-require 'settings.plugins'
-require 'settings.telescope'
-require 'settings.lsp'
-require 'settings.completion'
-require 'settings.lualine'
-require 'settings.treesitter'
-require 'settings.comment'
-require 'settings.theme'
-require 'settings.indentline'
-require 'settings.gitsigns'
-require 'settings.toggleterm'
-require 'settings.gitblame'
-require 'settings.notify'
-require 'settings.zen'
-require 'settings.fidget'
-require 'settings.copilot'
-require 'settings.trouble'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('options')
+require('keymaps')
+
+require('lazy').setup('plugins', {
+   ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+    },
+  },
+  install = {
+    colorscheme = { 'catppuccin' },
+  },
+})
