@@ -1,6 +1,5 @@
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-vim.keymap.set('i', 'jj', '<ESC>', { silent = true })
 vim.keymap.set('n', '<space><space>', '<C-^>', { silent = true })
 
 -- Line moves

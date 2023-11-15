@@ -1,15 +1,6 @@
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-require('copilot_cmp').setup({})
-
-lspkind.init {
-  symbol_map = {
-    Copilot = '',
-  },
-}
-vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
-
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noinsert,noselect'
 
@@ -65,7 +56,6 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
-    { name = 'copilot' },
     { name = 'path' },
     { name = 'buffer', keyword_length = 5 },
   }),
@@ -89,7 +79,6 @@ cmp.setup({
         nvim_lsp = '[LSP]',
         nvim_lua = '[api]',
         path = '[path]',
-        copilot = '[copilot]',
       }
     }
   }

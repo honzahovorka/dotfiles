@@ -46,6 +46,7 @@ return {
       vim.keymap.set('n', '<leader>fp', ':Telescope project<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fo', ':Telescope oldfiles<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>rf', ':Telescope resume<CR>', { silent = true })
       vim.keymap.set('n', '<leader>ft', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { silent = true })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.

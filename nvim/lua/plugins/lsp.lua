@@ -184,6 +184,7 @@ return {
 
       null_ls.setup({
         sources = {
+          null_ls.builtins.formatting.eslint,
           null_ls.builtins.formatting.prettier,
         },
         on_attach = on_attach,

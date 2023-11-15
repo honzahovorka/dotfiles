@@ -7,4 +7,10 @@ return {
   'vim-scripts/camelcasemotion',
   'tpope/vim-surround',
   'nvim-tree/nvim-web-devicons',
+  {
+    'folke/neodev.nvim',
+    config = function()
+      require('neodev').setup()
+    end
+  },
 }

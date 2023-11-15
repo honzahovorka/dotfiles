@@ -1,11 +1,12 @@
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
     config = function()
-      require('indent_blankline').setup({
-        show_current_context = false,
-        show_current_context_start = false,
+      require('ibl').setup({
+        scope = { enabled = false },
       })
     end
-  }
+  },
 }

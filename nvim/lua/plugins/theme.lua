@@ -48,6 +48,10 @@ return {
         telescope = true,
         notify = true,
         mini = false,
+        neogit = true,
+        harpoon = true,
+        fidget = true,
+        mason = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
     })

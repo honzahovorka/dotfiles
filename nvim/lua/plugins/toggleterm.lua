@@ -65,10 +65,7 @@ return {
         lazygit:toggle()
       end
 
-      -- :tnoremap <Esc> <C-\><C-n>
-      vim.api.nvim_set_keymap('t', 'qq', '<c-\\><c-n>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>lg', '<cmd>lua Lazygit_toggle()<CR>', { noremap = true, silent = true })
-
     end
   }
 }
