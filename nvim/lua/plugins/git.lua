@@ -15,7 +15,6 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('neogit').setup({
-        kind = 'split',
         integrations = {
           diffview = true,
         }

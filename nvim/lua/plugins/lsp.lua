@@ -18,6 +18,9 @@ return {
         'dockerls',
         'jsonls',
         'eslint',
+        'solargraph',
+        'zls',
+        'clangd',
       }
 
       require('mason-lspconfig').setup({
@@ -143,7 +146,12 @@ return {
       nvim_lsp.rust_analyzer.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+      })
+
+      nvim_lsp.solargraph.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = { os.getenv( 'HOME' ) .. '/.rbenv/shims/solargraph', 'stdio' },
       })
 
       nvim_lsp.lua_ls.setup({
@@ -178,6 +186,16 @@ return {
         'node_modules',
         '.git'
         ),
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      nvim_lsp.zls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      nvim_lsp.clangd.setup({
         on_attach = on_attach,
         capabilities = capabilities,
       })
