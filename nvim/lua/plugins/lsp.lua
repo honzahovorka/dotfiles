@@ -4,7 +4,6 @@ return {
     config = function()
       local nvim_lsp = require('lspconfig')
       local protocol = require('vim.lsp.protocol')
-      local null_ls = require('null-ls')
 
       require('mason').setup()
 
@@ -68,7 +67,6 @@ return {
         buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
         buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
         buf_set_keymap('n', '<space>sd', '<cmd>lua require("telescope.builtin").diagnostics()<CR>', opts)
-        buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
         -- formatting
         if client.name == 'tsserver' then
@@ -199,15 +197,6 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
       })
-
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.eslint,
-          null_ls.builtins.formatting.prettier,
-        },
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
     end,
   },
   {
@@ -220,6 +209,5 @@ return {
   'williamboman/mason-lspconfig.nvim',
   'simrat39/inlay-hints.nvim',
   'folke/neodev.nvim',
-  'jose-elias-alvarez/null-ls.nvim',
   'jose-elias-alvarez/nvim-lsp-ts-utils',
 }
