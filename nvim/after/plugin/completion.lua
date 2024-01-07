@@ -8,7 +8,17 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+local luasnip = require('luasnip')
+require('luasnip.loaders.from_vscode').lazy_load()
+luasnip.config.setup({})
+
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+
   mapping = {
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -56,20 +66,21 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'luasnip' },
     { name = 'path' },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'buffer',  keyword_length = 5 },
   }),
 
   window = {
-		completion = {
-			border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:Normal',
-		},
-		documentation = {
-			border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    completion = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+      winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:Normal',
+    },
+    documentation = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
       winhighlight = 'FloatBorder:NormalFloat',
-		},
-	},
+    },
+  },
 
   formatting = {
     format = lspkind.cmp_format {
@@ -78,6 +89,7 @@ cmp.setup({
         buffer = '[buf]',
         nvim_lsp = '[LSP]',
         nvim_lua = '[api]',
+        luasnip = ' [snip]',
         path = '[path]',
       }
     }
