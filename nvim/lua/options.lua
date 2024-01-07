@@ -47,3 +47,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+local strip_whitespaces_group = vim.api.nvim_create_augroup('StripWhitespaces', { clear = true })
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  group = strip_whitespaces_group,
+  pattern = '*',
+  callback = function()
+    local save_cursor = vim.fn.getpos('.')
+    vim.cmd([[%s/\s\+$//e]])
+    vim.fn.setpos('.', save_cursor)
+  end,
+})
