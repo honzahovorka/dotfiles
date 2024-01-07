@@ -1,7 +1,9 @@
 return {
+  'folke/neodev.nvim',
   {
     'neovim/nvim-lspconfig',
     config = function()
+      require('neodev').setup({})
       local nvim_lsp = require('lspconfig')
       local protocol = require('vim.lsp.protocol')
 
@@ -149,7 +151,7 @@ return {
       nvim_lsp.solargraph.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { os.getenv( 'HOME' ) .. '/.rbenv/shims/solargraph', 'stdio' },
+        cmd = { os.getenv('HOME') .. '/.rbenv/shims/solargraph', 'stdio' },
       })
 
       nvim_lsp.lua_ls.setup({
@@ -157,32 +159,19 @@ return {
         capabilities = capabilities,
         settings = {
           Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-              -- Setup your lua path
-              path = vim.split(package.path, ';'),
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { 'vim' },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = {
-                [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-              },
-            },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            diagnostics = { disable = { 'missing-fields' } },
           },
         },
       })
 
       nvim_lsp.eslint.setup({
         root_dir = require('lspconfig.util').root_pattern(
-        '.eslintrc.js',
-        'node_modules',
-        '.git'
+          '.eslintrc.js',
+          'node_modules',
+          '.git'
         ),
         on_attach = on_attach,
         capabilities = capabilities,
@@ -207,7 +196,5 @@ return {
   },
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  'simrat39/inlay-hints.nvim',
-  'folke/neodev.nvim',
   'jose-elias-alvarez/nvim-lsp-ts-utils',
 }
