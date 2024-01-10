@@ -28,3 +28,5 @@ vim.keymap.set('v', '>', '>gv', { silent = true })
 
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { silent = true })
 vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { silent = true })
+
+vim.api.nvim_set_keymap('t', '<C-w>', '<C-\\><C-n>', { noremap = true, silent = true })

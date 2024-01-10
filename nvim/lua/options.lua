@@ -39,6 +39,9 @@ vim.opt.iskeyword:append('-')
 vim.opt.hlsearch = false
 vim.opt.inccommand = 'split'
 
+vim.g.netrw_banner = 0
+vim.g.netrw_mouse = 2
+
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()

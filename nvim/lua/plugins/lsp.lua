@@ -191,7 +191,7 @@ return {
   {
     'j-hui/fidget.nvim',
     config = function()
-      require('fidget').setup()
+      require('fidget').setup({})
     end
   },
   'williamboman/mason.nvim',
