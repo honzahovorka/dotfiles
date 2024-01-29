@@ -29,4 +29,4 @@ source $OMF_PATH/init.fish
 set -gx  LC_ALL en_US.UTF-8
 
 set PATH $HOME/.cargo/bin $PATH
-# set PATH $HOME/.local/share/nvim/ $PATH
+set PATH $HOME/.config/bin $PATH
