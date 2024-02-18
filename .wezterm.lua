@@ -28,5 +28,7 @@ config.font_size = 15.0
 
 config.enable_tab_bar = false
 
+config.window_background_opacity = 0.97
+
 -- and finally, return the configuration to wezterm
 return config
