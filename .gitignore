@@ -106,6 +106,8 @@ nvim/plugged/*
 .vim/bundle/*
 vifm/vifminfo
 nvim/plugin/*
+tmux/plugins/*
+nvim/lazy-lock.json
 
 # Redis
 # ---------------------------------------------------------------------------------------------
