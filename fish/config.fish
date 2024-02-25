@@ -26,6 +26,10 @@ set -x PATH $N_PREFIX/bin:$PATH
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
+# Starship
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+starship init fish | source
+
 set -gx  LC_ALL en_US.UTF-8
 
 set PATH $HOME/.cargo/bin $PATH
