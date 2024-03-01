@@ -27,7 +27,7 @@ return {
             theme = 'ivy',
           },
           ['ui-select'] = {
-            require('telescope.themes').get_dropdown {},
+            require('telescope.themes').get_dropdown({}),
           },
         },
 
@@ -44,10 +44,10 @@ return {
       vim.keymap.set('n', '<leader>gf', ':Telescope git_files<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fs', function()
-        require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ") })
+        require('telescope.builtin').grep_string({ search = vim.fn.input('Grep > ') })
       end)
       vim.keymap.set('n', '<leader>fw', function()
-        local word = vim.fn.expand('<cWORD>')
+        local word = vim.fn.expand('<cword>')
         require('telescope.builtin').grep_string({ search = word })
       end)
       vim.keymap.set('n', '<leader>fp', ':Telescope project<CR>', { silent = true })
@@ -57,10 +57,10 @@ return {
       vim.keymap.set('n', '<leader>ft', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { silent = true })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
+        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+          winblend = 0,
           previewer = false,
-        })
+        }))
       end, { silent = true })
     end,
   },

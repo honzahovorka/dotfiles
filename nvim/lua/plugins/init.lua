@@ -1,4 +1,5 @@
 return {
+  'tpope/vim-sleuth',
   'nvim-lua/popup.nvim',
   'nvim-lualine/lualine.nvim',
   'editorconfig/editorconfig-vim',

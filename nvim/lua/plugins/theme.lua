@@ -52,6 +52,10 @@ return {
           harpoon = true,
           fidget = true,
           mason = true,
+          dap = true,
+          dap_ui = true,
+          indent_blankline = true,
+          dropbar = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       })

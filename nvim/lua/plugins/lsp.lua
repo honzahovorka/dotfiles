@@ -1,6 +1,10 @@
 return {
   'folke/neodev.nvim',
   {
+    'dmmulroy/ts-error-translator.nvim',
+    opts = {},
+  },
+  {
     'neovim/nvim-lspconfig',
     config = function()
       require('neodev').setup({})
