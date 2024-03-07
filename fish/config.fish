@@ -30,6 +30,9 @@ source $OMF_PATH/init.fish
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 starship init fish | source
 
+# Zoxide
+zoxide init fish | source
+
 set -gx  LC_ALL en_US.UTF-8
 
 set PATH $HOME/.cargo/bin $PATH
