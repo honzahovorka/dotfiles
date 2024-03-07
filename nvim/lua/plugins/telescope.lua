@@ -22,20 +22,8 @@ return {
             override_file_sorter = true, -- override the file sorter
             case_mode = 'smart_case', -- or 'ignore_case' or 'respect_case'
           },
-          file_browser = {
-            git_status = false,
-            theme = 'ivy',
-          },
           ['ui-select'] = {
             require('telescope.themes').get_dropdown({}),
-          },
-        },
-
-        project = {
-          hidden_files = false,
-          theme = 'dropdown',
-          base_dirs = {
-            '~/Code/payments-service/',
           },
         },
       })
@@ -50,17 +38,18 @@ return {
         local word = vim.fn.expand('<cword>')
         require('telescope.builtin').grep_string({ search = word })
       end)
-      vim.keymap.set('n', '<leader>fp', ':Telescope project<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
       vim.keymap.set('n', '<leader>fo', ':Telescope oldfiles<CR>', { silent = true })
       vim.keymap.set('n', '<leader>rf', ':Telescope resume<CR>', { silent = true })
-      vim.keymap.set('n', '<leader>ft', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { silent = true })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
           winblend = 0,
           previewer = false,
         }))
+      end, { silent = true })
+      vim.keymap.set('n', '<leader>gwt', function()
+        require('telescope').extensions.git_worktree.git_worktrees()
       end, { silent = true })
     end,
   },
@@ -69,8 +58,6 @@ return {
     build = 'make',
   },
   'nvim-telescope/telescope-ui-select.nvim',
-  'nvim-telescope/telescope-file-browser.nvim',
-  'nvim-telescope/telescope-project.nvim',
   {
     'AckslD/nvim-neoclip.lua',
     config = function()

@@ -23,4 +23,8 @@ return {
       vim.keymap.set('n', '<leader>gg', ':Neogit<cr>', { silent = true })
     end
   },
+  {
+    'ThePrimeagen/git-worktree.nvim',
+    opts = {},
+  },
 }

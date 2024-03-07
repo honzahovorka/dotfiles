@@ -108,6 +108,7 @@ vifm/vifminfo
 nvim/plugin/*
 tmux/plugins/*
 nvim/lazy-lock.json
+fish/conf.d/*
 
 # Redis
 # ---------------------------------------------------------------------------------------------

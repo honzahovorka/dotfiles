@@ -9,9 +9,11 @@ return {
         'size',
         'mtime',
       },
-      lsp_rename_autosave = true,
       view_options = {
         show_hidden = true,
+      },
+      lsp_file_methods = {
+        autosave_changes = true,
       },
     })
 
