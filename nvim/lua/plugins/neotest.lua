@@ -1,6 +1,9 @@
 return {
   'nvim-neotest/neotest',
-  dependencies = { 'haydenmeade/neotest-jest' },
+  dependencies = {
+    'nvim-neotest/nvim-nio',
+    'haydenmeade/neotest-jest',
+  },
   config = function()
     local neotest = require('neotest')
     neotest.setup({

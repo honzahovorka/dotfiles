@@ -2,16 +2,15 @@ return {
   'mfussenegger/nvim-dap',
   event = 'VeryLazy',
   dependencies = {
+    'rcarriga/nvim-dap-ui',
+    'mxsdev/nvim-dap-vscode-js',
     {
-      { 'rcarriga/nvim-dap-ui' },
-      { 'mxsdev/nvim-dap-vscode-js' },
-      {
-        'microsoft/vscode-js-debug',
-        build = 'rm -rf out/dist && npm ci && npm run compile vsDebugServerBundle && mv dist out',
-      },
-      { 'theHamsta/nvim-dap-virtual-text' },
-      { 'nvim-telescope/telescope-dap.nvim' },
+      'microsoft/vscode-js-debug',
+      build = 'rm -rf out/dist && npm ci && npm run compile vsDebugServerBundle && mv dist out',
     },
+    'theHamsta/nvim-dap-virtual-text',
+    'nvim-telescope/telescope-dap.nvim',
+    'nvim-neotest/nvim-nio',
   },
   config = function()
     local dapui = require('dapui')
