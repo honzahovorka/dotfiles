@@ -16,3 +16,6 @@ behind = '⇣${count}'
 staged = '[+${count}](bold green)'
 untracked = '[?${count}](bold red)'
 modified = '[!${count}](bold yellow)'
+
+[docker_context]
+disabled = true
