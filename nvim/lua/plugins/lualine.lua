@@ -2,22 +2,68 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     config = function()
+      local icons = require('icons')
+
+      local filetype = { 'filetype', icon_only = true }
+      local diagnostics = {
+        'diagnostics',
+        sources = { 'nvim_diagnostic' },
+        sections = { 'error', 'warn', 'info', 'hint' },
+        symbols = {
+          error = icons.diagnostics.BoldError .. ' ',
+          hint = icons.diagnostics.BoldHint .. ' ',
+          info = icons.diagnostics.BoldInformation .. ' ',
+          warn = icons.diagnostics.BoldWarning .. ' ',
+        },
+        colored = true,
+        update_in_insert = false,
+        always_visible = false,
+      }
+
+      local diff = {
+        'diff',
+        source = function()
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
+        end,
+
+        symbols = {
+          added = icons.git.LineAdded .. ' ',
+          modified = icons.git.LineModified .. ' ',
+          removed = icons.git.LineRemoved .. ' ',
+        },
+        colored = true,
+        always_visible = false,
+      }
+
+      local branch = {
+        'branch',
+        icon = icons.git.Branch .. ' ',
+      }
+
       local opts = {
+        extensions = { 'oil', 'trouble' },
         options = {
-          component_separators = '|',
-          section_separators = { left = '', right = '' },
+          component_separators = icons.status.ComponentSeparator,
+          section_separators = { left = icons.status.SeparatorRight, right = icons.status.SeparatorLeft },
 
         },
         sections = {
           lualine_a = {
-            { 'mode', separator = { left = '' }, right_padding = 2 },
+            { 'mode', separator = { left = icons.status.SeparatorLeft }, right_padding = 2 },
           },
           lualine_b = { 'filename' },
-          lualine_c = {},
-          lualine_x = { 'o:encoding', 'fileformat', 'filetype' },
+          lualine_c = { branch, diff },
+          lualine_x = { diagnostics, filetype },
           lualine_y = { 'progress' },
           lualine_z = {
-            { 'location', separator = { right = '' }, left_padding = 2 },
+            { 'location', separator = { right = icons.status.SeparatorRight }, left_padding = 2 },
           },
         },
         inactive_sections = {
@@ -28,27 +74,6 @@ return {
           lualine_y = {},
           lualine_z = {}
         },
-      }
-
-      local function ins_left(component)
-        table.insert(opts.sections.lualine_c, component)
-      end
-
-      ins_left {
-        'branch',
-        icon = '',
-      }
-
-      ins_left {
-        'diff',
-        -- Is it me or the symbol for modified us really weird
-        symbols = { added = ' ', modified = '柳 ', removed = ' ' },
-      }
-
-      ins_left {
-        'diagnostics',
-        sources = { 'nvim_diagnostic' },
-        symbols = { error = ' ', warn = ' ', info = ' ' },
       }
 
       require('lualine').setup(opts)
