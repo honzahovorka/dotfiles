@@ -29,5 +29,10 @@ vim.keymap.set('v', '>', '>gv', { silent = true })
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { silent = true })
 vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { silent = true })
 
-vim.keymap.set('t', '<C-w>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-t>', ':vert term<CR>', { silent = true })
+
+vim.keymap.set('n', '<M-.>', '<c-w>5<', { silent = true })
+vim.keymap.set('n', '<M-,>', '<c-w>5>', { silent = true })
+vim.keymap.set('n', '<M-t>', '<c-w>+', { silent = true })
+vim.keymap.set('n', '<M-d>', '<c-w>-', { silent = true })

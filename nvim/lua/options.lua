@@ -38,6 +38,7 @@ vim.opt.whichwrap:append('<,>,[,],h,l')
 vim.opt.iskeyword:append('-')
 vim.opt.hlsearch = false
 vim.opt.inccommand = 'split'
+vim.opt.conceallevel = 2
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2

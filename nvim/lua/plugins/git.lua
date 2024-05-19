@@ -13,6 +13,7 @@ return {
   {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    branch = 'nightly',
     config = function()
       require('neogit').setup({
         integrations = {
