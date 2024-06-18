@@ -21,9 +21,8 @@ set -x PATH $N_PREFIX/bin:$PATH
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
-# Starship
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-starship init fish | source
+# Oh my Posh
+oh-my-posh init fish --config ~/.config/ohmyposh/default.toml | source
 
 # Zoxide
 zoxide init fish | source
