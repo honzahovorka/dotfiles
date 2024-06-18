@@ -106,7 +106,7 @@ nvim/plugged/*
 .vim/bundle/*
 vifm/vifminfo
 nvim/plugin/*
-tmux/plugins/*
+.tmux/plugins/*
 nvim/lazy-lock.json
 fish/conf.d/*
 
