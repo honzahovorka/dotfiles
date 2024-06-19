@@ -1,3 +1,25 @@
+# https://www.gnu.org/software/stow/manual/html_node/Ignore-Lists.html#Ignore-Lists
+# Comments and blank lines are allowed.
+
+RCS
+.+,v
+
+CVS
+\.\#.+       # CVS conflict files / emacs lock files
+\.cvsignore
+
+\.svn
+_darcs
+\.hg
+
+\.git
+\.gitignore
+
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
 .DS_Store
-LICENSE
-README
