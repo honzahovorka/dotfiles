@@ -90,37 +90,19 @@ return {
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      tsserver = {
-        init_options = {
-          preferences = {
-            importModuleSpecifierPreference = 'relative'
-          }
-        },
-        filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
+      vtsls = {
         settings = {
-          javascript = {
-            inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = false,
-            },
-          },
           typescript = {
             inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = false,
+              parameterNames = { enabled = 'literals' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
             },
           },
-        }
+        },
       },
 
       lua_ls = {
