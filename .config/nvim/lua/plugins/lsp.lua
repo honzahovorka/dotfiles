@@ -93,6 +93,9 @@ return {
       vtsls = {
         settings = {
           typescript = {
+            preferences = {
+              importModuleSpecifier = 'relative',
+            },
             inlayHints = {
               parameterNames = { enabled = 'literals' },
               parameterTypes = { enabled = true },
