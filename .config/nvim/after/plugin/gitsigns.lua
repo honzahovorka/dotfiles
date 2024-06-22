@@ -1,11 +1,11 @@
 require('gitsigns').setup({
   signs = {
-    add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr" },
-    untracked = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr" },
-    change = { hl = "GitSignsChange", text = "│", numhl = "GitSignsChangeNr" },
-    delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr" },
-    topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr" },
-    changedelete = { hl = "GitSignsDelete", text = "~", numhl = "GitSignsChangeNr" },
+    add = { text = '│' },
+    untracked = { text = '│' },
+    change = { text = '│' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
   },
 
   -- Highlights just the number part of the number column
