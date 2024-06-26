@@ -18,6 +18,12 @@ return {
           find_files = {
             find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
           },
+          grep_string = {
+            additional_args = { '--hidden' }
+          },
+          live_grep = {
+            additional_args = { '--hidden' }
+          },
         },
 
         extensions = {
