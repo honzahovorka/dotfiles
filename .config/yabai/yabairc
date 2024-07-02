@@ -11,9 +11,11 @@ yabai -m config left_padding 12
 yabai -m config right_padding 12
 yabai -m config window_gap 12
 
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
 # center mouse on window with focus
 yabai -m config mouse_follows_focus on
-
 # modifier for clicking and dragging with mouse
 yabai -m config mouse_modifier alt
 # set modifier + left-click drag to move window
@@ -27,14 +29,6 @@ yabai -m mouse_drop_action swap
 yabai -m config external_bar all:36:0
 
 yabai -m rule --add app="^Raycast Settings$" manage=off
-yabai -m rule --add app="^1Password$" manage=off
-yabai -m rule --add app="^Mail$" manage=off
-yabai -m rule --add app="^Notes$" manage=off
-yabai -m rule --add app="^Finder$" manage=on
-yabai -m rule --add app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
-yabai -m rule --add app="^App Store$" manage=off
-yabai -m rule --add app="^Activity Monitor$" manage=off
-yabai -m rule --add app="^Dictionary$" manage=off
 yabai -m rule --add title="^Software Update$" manage=off
 yabai -m rule --add app="System Information" title="About This Mac" manage=off
 yabai -m rule --add app="^(Calculator|System Preferences|Archieve Utilitiy)$" manage=off
