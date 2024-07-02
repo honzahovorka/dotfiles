@@ -1,6 +1,5 @@
 return {
   'sindrets/diffview.nvim',
-  'f-person/git-blame.nvim',
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -22,9 +21,5 @@ return {
 
       vim.keymap.set('n', '<leader>gg', ':Neogit<cr>', { silent = true })
     end
-  },
-  {
-    'ThePrimeagen/git-worktree.nvim',
-    opts = {},
   },
 }
