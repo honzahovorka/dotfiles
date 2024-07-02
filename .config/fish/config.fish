@@ -22,7 +22,11 @@ set -x PATH $N_PREFIX/bin:$PATH
 source $OMF_PATH/init.fish
 
 # Starship
+function starship_transient_rprompt_func
+  starship module time
+end
 starship init fish | source
+enable_transience
 
 # Zoxide
 zoxide init fish | source
