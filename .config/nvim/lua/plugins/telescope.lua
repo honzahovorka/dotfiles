@@ -3,7 +3,7 @@ return {
     'nvim-telescope/telescope.nvim',
     priority = 100,
     config = function()
-      local data = assert(vim.fn.stdpath 'data')
+      local data = assert(vim.fn.stdpath('data'))
 
       require('telescope').setup({
         defaults = {
@@ -75,11 +75,17 @@ return {
     build = 'make',
   },
   'nvim-telescope/telescope-ui-select.nvim',
-  'nvim-telescope/telescope-smart-history.nvim',
+  {
+    'nvim-telescope/telescope-smart-history.nvim',
+    dependencies = {
+      'kkharji/sqlite.lua'
+    },
+  },
   {
     'AckslD/nvim-neoclip.lua',
-    config = function()
-      require('neoclip').setup()
-    end,
+    dependencies = {
+      'kkharji/sqlite.lua'
+    },
+   opts = {}
   },
 }
