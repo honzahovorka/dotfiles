@@ -1,4 +1,5 @@
 function mkcd
-  mkdir -pv $argv;
-  cd $argv;
+    set dir $argv[1]
+    mkdir -p $dir
+    cd $dir
 end
