@@ -69,9 +69,9 @@ alias md 'glow'
 alias c 'clear'
 alias clr 'clear'
 
-alias l 'exa -la --icons'
-alias ll 'exa -l'
-alias la 'exa -la --icons'
+alias ls 'eza -lAh --git --icons=always'
+alias l ls
+alias lt 'eza -lAh --icons=always --git --tree --level=4 --long --ignore-glob="node_modules|.git"'
 
 # FZF
 alias fzfi 'rg --files --hidden --follow -g "!{node_modules,.git}" | fzf --height 40%'
