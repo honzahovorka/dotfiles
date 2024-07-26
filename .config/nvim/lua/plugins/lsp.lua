@@ -18,6 +18,24 @@ return {
     },
     { 'folke/neodev.nvim',                 opts = {} },
     { 'dmmulroy/ts-error-translator.nvim', opts = {} },
+    {
+      'aznhe21/actions-preview.nvim',
+      opts = {
+        telescope = {
+          sorting_strategy = 'ascending',
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.8,
+            height = 0.9,
+            prompt_position = 'top',
+            preview_cutoff = 20,
+            preview_height = function(_, _, max_lines)
+              return max_lines - 15
+            end,
+          },
+        },
+      },
+    },
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -34,7 +52,7 @@ return {
         map('<leader>ds', require('telescope.builtin').lsp_document_symbols)
         map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
         map('<leader>rn', vim.lsp.buf.rename)
-        map('<leader>ca', vim.lsp.buf.code_action)
+        map('<leader>ca', require('actions-preview').code_actions)
         map('K', vim.lsp.buf.hover)
         map('gD', vim.lsp.buf.declaration)
 
