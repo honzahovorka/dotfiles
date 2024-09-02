@@ -1,5 +1,14 @@
 return {
-  'sindrets/diffview.nvim',
+  {
+    'sindrets/diffview.nvim',
+    opts = {
+      view = {
+        merge_tool = {
+          layout = 'diff3_mixed',
+        },
+      },
+    }
+  },
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },

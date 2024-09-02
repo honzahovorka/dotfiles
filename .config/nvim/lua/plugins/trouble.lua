@@ -9,8 +9,8 @@ return {
 
       vim.keymap.set('n', '<leader>xt', '<cmd>Trouble<cr>', { silent = true })
       vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', { silent = true })
-      vim.keymap.set('n', '<leader>xj', function() require('trouble').next({skip_groups = true, jump = true}) end, { silent = true })
-      vim.keymap.set('n', '<leader>xk', function() require('trouble').prev({skip_groups = true, jump = true}) end, { silent = true })
+      vim.keymap.set('n', '<leader>xj', '<cmd>Trouble diagnostics next skip_groups=true jump=true<cr>', { silent = true })
+      vim.keymap.set('n', '<leader>xk', '<cmd>Trouble diagnostics prev skip_groups=true jump=true<cr>', { silent = true })
     end
   },
 }

@@ -86,6 +86,6 @@ return {
     dependencies = {
       'kkharji/sqlite.lua'
     },
-   opts = {}
+    opts = {}
   },
 }
