@@ -29,7 +29,7 @@ sketchybar --add item logo left \
                  icon.color=0xff010101 \
                  icon.padding_left=16 \
                  icon.padding_right=16 \
-                 background.color=0xffA5E0D5 \
+                 background.color=0x00000000 \
                  background.padding_right=8 \
                  background.padding_left=4 \
                  click_script="sketchybar --update"
@@ -60,7 +60,7 @@ sketchybar --add item space_separator left \
                                  background.padding_left=23 \
                                  background.padding_right=23 \
                                  label.drawing=off \
-                                 icon.color=0xff3C3E4F
+                                 icon.color=0xff3C3E4F \
 
 sketchybar --add item window_title left \
            --set window_title    script="~/.config/sketchybar/plugins/window_title.sh" \
