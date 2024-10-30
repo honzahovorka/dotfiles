@@ -102,13 +102,9 @@ bower_components/
 
 # Dotfiles
 # ---------------------------------------------------------------------------------------------
-nvim/plugged/*
-.vim/bundle/*
-vifm/vifminfo
-nvim/plugin/*
 .tmux/plugins/*
-nvim/lazy-lock.json
-fish/conf.d/*
+.config/fish/conf.d/*
+.config/fish/secrets.fish
 
 # Redis
 # ---------------------------------------------------------------------------------------------

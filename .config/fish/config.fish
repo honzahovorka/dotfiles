@@ -33,5 +33,8 @@ zoxide init fish | source
 
 set -gx  LC_ALL en_US.UTF-8
 
+# Load secrets
+source $HOME/.config/fish/secrets.fish
+
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.config/bin $PATH
