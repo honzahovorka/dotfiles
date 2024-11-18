@@ -1,8 +1,8 @@
 # Path to Oh My Fish install.
-set -gx OMF_PATH "/Users/honzahovorka/.local/share/omf"
+set -gx OMF_PATH $HOME/.local/share/omf
 
 # Customize Oh My Fish configuration path.
-set -gx OMF_CONFIG "/Users/honzahovorka/.config/omf"
+set -gx OMF_CONFIG $HOME/.config/omf
 
 # FZF command
 set -x FZF_DEFAULT_COMMAND 'rg --files --no-ignore-vcs --hidden'
@@ -10,9 +10,6 @@ set -Ux FZF_DEFAULT_OPTS '--height=90% --layout=reverse --info=inline --border -
 
 # Autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
-
-# LazyGit
-set -x LG_CONFIG_FILE "/Users/honzahovorka/.config/lazygit/config.yml"
 
 # Node.js
 export N_PREFIX=$HOME/.n
