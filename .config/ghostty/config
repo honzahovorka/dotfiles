@@ -1,0 +1,7 @@
+font-family = JetBrainsMono NFM Regular
+font-size = 16
+
+theme = catppuccin-frappe
+
+window-padding-y = 8
+window-padding-x = 8
