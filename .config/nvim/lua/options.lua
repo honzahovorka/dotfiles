@@ -63,6 +63,5 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   end,
 })
 
-vim.api.nvim_command('autocmd TermOpen * startinsert')
 vim.api.nvim_command('autocmd TermOpen * setlocal nonumber norelativenumber')
 vim.api.nvim_command('autocmd TermEnter * setlocal signcolumn=no')
