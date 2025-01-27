@@ -28,6 +28,13 @@ enable_transience
 # Zoxide
 zoxide init fish | source
 
+# Atuin
+set -gx ATUIN_NOBIND "true"
+atuin init fish | source
+
+bind \cr _atuin_search
+bind -M insert \cr _atuin_search
+
 set -gx  LC_ALL en_US.UTF-8
 
 # Load secrets
