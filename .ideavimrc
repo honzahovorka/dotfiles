@@ -1,29 +1,25 @@
-"" Source your .vimrc
-"source ~/.vimrc
-
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
+set incsearch
+set ignorecase
+set smartcase
+set multiple-cursors
+set clipboard+=unnamed
+set ideajoin
+set ideaput
+set relativenumber
+set number
+set surround
+set highlightedyank
+set relativenumber
+set idearefactormode=keep
+set ideajoin
+set showmode
+set NERDTree
 set scrolloff=5
 
 let mapleader = " "
 
-" Do incremental searching.
-set incsearch
-
 " Don't use Ex mode, use Q for formatting.
 map Q gq
-
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
-
 
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
@@ -36,9 +32,35 @@ map <C-K> <C-W>k
 vmap J :m '>+1<CR>gv=gv
 vmap K :m '<-2<CR>gv=gv
 
-set rnu
+" system clipboard
+vmap <leader>yiw "+yiw
+nmap <leader>yiw "+yiw
+vmap <leader>y "+y
+vmap <leader>d "_d
+nmap <leader>y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+nnoremap <leader>f :action ReformatCode <CR>
+vnoremap <leader>f :action ReformatCode <CR>
+
+nnoremap gcc :action CommentByLineComment<CR>
+vnoremap gcc :action CommentByLineComment<CR>
+
+nnoremap <leader>a :action GotoAction<CR>
+vnoremap <leader>a :action GotoAction<CR>
+
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap <leader>fr :action RecentFiles<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fg :action FindInPath<CR>
+nnoremap <leader>fu :action FindUsages <CR>
+vnoremap <leader>fu :action FindUsages <CR>
+nnoremap <leader>fe :action SearchEverywhere <CR>
+
+nnoremap <leader>ss :action SelectInProjectView<CR>
 
 nnoremap <leader>rn :action RenameElement<CR>
-
-" Find more examples here: https://jb.gg/share-ideavimrc
-
