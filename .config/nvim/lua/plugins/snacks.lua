@@ -11,6 +11,8 @@ return {
     scroll = { enabled = true },
     scratch = { enabled = true },
     words = { enabled = true },
+    zen = { enabled = true },
+    lazygit = { enabled = true },
   },
   keys = {
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
@@ -51,5 +53,9 @@ return {
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    -- Others
+    { "<leader>z", function() Snacks.zen() end, desc = "Zen Mode" },
+    { "<leader>lg", function() Snacks.lazygit() end, desc = "LazyGit" },
+    { "<leader>sc", function() Snacks.scratch() end, desc = "Scratch" },
   },
 }
