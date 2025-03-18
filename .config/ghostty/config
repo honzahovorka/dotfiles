@@ -1,7 +1,7 @@
 font-family = JetBrainsMono NFM Regular
 font-size = 16
 
-theme = catppuccin-frappe
+theme = dark:catppuccin-frappe,light:catppuccin-latte
 
 window-padding-y = 8
 window-padding-x = 8
