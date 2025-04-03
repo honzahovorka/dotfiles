@@ -3,7 +3,6 @@ return {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     depenencies = {
-      'nvim-telescope/telescope.nvim',
       'nvim-lua/plenary.nvim',
     },
     event = 'VeryLazy',
