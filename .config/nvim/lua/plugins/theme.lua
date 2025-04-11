@@ -42,7 +42,7 @@ return {
         color_overrides = {},
         custom_highlights = {},
         integrations = {
-          cmp = true,
+          blink_cmp = true,
           gitsigns = true,
           nvimtree = true,
           telescope = true,
