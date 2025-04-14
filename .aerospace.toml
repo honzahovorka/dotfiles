@@ -199,11 +199,19 @@ alt-shift-l = ['join-with right', 'mode main']
     run = 'move-node-to-workspace I' # mnemonics I - IDE
 
 [[on-window-detected]]
+    if.app-id = 'com.jetbrains.rider'
+    run = 'move-node-to-workspace I' # mnemonics I - IDE
+
+[[on-window-detected]]
     if.app-id = 'md.obsidian'
     run = 'move-node-to-workspace N' # mnemonics N - Notes
 
 [[on-window-detected]]
     if.app-id = 'io.podmandesktop.PodmanDesktop'
+    run = 'move-node-to-workspace D' # mnemonics D - Docker
+
+[[on-window-detected]]
+    if.app-id = 'com.electron.dockerdesktop'
     run = 'move-node-to-workspace D' # mnemonics D - Docker
 
 [[on-window-detected]]
