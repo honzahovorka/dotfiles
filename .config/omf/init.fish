@@ -57,6 +57,7 @@ alias tma 'tmux attach -d -t'
 alias tmn 'tmux new -s (basename (pwd))'
 alias tml 'tmux list-sessions'
 alias tmk 'tmux kill-session -t $1'
+alias tmp 'tmux attach -t (tmux list-session | sed "s/:.*//" | fzf)'
 
 # Custom
 alias mk mkcd # custom fish function

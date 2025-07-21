@@ -10,10 +10,6 @@ set -Ux FZF_DEFAULT_OPTS '--height=90% --layout=reverse --info=inline --border -
 
 set -x EDITOR 'nvim'
 
-# Node.js
-export N_PREFIX=$HOME/.n
-set -x PATH $N_PREFIX/bin:$PATH
-
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
@@ -36,8 +32,10 @@ bind -M insert \cr _atuin_search
 
 set -gx  LC_ALL en_US.UTF-8
 
+set -x GPG_TTY (tty)
+
 # Load secrets
 source $HOME/.config/fish/secrets.fish
 
-set PATH $HOME/.cargo/bin $PATH
-set PATH $HOME/.config/bin $PATH
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.config/bin
