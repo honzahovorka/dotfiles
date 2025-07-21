@@ -1,7 +1,9 @@
-font-family = JetBrainsMono NFM Regular
-font-size = 16
+font-family = JetBrainsMono NF
+font-size = 18
 
 theme = dark:catppuccin-frappe,light:catppuccin-latte
 
 window-padding-y = 8
 window-padding-x = 8
+
+custom-shader = shaders/cursor_smear.glsl
