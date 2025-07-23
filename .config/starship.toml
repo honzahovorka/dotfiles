@@ -3,6 +3,7 @@
 
 format = """
 $os\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -102,3 +103,9 @@ symbol = " "
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)'
 error_symbol = '[➜](bold red)'
+
+[hostname]
+ssh_symbol = " "
+ssh_only = true
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+disabled = false
