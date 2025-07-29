@@ -1,0 +1,63 @@
+[global]
+# Display
+follow = mouse
+width = 350
+height = (0, 300)
+origin = top-right
+offset = (24, 24)
+indicate_hidden = yes
+notification_limit = 5
+gap_size = 12
+padding = 12
+horizontal_padding = 20
+frame_width = 1
+sort = no
+
+# Progress bar
+progress_bar_frame_width = 0
+progress_bar_corner_radius = 3
+
+# Colors
+frame_color = "#8caaee"
+highlight = "#8caaee"
+
+# Text
+font = JetBrains Mono NF 14
+markup = full
+format = "<small>%a</small>\n<b>%s</b>\n%b"
+alignment = left
+vertical_alignment = center
+show_age_threshold = -1
+hide_duplicate_count = false
+
+# Icon
+icon_position = left
+min_icon_size = 54
+max_icon_size = 80
+icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/legacy/
+icon_corner_radius = 4
+
+# Mouse
+mouse_left_click = close_current
+mouse_middle_click = do_action, close_current
+mouse_right_click = close_all
+
+[experimental]
+per_monitor_dpi = true
+
+[slack]
+desktop_entry = "^Slack$"
+new_icon = slack
+
+[urgency_low]
+background = "#303446"
+foreground = "#c6d0f5"
+
+[urgency_normal]
+background = "#303446"
+foreground = "#c6d0f5"
+
+[urgency_critical]
+background = "#303446"
+foreground = "#c6d0f5"
+frame_color = "#ef9f76"
