@@ -1,0 +1,12 @@
+configuration {
+    display-drun: "Applications:";
+    display-window: "Windows:";
+    drun-display-format: "{name}";
+    font: "JetBrainsMono NF 16";
+    modi: "window,run,drun";
+
+    show-icons: true;
+    drun-icon-size: 32;
+}
+
+@theme "catppuccin"

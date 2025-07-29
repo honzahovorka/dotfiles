@@ -1,0 +1,180 @@
+@import "catppuccin-frappe"
+
+* {
+    /* Theme Variables */
+    background-color: transparent;
+    text-color: @text;
+    accent-color: @mauve;
+    urgent-color: @red;
+    selected-color: @blue;
+}
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+    fullscreen: false;
+    width: 600px;
+    x-offset: 0px;
+    y-offset: 0px;
+    background-color: @base;
+    border: 2px solid;
+    border-color: @surface2;
+    border-radius: 12px;
+    padding: 0px;
+}
+
+mainbox {
+    enabled: true;
+    spacing: 0px;
+    background-color: transparent;
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled: true;
+    spacing: 10px;
+    padding: 15px;
+    border-radius: 0px;
+    background-color: @mantle;
+    text-color: @text;
+    children: [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled: true;
+    expand: false;
+    str: ">";
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: @accent-color;
+    text-color: @base;
+    font: "JetBrains Mono NF 12";
+}
+
+entry {
+    enabled: true;
+    expand: true;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: @surface0;
+    text-color: @text;
+    cursor: text;
+    placeholder: "Search applications...";
+    placeholder-color: @subtext0;
+    font: "JetBrains Mono NF 12";
+}
+
+listview {
+    enabled: true;
+    columns: 1;
+    lines: 8;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    fixed-height: true;
+    fixed-columns: true;
+    spacing: 5px;
+    padding: 15px;
+    background-color: transparent;
+    text-color: @text;
+}
+
+element {
+    enabled: true;
+    spacing: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: transparent;
+    text-color: @text;
+    cursor: pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @text;
+}
+
+element normal.urgent {
+    background-color: @urgent-color;
+    text-color: @base;
+}
+
+element normal.active {
+    background-color: @accent-color;
+    text-color: @base;
+}
+
+element selected.normal {
+    background-color: @selected-color;
+    text-color: @base;
+}
+
+element selected.urgent {
+    background-color: @urgent-color;
+    text-color: @base;
+}
+
+element selected.active {
+    background-color: @accent-color;
+    text-color: @base;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @text;
+}
+
+element alternate.urgent {
+    background-color: @urgent-color;
+    text-color: @base;
+}
+
+element alternate.active {
+    background-color: @accent-color;
+    text-color: @base;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color: inherit;
+    size: 28px;
+    cursor: inherit;
+    margin: 0px 8px 0px 0px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    font: "JetBrains Mono NF 12";
+}
+
+/* Scrollbar */
+scrollbar {
+    width: 4px;
+    border: 0;
+    handle-color: @surface2;
+    handle-width: 8px;
+    padding: 0;
+}
+
+/* Error message */
+error-message {
+    padding: 15px;
+    border-radius: 0px 0px 12px 12px;
+    background-color: @red;
+    text-color: @base;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    font: "JetBrains Mono NF 12";
+}

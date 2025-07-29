@@ -1,0 +1,81 @@
+@import 'frappe.css';
+
+* {
+  background-color: @base;
+  color: @text;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrains Mono NF';
+  font-size: 22px;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#tray,
+#workspaces,
+#window,
+#cpu,
+#memory,
+#disk,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#clock,
+#mpris,
+#language,
+#custom-launcher,
+#custom-powermenu {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#custom-launcher {
+  margin: 0 10px;
+  color: @maroon;
+}
+
+#mpris {
+  color: @flamingo;
+  font-size: 16px;
+}
+
+#custom-expand-icon {
+  margin-right: 12px;
+}
+
+#custom-powermenu {
+  color: @surface2;
+}
+
+#window * {
+  font-size: 16px;
+  color: @surface2;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.active * {
+  color: @mauve;
+}
+
+#workspaces button.focused * {
+  color: @rosewater;
+}
+
+tooltip {
+  padding: 2px;
+}

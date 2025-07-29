@@ -1,0 +1,20 @@
+font-family = JetBrainsMono NF
+font-size = 18
+
+theme = /usr/share/ghostty/themes/catppuccin-frappe
+
+window-padding-y = 8
+window-padding-x = 8
+
+custom-shader = shaders/cursor_smear.glsl
+
+clipboard-paste-protection = false
+copy-on-select = clipboard
+
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard
+
+gtk-titlebar = false
+
+app-notifications = no-clipboard-copy

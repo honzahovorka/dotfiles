@@ -1,0 +1,124 @@
+{
+  "position": "top",
+  "modules-left": ["custom/launcher", "hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["mpris"],
+  "modules-right": ["network", "bluetooth", "pulseaudio", "memory", "cpu", "disk", "hyprland/language", "custom/dunst", "clock", "custom/lock", "custom/powermenu"],
+
+  "custom/launcher": {
+    "interval": "once",
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip": false
+  },
+
+
+  "hyprland/window": {
+    "format": "{}",
+    "icon": true,
+    "separate-outputs": true
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "player-icons": {
+      "default": ""
+    },
+    "status-icons": {
+      "paused": ""
+    }
+  },
+
+  "clock": {
+    "format": "{:%d/%m/%Y %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "custom/nordvpn": {
+    "format": "{}",
+    "exec": "sh ~/.config/waybar/scripts/nordvpn-status.sh",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "sh ~/.config/waybar/scripts/nordvpn-menu.sh"
+  },
+
+  "network": {
+    "format-wifi": "   {bandwidthDownBytes}  {bandwidthUpBytes} ",
+    "format-ethernet": "  {ipaddr}",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "  Disconnected",
+    "tooltip-format-wifi": "{essid}: {signalStrength}%",
+    "interval": "1",
+    "on-click-right": "sh ~/.config/waybar/scripts/rofi-wifi-menu.sh"
+  },
+
+  "bluetooth": {
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click-right": "kitty bluetui"
+  },
+
+  "pulseaudio": {
+    "on-click-right": "pavucontrol",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "format": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    }
+  },
+
+  "memory": {
+    "format": " {used:0.1f}G/{total:0.1f}G",
+    "interval": 1,
+    "states": {
+      "warning": 85
+    }
+  },
+
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 1
+  },
+
+  "disk": {
+    "format": " {used}/{total}",
+    "interal": 30,
+    "path": "/home"
+  },
+
+  "custom/dunst": {
+    "exec": "~/.config/waybar/scripts/dunst.sh",
+    "on-click": "dunstctl set-paused toggle",
+    "restart-interval": 1,
+    "tooltip": false
+  },
+
+  "custom/powermenu": {
+    "format": "",
+    "on-click": "sh ~/.config/waybar/scripts/power-menu/powermenu.sh",
+    "tooltip": false
+  },
+
+  "hyprland/language": {
+   "format-en": " US",
+    "format-cs": " CZ"
+  },
+
+  "custom/lock": {
+    "tooltip": false,
+    "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
+    "format": ""
+  }
+}
