@@ -1,5 +1,6 @@
 common/.config/fish/conf.d/*
 common/.config/fish/secrets.fish
+common/.config/fish/fish_variables
 macos/.config/sketchybar/helpers/*
 macos/.tmux/plugins/*
 arch/.tmux/plugins/*
