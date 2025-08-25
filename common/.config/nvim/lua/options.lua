@@ -39,28 +39,9 @@ vim.opt.hlsearch = false
 vim.opt.inccommand = 'split'
 vim.opt.conceallevel = 2
 
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
+
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
-
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
-local strip_whitespaces_group = vim.api.nvim_create_augroup('StripWhitespaces', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  group = strip_whitespaces_group,
-  pattern = '*',
-  callback = function()
-    local save_cursor = vim.fn.getpos('.')
-    vim.cmd([[%s/\s\+$//e]])
-    vim.fn.setpos('.', save_cursor)
-  end,
-})
-
-vim.api.nvim_command('autocmd TermOpen * setlocal nonumber norelativenumber')
-vim.api.nvim_command('autocmd TermEnter * setlocal signcolumn=no')
