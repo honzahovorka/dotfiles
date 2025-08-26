@@ -127,13 +127,9 @@ alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
-alt-w = 'workspace W' # Web browser
-alt-s = 'workspace S' # Slack
-alt-i = 'workspace I' # IDE
-alt-t = 'workspace T' # Terminal
-alt-d = 'workspace D' # Docker
-alt-m = 'workspace M' # Music (Spotify)
-alt-n = 'workspace N' # Notes (Obsidian)
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -141,13 +137,9 @@ alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-w = 'move-node-to-workspace W' # Web browser
-alt-shift-s = 'move-node-to-workspace S' # Slack
-alt-shift-i = 'move-node-to-workspace I' # IDE
-alt-shift-t = 'move-node-to-workspace T' # Terminal
-alt-shift-d = 'move-node-to-workspace D' # Docker
-alt-shift-m = 'move-node-to-workspace M' # Music (Spotify)
-alt-shift-n = 'move-node-to-workspace N' # Notes (Obsidian)
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
 
 alt-shift-f = 'fullscreen'
 
@@ -188,36 +180,36 @@ alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
     if.app-id = 'com.mitchellh.ghostty'
-    run = 'move-node-to-workspace T' # mnemonics T - Terminal
+    run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
     if.app-id = 'com.brave.Browser'
-    run = 'move-node-to-workspace W' # mnemonics W - Web browser
+    run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
     if.app-id = 'com.jetbrains.intellij'
-    run = 'move-node-to-workspace I' # mnemonics I - IDE
+    run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-    if.app-id = 'com.jetbrains.rider'
-    run = 'move-node-to-workspace I' # mnemonics I - IDE
+    if.app-id = 'com.microsoft.VSCode'
+    run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
     if.app-id = 'md.obsidian'
-    run = 'move-node-to-workspace N' # mnemonics N - Notes
+    run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
     if.app-id = 'io.podmandesktop.PodmanDesktop'
-    run = 'move-node-to-workspace D' # mnemonics D - Docker
+    run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
     if.app-id = 'com.electron.dockerdesktop'
-    run = 'move-node-to-workspace D' # mnemonics D - Docker
+    run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace S' # mnemonics S - Slack
+    run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
     if.app-id = 'com.spotify.client'
-    run = 'move-node-to-workspace M' # mnemonics M - Music
+    run = 'move-node-to-workspace 5'
