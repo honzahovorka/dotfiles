@@ -42,6 +42,7 @@ vim.opt.conceallevel = 2
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 99
+vim.o.foldlevelstart = 99
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
