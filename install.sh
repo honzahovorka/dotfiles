@@ -29,11 +29,12 @@ usage() {
     echo "  -h, --help          Show this help message"
     echo ""
     echo "Arguments:"
-    echo "  OS               Operating system (macos, arch)"
+    echo "  OS               Operating system (macos, arch, omarchy)"
     echo ""
     echo "Examples:"
     echo "  $0 macos            # Install common + macOS configs (with backup)"
     echo "  $0 arch             # Install common + Arch configs (with backup)"
+    echo "  $0 omarchy          # Install common + Omarchy configs (with backup)"
     echo "  $0 -n macos         # Show what would be installed for macOS"
     echo "  $0 --no-backup      # Install without backing up existing files"
     echo ""
@@ -41,6 +42,7 @@ usage() {
     echo "  common           Cross-platform configs (git, nvim, tmux, etc.)"
     echo "  macos            macOS-specific configs (sketchybar, aerospace)"
     echo "  arch             Arch Linux-specific configs"
+    echo "  omarchy          Omarchy-specific configs"
 }
 
 check_stow() {
@@ -93,7 +95,7 @@ stow_package() {
         echo "[DRY RUN] Command: stow -t '$HOME' '$package'"
         if command -v stow &> /dev/null; then
             echo "[DRY RUN] Stow output:"
-            if ! stow -n -t "$HOME" "$package" 2>&1; then
+            if ! stow -n -t "$HOME" "$package" --adopt 2>&1; then
                 log_error "Dry-run stow failed for package: $package"
             fi
         fi
@@ -108,7 +110,7 @@ stow_package() {
         local stow_output
         local stow_exit_code
 
-        stow_output=$(stow -t "$HOME" "$package" 2>&1)
+        stow_output=$(stow -t "$HOME" "$package" --adopt 2>&1)
         stow_exit_code=$?
 
         echo "$stow_output" | tee -a "$LOG_FILE"
@@ -184,7 +186,7 @@ main() {
 
     # Validate OS argument (but allow dry-run to proceed with invalid OS for testing)
     case "$os" in
-        macos|arch)
+        macos|arch|omarchy)
             # Valid OS
             ;;
         *)
@@ -229,6 +231,14 @@ main() {
                 fi
             fi
             ;;
+        omarchy)
+            if ! stow_package "omarchy"; then
+                if [[ "$DRY_RUN" == "false" ]]; then
+                    log_error "Failed to install omarchy package"
+                    exit 1
+                fi
+            fi
+            ;;
         *)
             # This case should only be reached in dry-run mode due to earlier validation
             if [[ "$DRY_RUN" == "true" ]]; then
@@ -252,6 +262,7 @@ main() {
         echo "  ✓ common (cross-platform configs)"
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
+        [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
         echo ""
         echo "To actually install, run without --dry-run flag"
     else
@@ -261,6 +272,7 @@ main() {
         echo "  ✓ common (cross-platform configs)"
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
+        [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
         echo ""
         echo "📝 Full installation log saved to: $LOG_FILE"
         log "Installation completed successfully"

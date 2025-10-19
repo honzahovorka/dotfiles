@@ -30,6 +30,9 @@ atuin init fish | source
 bind \cr _atuin_search
 bind -M insert \cr _atuin_search
 
+# Mise
+$HOME/.local/bin/mise activate fish | source
+
 set -gx  LC_ALL en_US.UTF-8
 
 set -x GPG_TTY (tty)
