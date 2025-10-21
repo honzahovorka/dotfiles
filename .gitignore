@@ -5,3 +5,5 @@ macos/.config/sketchybar/helpers/*
 macos/.tmux/plugins/*
 arch/.tmux/plugins/*
 install.log
+common/.gnupg/*
+!common/.gnupg/gpg-agent.conf

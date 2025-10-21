@@ -1,11 +1,6 @@
-set -x EDITOR /opt/homebrew/bin/nvim
-
 alias tmux 'tmux -2'
 alias vim 'nvim'
 alias v 'nvim'
-
-# Hub
-alias git hub
 
 # git
 alias g git

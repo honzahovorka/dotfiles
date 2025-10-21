@@ -3,3 +3,6 @@ idiomatic_version_file_enable_tools = ["terraform", "node"]
 
 [tools]
 node = "latest"
+go = "latest"
+rust = "latest"
+python = "latest"
