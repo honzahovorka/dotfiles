@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dheight\x3d90\x25\x20\x2d\x2dlayout\x3dreverse\x20\x2d\x2dinfo\x3dinline\x20\x2d\x2dborder\x20\x2d\x2dmargin\x3d1\x20\x2d\x2dpadding\x3d1\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x23414559\x2cbg\x3a\x23303446\x2cspinner\x3a\x23f2d5cf\x2chl\x3a\x23e78284\x20\x2d\x2dcolor\x3dfg\x3a\x23c6d0f5\x2cheader\x3a\x23e78284\x2cinfo\x3a\x23ca9ee6\x2cpointer\x3a\x23f2d5cf\x20\x2d\x2dcolor\x3dmarker\x3a\x23f2d5cf\x2cfg\x2b\x3a\x23c6d0f5\x2cprompt\x3a\x23ca9ee6\x2chl\x2b\x3a\x23e78284
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dheight\x3d90\x25\x20\x2d\x2dlayout\x3dreverse\x20\x2d\x2dinfo\x3dinline\x20\x2d\x2dborder\x20\x2d\x2dmargin\x3d1\x20\x2d\x2dpadding\x3d1\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x23313244\x2cbg\x3a\x231e1e2e\x2cspinner\x3a\x23f5e0dc\x2chl\x3a\x23f38ba8\x20\x2d\x2dcolor\x3dfg\x3a\x23cdd6f4\x2cheader\x3a\x23f38ba8\x2cinfo\x3a\x23cba6f7\x2cpointer\x3a\x23f5e0dc\x20\x2d\x2dcolor\x3dmarker\x3a\x23f5e0dc\x2cfg\x2b\x3a\x23cdd6f4\x2cprompt\x3a\x23cba6f7\x2chl\x2b\x3a\x23f38ba8
 SETUVAR FZF_DISABLE_KEYBINDINGS:0
 SETUVAR FZF_LEGACY_KEYBINDINGS:1
 SETUVAR FZF_PREVIEW_DIR_CMD:ls
@@ -45,4 +45,4 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/honza/\x2econfig/bin\x1e/home/honza/\x2ecargo/bin\x1e/Users/honzahovorka/\x2econfig/bin\x1e/Users/honzahovorka/\x2ecargo/bin\x1e/opt/homebrew/bin\x1e/Users/honzahovorka/\x2efzf/bin\x1e/opt/homebrew/opt/fzf/bin\x1e/usr/bin
+SETUVAR fish_user_paths:/Users/jhovorka\x40dnanexus\x2ecom/\x2econfig/bin\x1e/Users/jhovorka\x40dnanexus\x2ecom/\x2ecargo/bin\x1e/Applications/IntelliJ\x20IDEA\x2eapp/Contents/MacOS\x1e/home/honza/\x2econfig/bin\x1e/home/honza/\x2ecargo/bin\x1e/Users/honzahovorka/\x2econfig/bin\x1e/Users/honzahovorka/\x2ecargo/bin\x1e/opt/homebrew/bin\x1e/Users/honzahovorka/\x2efzf/bin\x1e/opt/homebrew/opt/fzf/bin\x1e/usr/bin
