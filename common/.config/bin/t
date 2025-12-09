@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Jump to a directory using zoxide and attach/create a tmux session
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: t <directory>"
+    echo "Jump to directory and attach/create tmux session"
+    exit 1
+fi
+
+name="$1"
+
+# Use zoxide to get the directory path
+dir=$(zoxide query "$name" 2>/dev/null)
+
+if [[ -z "$dir" ]]; then
+    echo "No match found for '$name'"
+    exit 1
+fi
+
+# Try to attach to existing session, or create new one
+if tmux has-session -t "$name" 2>/dev/null; then
+    exec tmux attach -d -t "$name"
+else
+    # Create new session with nvim in first window
+    tmux new-session -d -s "$name" -c "$dir" "nvim"
+    # Create second window (shell)
+    tmux new-window -t "$name" -c "$dir"
+    # Select first window (nvim)
+    tmux select-window -t "$name:0"
+    exec tmux attach -d -t "$name"
+fi
