@@ -40,5 +40,7 @@ set -x GPG_TTY (tty)
 # Load secrets
 source $HOME/.config/fish/secrets.fish
 
+set -x HOST (hostname)
+
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.config/bin
