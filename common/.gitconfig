@@ -122,6 +122,7 @@
 [core]
   autocrlf = false
   editor = $EDITOR
+  excludesFile = ~/.gitignore
 [advice]
   statusHints = false
 [diff]
