@@ -1,23 +1,29 @@
 return {
-  'stevearc/oil.nvim',
-  dependencies = { "echasnovski/mini.icons" },
-  config = function()
-    require('oil').setup({
-      columns = {
-        'icon',
-        'permissions',
-        'size',
-        'mtime',
-      },
-      view_options = {
-        show_hidden = true,
-      },
-      lsp_file_methods = {
-        autosave_changes = true,
-      },
-    })
+	"stevearc/oil.nvim",
+	dependencies = { "echasnovski/mini.icons" },
+	config = function()
+		require("oil").setup({
+			columns = {
+				"icon",
+				"permissions",
+				"size",
+				"mtime",
+			},
+			view_options = {
+				show_hidden = true,
+			},
+			lsp_file_methods = {
+				autosave_changes = true,
+			},
+			confirmation = {
+				border = "rounded",
+			},
+			float = {
+				border = "rounded",
+			},
+		})
 
-    vim.keymap.set('n', '-', '<CMD>Oil<CR>')
-    vim.keymap.set('n', '<space>-', require('oil').toggle_float)
-  end
+		vim.keymap.set("n", "-", "<CMD>Oil<CR>")
+		vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+	end,
 }
