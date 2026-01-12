@@ -8,15 +8,17 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
-name="$1"
+query="$1"
 
 # Use zoxide to get the directory path
-dir=$(zoxide query "$name" 2>/dev/null)
+dir=$(zoxide query "$query" 2>/dev/null)
 
 if [[ -z "$dir" ]]; then
-    echo "No match found for '$name'"
+    echo "No match found for '$query'"
     exit 1
 fi
+
+name="$(basename "$dir")"
 
 # Try to attach to existing session, or create new one
 if tmux has-session -t "$name" 2>/dev/null; then
