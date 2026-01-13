@@ -5,5 +5,10 @@ email = "honza.hovorka@gmail.com"
 [ui]
 default-command = "log"
 
+[signing]
+behavior = "own"
+backend = "gpg"
+key = "3EE79C32BD351229"
+
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
