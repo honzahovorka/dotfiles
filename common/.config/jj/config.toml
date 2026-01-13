@@ -4,3 +4,6 @@ email = "honza.hovorka@gmail.com"
 
 [ui]
 default-command = "log"
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
