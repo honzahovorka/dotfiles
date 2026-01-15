@@ -18,6 +18,7 @@ require('options')
 require('keymaps')
 require('lsp-config')
 require('autocmds')
+require('utils')
 
 require('lazy').setup('plugins', {
   ui = {
