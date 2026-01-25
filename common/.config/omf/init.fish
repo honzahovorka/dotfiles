@@ -34,6 +34,7 @@ alias gco 'git checkout'
 alias gcom 'git checkout master'
 # Switching contexts
 alias gwip 'git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "[WIP]: $(date)"'
+alias jjwip 'jj commit -m "[WIP]: $(date)"'
 # Oops savers
 alias gundo='git reset HEAD~'
 

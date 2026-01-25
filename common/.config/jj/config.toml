@@ -6,9 +6,12 @@ email = "honza.hovorka@gmail.com"
 default-command = "log"
 
 [signing]
-behavior = "own"
+behavior = "drop"
 backend = "gpg"
 key = "3EE79C32BD351229"
+
+[git]
+sign-on-push = true
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
