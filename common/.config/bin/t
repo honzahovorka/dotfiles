@@ -25,9 +25,11 @@ if tmux has-session -t "$name" 2>/dev/null; then
     exec tmux attach -d -t "$name"
 else
     # Create new session with nvim in first window
-    tmux new-session -d -s "$name" -c "$dir" "nvim"
+    tmux new-session -d -s "$name" -c "$dir" -n "nvim" "nvim"
     # Create second window (shell)
-    tmux new-window -t "$name" -c "$dir"
+    tmux new-window -t "$name" -c "$dir" -n "fish"
+    # Create third window (opencode)
+    tmux new-window -t "$name" -c "$dir" -n "opencode" "opencode ."
     # Select first window (nvim)
     tmux select-window -t "$name:0"
     exec tmux attach -d -t "$name"
