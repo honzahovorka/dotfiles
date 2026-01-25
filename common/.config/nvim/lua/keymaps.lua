@@ -22,7 +22,9 @@ vim.keymap.set("v", "<leader>y", '"+y', { silent = true })
 vim.keymap.set("n", "<leader>d", '"_d', { silent = true })
 vim.keymap.set("v", "<leader>d", '"_d', { silent = true })
 
-vim.keymap.set("n", "<leader>yp", function() yank_current_path() end, { silent = true })
+vim.keymap.set("n", "<leader>yp", function()
+	yank_current_path()
+end, { silent = true })
 
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", { silent = true })
