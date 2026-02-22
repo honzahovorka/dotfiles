@@ -29,13 +29,15 @@ usage() {
     echo "  -h, --help          Show this help message"
     echo ""
     echo "Arguments:"
-    echo "  OS               Operating system (macos, arch, omarchy)"
+    echo "  OS               Operating system (macos, arch, omarchy, ubuntu)"
     echo ""
     echo "Examples:"
     echo "  $0 macos            # Install common + macOS configs (with backup)"
     echo "  $0 arch             # Install common + Arch configs (with backup)"
     echo "  $0 omarchy          # Install common + Omarchy configs (with backup)"
+    echo "  $0 ubuntu           # Install common + Ubuntu configs (with backup)"
     echo "  $0 -n macos         # Show what would be installed for macOS"
+    echo "  $0 -n ubuntu        # Show what would be installed for Ubuntu"
     echo "  $0 --no-backup      # Install without backing up existing files"
     echo ""
     echo "Available packages:"
@@ -43,6 +45,7 @@ usage() {
     echo "  macos            macOS-specific configs (sketchybar, aerospace)"
     echo "  arch             Arch Linux-specific configs"
     echo "  omarchy          Omarchy-specific configs"
+    echo "  ubuntu           Ubuntu-specific configs"
 }
 
 check_stow() {
@@ -186,14 +189,14 @@ main() {
 
     # Validate OS argument (but allow dry-run to proceed with invalid OS for testing)
     case "$os" in
-        macos|arch|omarchy)
+        macos|arch|omarchy|ubuntu)
             # Valid OS
             ;;
         *)
             if [[ "$DRY_RUN" == "false" ]]; then
                 log_error "Unsupported OS: $os"
                 echo "Error: Unsupported OS '$os'"
-                echo "Supported: macos, arch"
+                echo "Supported: macos, arch, omarchy, ubuntu"
                 usage
                 exit 1
             else
@@ -239,6 +242,14 @@ main() {
                 fi
             fi
             ;;
+        ubuntu)
+            if ! stow_package "ubuntu"; then
+                if [[ "$DRY_RUN" == "false" ]]; then
+                    log_error "Failed to install ubuntu package"
+                    exit 1
+                fi
+            fi
+            ;;
         *)
             # This case should only be reached in dry-run mode due to earlier validation
             if [[ "$DRY_RUN" == "true" ]]; then
@@ -247,7 +258,7 @@ main() {
             else
                 log_error "Unsupported OS: $os"
                 echo "Error: Unsupported OS '$os'"
-                echo "Supported: macos, arch"
+                echo "Supported: macos, arch, omarchy, ubuntu"
                 usage
                 exit 1
             fi
@@ -263,6 +274,7 @@ main() {
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
+        [[ "$os" == "ubuntu" ]] && echo "  ✓ ubuntu (ubuntu-specific configs)"
         echo ""
         echo "To actually install, run without --dry-run flag"
     else
@@ -273,6 +285,7 @@ main() {
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
+        [[ "$os" == "ubuntu" ]] && echo "  ✓ ubuntu (ubuntu-specific configs)"
         echo ""
         echo "📝 Full installation log saved to: $LOG_FILE"
         log "Installation completed successfully"

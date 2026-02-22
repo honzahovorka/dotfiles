@@ -15,11 +15,13 @@ cd dotfiles
 ./install.sh --dry-run macos
 ./install.sh --dry-run arch
 ./install.sh --dry-run omarchy
+./install.sh --dry-run ubuntu
 
 # Install for your OS
 ./install.sh macos
 ./install.sh arch
 ./install.sh omarchy
+./install.sh ubuntu
 ```
 
 ### Manual Installation
@@ -32,6 +34,7 @@ stow common
 stow macos    # on macOS
 stow arch     # on Arch Linux
 stow omarchy  # on Omarchy
+stow ubuntu   # on Ubuntu
 ```
 
 ## Repository Structure
@@ -64,6 +67,8 @@ dotfiles/
 │       ├── hypr/    # Hyprland window manager configuration
 │       ├── waybar/  # Waybar status bar configuration
 │       └── ghostty/ # Ghostty terminal configuration
+├── ubuntu/          # Ubuntu-specific configurations
+│   └── .tmux.conf   # Tmux configuration for Ubuntu
 └── install.sh       # Automated installation script
 ```
 
@@ -79,11 +84,13 @@ The `install.sh` script supports several options:
 ./install.sh --dry-run macos
 ./install.sh -n arch
 ./install.sh --dry-run omarchy
+./install.sh --dry-run ubuntu
 
 # Install for specific OS (with automatic backup)
 ./install.sh macos
 ./install.sh arch
 ./install.sh omarchy
+./install.sh ubuntu
 ```
 
 ## Tools & Configuration
@@ -216,7 +223,8 @@ stow -D common
 stow -D macos
 stow -D arch
 stow -D omarchy
+stow -D ubuntu
 
 # Or remove all
-stow -D common macos arch omarchy
+stow -D common macos arch omarchy ubuntu
 ```
