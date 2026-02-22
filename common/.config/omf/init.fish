@@ -78,3 +78,5 @@ alias lt 'eza -lAh --icons=always --git --tree --level=4 --long --ignore-glob="n
 alias fzfi 'rg --files --hidden --follow -g "!{node_modules,.git}" | fzf --height 40%'
 alias preview 'fzfi --preview "bat --color \"always\" {}"'
 alias fo 'v (fzfi)'
+
+alias oc opencode
