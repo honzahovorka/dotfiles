@@ -8,3 +8,4 @@ ubuntu/.tmux/plugins/*
 install.log
 common/.gnupg/*
 !common/.gnupg/gpg-agent.conf
+common/.config/jj/repos/
