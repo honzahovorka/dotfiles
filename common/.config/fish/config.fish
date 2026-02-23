@@ -44,3 +44,4 @@ set -x HOST (hostname)
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.config/bin
+fish_add_path $HOME/.opencode/bin
