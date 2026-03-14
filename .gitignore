@@ -5,6 +5,7 @@ macos/.config/sketchybar/helpers/*
 macos/.tmux/plugins/*
 arch/.tmux/plugins/*
 ubuntu/.tmux/plugins/*
+omarchy/.config/tmux/plugins/*
 install.log
 common/.gnupg/*
 !common/.gnupg/gpg-agent.conf
