@@ -44,7 +44,16 @@ set -x HOST (hostname)
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.config/bin
+
 fish_add_path $HOME/.opencode/bin
 
-# opencode
-fish_add_path /home/honza/.opencode/bin
+set -x ANDROID_HOME $HOME/Android/Sdk
+fish_add_path $ANDROID_HOME/emulator
+fish_add_path $ANDROID_HOME/platform-tools
+fish_add_path $ANDROID_HOME/tools
+fish_add_path $ANDROID_HOME/tools/bin
+
+set -x ANDROID_AVD_HOME $HOME/.config/.android/avd
+
+set -x JAVA_HOME /usr/lib/jvm/java-17-openjdk
+
