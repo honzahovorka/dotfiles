@@ -34,7 +34,6 @@
 #battery,
 #pulseaudio,
 #custom-omarchy,
-
 #custom-update {
   min-width: 12px;
   margin: 0 7.5px;
@@ -72,7 +71,6 @@ tooltip {
   opacity: 0;
 }
 
-
 #custom-screenrecording-indicator,
 #custom-idle-indicator,
 #custom-notification-silencing-indicator {
@@ -87,16 +85,16 @@ tooltip {
   color: #a55555;
 }
 
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
+
 #custom-voxtype {
   min-width: 12px;
   margin: 0 0 0 7.5px;
 }
 
 #custom-voxtype.recording {
-  color: #a55555;
-}
-
-#custom-idle-indicator.active,
-#custom-notification-silencing-indicator.active {
   color: #a55555;
 }
