@@ -6,6 +6,6 @@ return {
 	"gopls",
 	"clangd",
 	"rust-analyzer",
-	"pyright",
+	"python-lsp-server",
 	"ruby-lsp",
 }
