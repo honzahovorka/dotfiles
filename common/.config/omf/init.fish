@@ -80,3 +80,4 @@ alias preview 'fzfi --preview "bat --color \"always\" {}"'
 alias fo 'v (fzfi)'
 
 alias oc opencode
+alias cc claude

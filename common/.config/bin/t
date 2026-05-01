@@ -28,8 +28,8 @@ else
     tmux new-session -d -s "$name" -c "$dir" -n "nvim" "nvim"
     # Create second window (shell)
     tmux new-window -t "$name" -c "$dir" -n "fish"
-    # Create third window (opencode)
-    tmux new-window -t "$name" -c "$dir" -n "opencode" "opencode ."
+    # Create third window (claude code)
+    tmux new-window -t "$name" -c "$dir" -n "claude" "claude"
     # Select first window (nvim)
     tmux select-window -t "$name:0"
     exec tmux attach -d -t "$name"
