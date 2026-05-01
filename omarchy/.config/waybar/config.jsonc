@@ -10,6 +10,7 @@
     "group/tray-expander",
     "bluetooth",
     "network",
+    "custom/warp",
     "pulseaudio",
     "cpu",
     "battery"
@@ -166,6 +167,14 @@
     "tooltip": true,
     "on-click-right": "omarchy-voxtype-config",
     "on-click": "omarchy-voxtype-model"
+  },
+  "custom/warp": {
+    "exec": "$HOME/.config/waybar/scripts/warp-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5,
+    "on-click": "$HOME/.config/waybar/scripts/warp-toggle.sh",
+    "tooltip": true
   },
   "tray": {
     "icon-size": 12,
