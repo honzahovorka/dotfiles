@@ -61,3 +61,4 @@ text/x-c++=nvim.desktop
 application/xml=nvim.desktop
 text/xml=nvim.desktop
 inode/directory=org.gnome.Nautilus.desktop
+x-scheme-handler/slack=slack.desktop
