@@ -67,6 +67,11 @@ dotfiles/
 │       ├── hypr/    # Hyprland window manager configuration
 │       ├── waybar/  # Waybar status bar configuration
 │       └── ghostty/ # Ghostty terminal configuration
+├── omarchy-wallpapers/ # Shared Omarchy wallpapers
+│   └── .config/
+│       └── omarchy/
+│           └── backgrounds/
+│               └── catppuccin/
 ├── ubuntu/          # Ubuntu-specific configurations
 │   └── .tmux.conf   # Tmux configuration for Ubuntu
 └── install.sh       # Automated installation script
@@ -121,6 +126,12 @@ The `install.sh` script supports several options:
 - **Hyprland** - Dynamic tiling Wayland compositor
 - **Waybar** - Highly customizable status bar for Wayland
 - **Ghostty** - Fast, native terminal emulator
+- **Catppuccin wallpapers** - Shared Omarchy backgrounds synced via Stow
+
+### Omarchy Wallpapers
+- Shared Omarchy wallpapers live in `omarchy-wallpapers/.config/omarchy/backgrounds/catppuccin/`
+- `./install.sh omarchy` installs both the `omarchy` and `omarchy-wallpapers` packages
+- Runtime state in `~/.config/omarchy/current/` is intentionally not tracked
 
 ## Requirements
 
@@ -159,6 +170,7 @@ The `install.sh` script supports several options:
 - **Hyprland** - Wayland compositor
 - **Waybar** - Status bar
 - **Ghostty** - Terminal emulator
+- **Catppuccin wallpapers** - Shared backgrounds managed via Stow
 
 ### Installation Commands
 
