@@ -45,6 +45,7 @@ usage() {
     echo "  macos            macOS-specific configs (sketchybar, aerospace)"
     echo "  arch             Arch Linux-specific configs"
     echo "  omarchy          Omarchy-specific configs"
+    echo "  omarchy-wallpapers Omarchy wallpapers (installed with omarchy)"
     echo "  ubuntu           Ubuntu-specific configs"
 }
 
@@ -241,6 +242,12 @@ main() {
                     exit 1
                 fi
             fi
+            if ! stow_package "omarchy-wallpapers"; then
+                if [[ "$DRY_RUN" == "false" ]]; then
+                    log_error "Failed to install omarchy-wallpapers package"
+                    exit 1
+                fi
+            fi
             ;;
         ubuntu)
             if ! stow_package "ubuntu"; then
@@ -274,6 +281,7 @@ main() {
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
+        [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy-wallpapers (shared catppuccin wallpapers)"
         [[ "$os" == "ubuntu" ]] && echo "  ✓ ubuntu (ubuntu-specific configs)"
         echo ""
         echo "To actually install, run without --dry-run flag"
@@ -285,6 +293,7 @@ main() {
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
+        [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy-wallpapers (shared catppuccin wallpapers)"
         [[ "$os" == "ubuntu" ]] && echo "  ✓ ubuntu (ubuntu-specific configs)"
         echo ""
         echo "📝 Full installation log saved to: $LOG_FILE"
