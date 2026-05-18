@@ -1,5 +1,13 @@
 return {
   {
+    'tpope/vim-fugitive',
+    cmd = { 'G', 'Git', 'Gdiffsplit', 'Gread', 'Gwrite', 'Ggrep', 'GMove', 'GDelete', 'GBrowse', 'GRemove', 'GRename', 'Glgrep', 'Gedit' },
+    ft = { 'fugitive' },
+    keys = {
+      { '<leader>gg', '<cmd>G<cr>', desc = 'Fugitive status' },
+    },
+  },
+  {
     'sindrets/diffview.nvim',
     opts = {
       view = {
@@ -27,8 +35,6 @@ return {
           diffview = true,
         }
       })
-
-      vim.keymap.set('n', '<leader>gg', ':Neogit<cr>', { silent = true })
     end
   },
 }
