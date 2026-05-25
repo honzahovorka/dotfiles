@@ -30,6 +30,8 @@ else
     tmux new-window -t "$name" -c "$dir" -n "fish"
     # Create third window (claude code)
     tmux new-window -t "$name" -c "$dir" -n "claude" "claude"
+    # Create fourth window (codex)
+    tmux new-window -t "$name" -c "$dir" -n "codex" "codex"
     # Select first window (nvim)
     tmux select-window -t "$name:0"
     exec tmux attach -d -t "$name"
