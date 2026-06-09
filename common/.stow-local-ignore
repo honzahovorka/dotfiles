@@ -1,4 +1,6 @@
 # https://www.gnu.org/software/stow/manual/html_node/Ignore-Lists.html#Ignore-Lists
+# Reproduces stow's built-in default ignore list, but allows the
+# package-root .gitignore to be linked to ~/.gitignore (global excludes).
 # Comments and blank lines are allowed.
 
 RCS
@@ -13,7 +15,9 @@ _darcs
 \.hg
 
 \.git
-\.gitignore
+.+/\.gitignore   # ignore nested .gitignore (e.g. opencode), but NOT common/.gitignore
+
+.stow-local-ignore
 
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
