@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Toggle the dwindle single-window aspect-ratio constraint:
+#   off (0 0) -> a lone window stretches full-width
+#   on  (1 1) -> a lone window is centered in a 1:1 box on wide screens
+#
+# Setting the keyword alone doesn't re-run the layout, so we nudge a recalc by
+# toggling pseudotile twice (returns the window to its original state).
+
+opt=layout:single_window_aspect_ratio
+
+if [ "$(hyprctl getoption "$opt" -j | jq -r '.vec2[0]')" = "0" ]; then
+  value="1 1"
+else
+  value="0 0"
+fi
+
+hyprctl --batch "keyword $opt $value; dispatch pseudo; dispatch pseudo"
