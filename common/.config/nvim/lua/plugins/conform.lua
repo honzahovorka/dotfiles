@@ -38,27 +38,30 @@ return {
 		end
 
 		return {
-		-- Define your formatters
-		formatters_by_ft = {
-			lua = { "stylua" },
-			python = { "isort", "black" },
-			javascript = web_formatters,
-			javascriptreact = web_formatters,
-			typescript = web_formatters,
-			typescriptreact = web_formatters,
-		},
-		-- Set default options
-		default_format_opts = {
-			lsp_format = "fallback",
-		},
-		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500 },
-		-- Customize formatters
-		formatters = {
-			shfmt = {
-				append_args = { "-i", "2" },
+			-- Define your formatters
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				javascript = web_formatters,
+				javascriptreact = web_formatters,
+				typescript = web_formatters,
+				typescriptreact = web_formatters,
 			},
-		},
+			-- Set default options
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+			-- Set up format-on-save
+			format_on_save = { timeout_ms = 500 },
+			-- Customize formatters
+			formatters = {
+				shfmt = {
+					append_args = { "-i", "2" },
+				},
+				deno_fmt = {
+					cwd = require("conform.util").root_file({ "deno.json", "deno.jsonc" }),
+				},
+			},
 		}
 	end,
 	init = function()
