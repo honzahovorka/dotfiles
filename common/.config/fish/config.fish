@@ -47,6 +47,9 @@ fish_add_path $HOME/.config/bin
 
 fish_add_path $HOME/.opencode/bin
 
+# plannotator
+fish_add_path $HOME/.local/bin
+
 set -x ANDROID_HOME $HOME/Android/Sdk
 fish_add_path $ANDROID_HOME/emulator
 fish_add_path $ANDROID_HOME/platform-tools
