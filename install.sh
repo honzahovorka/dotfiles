@@ -133,6 +133,40 @@ stow_package() {
     fi
 }
 
+# gpg-agent.conf references pinentry-program by an absolute, username-independent
+# path (/usr/local/bin/pinentry-switch). Symlink the stowed dispatcher there so
+# terminal git keeps the inline pinentry-tty while GUI callers (Neovim/Neogit set
+# PINENTRY_USER_DATA=gui) get a pinentry-qt popup.
+setup_pinentry_switch() {
+    local target="$HOME/.gnupg/pinentry-switch"
+    local link="/usr/local/bin/pinentry-switch"
+
+    if [[ ! -e "$target" ]]; then
+        log "pinentry dispatcher not found at $target, skipping"
+        return 0
+    fi
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        echo "[DRY RUN] Would symlink $link -> $target (sudo)"
+        echo "[DRY RUN] Would reload gpg-agent"
+        return 0
+    fi
+
+    echo "Setting up GPG pinentry dispatcher..."
+    if sudo ln -sf "$target" "$link"; then
+        echo "✓ Linked $link"
+        log "Linked pinentry dispatcher: $link -> $target"
+    else
+        log_error "Failed to symlink pinentry dispatcher to $link"
+        echo "❌ Failed to link $link (continuing)"
+    fi
+
+    # Pick up the new pinentry-program without restarting the agent
+    if command -v gpg-connect-agent &> /dev/null; then
+        gpg-connect-agent reloadagent /bye &> /dev/null || true
+    fi
+}
+
 main() {
     local os=""
 
@@ -271,6 +305,9 @@ main() {
             fi
             ;;
     esac
+
+    # Cross-platform post-stow setup
+    setup_pinentry_switch
 
     echo ""
     if [[ "$DRY_RUN" == "true" ]]; then
