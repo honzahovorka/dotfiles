@@ -167,6 +167,38 @@ setup_pinentry_switch() {
     fi
 }
 
+# monitors.conf is deliberately not tracked: hyprmon rewrites it on every profile
+# apply, and each machine plugs into different displays. Seed it from the tracked
+# example so hyprland.conf's `source` line resolves on a fresh install.
+seed_local_monitors() {
+    local target="$HOME/.config/hypr/monitors.conf"
+    local example="$SCRIPT_DIR/omarchy/.config/hypr/monitors.conf.example"
+
+    if [[ -e "$target" ]]; then
+        log "Local monitors.conf already present, leaving it alone"
+        return 0
+    fi
+
+    if [[ ! -f "$example" ]]; then
+        log_error "monitors.conf.example not found at $example"
+        return 0
+    fi
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        echo "[DRY RUN] Would seed $target from monitors.conf.example"
+        return 0
+    fi
+
+    echo "Seeding machine-local monitors.conf..."
+    if cp "$example" "$target"; then
+        echo "✓ Created $target (untracked, hyprmon writes here)"
+        log "Seeded local monitors.conf from example"
+    else
+        log_error "Failed to seed $target"
+        echo "❌ Failed to create $target (continuing)"
+    fi
+}
+
 main() {
     local os=""
 
@@ -270,6 +302,16 @@ main() {
             fi
             ;;
         omarchy)
+            # Keep these as real directories so stow links their *contents*
+            # individually instead of folding each whole directory into a single
+            # symlink back into the repo. Machine-local, untracked state lives in
+            # both of them (hypr/monitors.conf, hyprmon/settings.json) and must
+            # not end up physically inside the dotfiles checkout.
+            if [[ "$DRY_RUN" == "true" ]]; then
+                echo "[DRY RUN] Would ensure ~/.config/{hypr,hyprmon} exist as real directories"
+            else
+                mkdir -p "$HOME/.config/hypr" "$HOME/.config/hyprmon"
+            fi
             if ! stow_package "omarchy"; then
                 if [[ "$DRY_RUN" == "false" ]]; then
                     log_error "Failed to install omarchy package"
@@ -308,6 +350,10 @@ main() {
 
     # Cross-platform post-stow setup
     setup_pinentry_switch
+
+    if [[ "$os" == "omarchy" ]]; then
+        seed_local_monitors
+    fi
 
     echo ""
     if [[ "$DRY_RUN" == "true" ]]; then
