@@ -11,3 +11,14 @@ common/.gnupg/*
 !common/.gnupg/gpg-agent.conf
 !common/.gnupg/pinentry-switch
 common/.config/jj/repos/
+
+# Machine-local monitor layout + hyprmon's backups of it (see monitors.conf.example)
+omarchy/.config/hypr/monitors.conf
+omarchy/.config/hypr/*.bak.*
+
+# Keep hyprmon's saved profiles, drop its UI/runtime state
+omarchy/.config/hyprmon/*
+!omarchy/.config/hyprmon/profiles/
+omarchy/.config/hyprmon/profiles/*
+!omarchy/.config/hyprmon/profiles/*.json
+!omarchy/.config/hyprmon/profiles/.gitkeep
