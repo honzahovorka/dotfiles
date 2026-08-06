@@ -17,23 +17,44 @@ return {
 	---@module 'conform'
 	---@type conform.setupOpts
 	opts = function()
-		-- Pick the JS/TS formatter based on which project the buffer lives in,
-		-- so a Deno package uses `deno fmt`, a Biome package uses biome, and
-		-- everything else falls back to prettier. Mirrors the LSP root logic:
-		-- the deepest (nearest) config wins.
+		local ts_runtime = require("lsp.ts_runtime")
+
+		-- Use the same Deno/Node ownership decision as the language servers.
+		-- A package may still explicitly choose `deno fmt` while using vtsls for
+		-- type checking. Within other Node projects, prefer an explicit Biome
+		-- config and otherwise use the first available Prettier implementation.
+		local function package_uses_deno_fmt(dir)
+			local package_root = vim.fs.root(dir, { "package.json" })
+			if not package_root then
+				return false
+			end
+
+			local ok, package = pcall(function()
+				local path = vim.fs.joinpath(package_root, "package.json")
+				return vim.json.decode(table.concat(vim.fn.readfile(path), "\n"))
+			end)
+			local format_script = ok
+				and type(package) == "table"
+				and type(package.scripts) == "table"
+				and package.scripts.format
+			return type(format_script) == "string" and format_script:find("%f[%w]deno%s+fmt%f[%W]") ~= nil
+		end
+
 		local function web_formatters(bufnr)
 			local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
-			local deno = vim.fs.root(dir, { "deno.json", "deno.jsonc", "deno.lock" })
-			local biome = vim.fs.root(dir, { "biome.json", "biome.jsonc" })
-			local node = vim.fs.root(dir, { "package.json", "tsconfig.json", "jsconfig.json" })
-
-			-- Deno wins when its config is at least as deep as the node config.
-			if deno and (not node or #deno >= #node) then
+			if package_uses_deno_fmt(dir) then
 				return { "deno_fmt" }
 			end
-			if biome and (not node or #biome >= #node) then
+
+			local runtime = ts_runtime.resolve(bufnr)
+			if runtime == "deno" then
+				return { "deno_fmt" }
+			end
+
+			if vim.fs.root(dir, { "biome.json", "biome.jsonc" }) then
 				return { "biome" }
 			end
+
 			return { "prettierd", "prettier", stop_after_first = true }
 		end
 

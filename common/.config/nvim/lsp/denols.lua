@@ -1,4 +1,5 @@
 local lsp = vim.lsp
+local ts_runtime = require("lsp.ts_runtime")
 
 local function virtual_text_document_handler(uri, res, client)
 	if not res then
@@ -59,23 +60,9 @@ return {
 		"typescriptreact",
 	},
 	root_dir = function(bufnr, on_dir)
-		-- The project root is where the LSP can be started from
-		local root_markers = { "deno.lock", "deno.json", "deno.jsonc" }
-		-- Give the root markers equal priority by wrapping them in a table
-		root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers, { ".git" } }
-			or vim.list_extend(root_markers, { ".git" })
-		-- only include deno projects
-		local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
-		local deno_lock_root = vim.fs.root(bufnr, { "deno.lock" })
-		local project_root = vim.fs.root(bufnr, root_markers)
-		if
-			(deno_lock_root and (not project_root or #deno_lock_root > #project_root))
-			or (deno_root and (not project_root or #deno_root >= #project_root))
-		then
-			-- deno config is closer than or equal to package manager lock,
-			-- or deno lock is closer than package manager lock. Attach at the project root,
-			-- or deno lock or deno config path. At least one of these is always set at this point.
-			on_dir(project_root or deno_lock_root or deno_root)
+		local runtime, root = ts_runtime.resolve(bufnr)
+		if runtime == "deno" and root then
+			on_dir(root)
 		end
 	end,
 	---@type lspconfig.settings.denols
