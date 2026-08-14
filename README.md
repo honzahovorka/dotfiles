@@ -64,8 +64,8 @@ dotfiles/
 │       └── dunst/   # Dunst notification daemon
 ├── omarchy/         # Omarchy-specific configurations
 │   └── .config/
-│       ├── hypr/    # Hyprland window manager configuration
-│       ├── waybar/  # Waybar status bar configuration
+│       ├── hypr/    # Hyprland window manager configuration (Lua)
+│       ├── omarchy/ # Omarchy shell: bar layout, idle, custom plugins
 │       └── ghostty/ # Ghostty terminal configuration
 ├── omarchy-wallpapers/ # Shared Omarchy wallpapers
 │   └── .config/
@@ -123,15 +123,25 @@ The `install.sh` script supports several options:
 - **Catppuccin Frappe Theme** - Consistent theming across all components
 
 ### Omarchy-Specific
-- **Hyprland** - Dynamic tiling Wayland compositor
-- **Waybar** - Highly customizable status bar for Wayland
+- **Hyprland** - Dynamic tiling Wayland compositor, configured in Lua
+- **Omarchy shell** - Quickshell status bar, notifications, idle and lock
 - **Ghostty** - Fast, native terminal emulator
 - **Catppuccin wallpapers** - Shared Omarchy backgrounds synced via Stow
+
+Requires Omarchy 4 ("quattro") or newer: Hyprland moved from `.conf` to Lua, and
+the bar moved from Waybar to the Quickshell-based Omarchy shell.
+
+- `hypr/*.lua` holds the personal overrides; `hypr/machines/$HOST.lua` holds
+  per-host settings, picked up by hostname
+- `omarchy/shell.json` owns the bar layout and idle timings;
+  `omarchy/plugins/honzahovorka.warp/` is a custom Cloudflare WARP bar widget
+- `~/.config/hypr/monitors.lua` is deliberately **not** tracked: Omarchy rewrites
+  it whenever monitor scaling changes
 
 ### Omarchy Wallpapers
 - Shared Omarchy wallpapers live in `omarchy-wallpapers/.config/omarchy/backgrounds/catppuccin/`
 - `./install.sh omarchy` installs both the `omarchy` and `omarchy-wallpapers` packages
-- Runtime state in `~/.config/omarchy/current/` is intentionally not tracked
+- Runtime state in `~/.local/state/omarchy/current/` is intentionally not tracked
 
 ## Requirements
 
@@ -167,9 +177,7 @@ The `install.sh` script supports several options:
 - **SketchyBar** - Status bar replacement
 
 ### Omarchy-Specific
-- **Hyprland** - Wayland compositor
-- **Waybar** - Status bar
-- **Ghostty** - Terminal emulator
+- **Omarchy 4** - ships Hyprland, the Quickshell Omarchy shell, and Ghostty
 - **Catppuccin wallpapers** - Shared backgrounds managed via Stow
 
 ### Installation Commands
