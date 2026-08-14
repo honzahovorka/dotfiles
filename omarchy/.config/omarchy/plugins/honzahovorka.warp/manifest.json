@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "honzahovorka.warp",
+  "name": "Cloudflare WARP",
+  "version": "1.0.0",
+  "author": "Honza Hovorka",
+  "license": "MIT",
+  "description": "Cloudflare WARP status, connection toggle, and reason reporting in the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Warp.qml"
+  },
+  "barWidget": {
+    "displayName": "Cloudflare WARP",
+    "description": "Toggle Cloudflare WARP and see its connection state. Left click opens the panel, right click toggles, middle click refreshes.",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshIntervalSec": 5
+    },
+    "schema": [
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 2,
+        "max": 3600,
+        "step": 1,
+        "defaultValue": 5
+      }
+    ]
+  }
+}
