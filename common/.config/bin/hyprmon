@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Wrapper around hyprmon that keeps its droppings out of the way.
+#
+# hyprmon's Lua mode writes monitor rules to the machine-local, untracked
+# sidecar ~/.config/hypr/hyprmon.lua and leaves hyprland.lua alone as long as
+# it already carries the managed `require("hyprmon")` line — which the tracked
+# config does — so the HYPRLAND_CONFIG redirection the old wrapper needed is
+# gone. What remains is that hyprmon backs up hyprland.lua on every profile
+# apply; keep only the 3 newest so desk-hopping does not pile them up.
+
+set -euo pipefail
+
+# Resolve the real binary, skipping this wrapper, so /usr/bin and ~/go/bin both work
+real=$(type -aP hyprmon | grep -vFx "$HOME/.config/bin/hyprmon" | head -1 || true)
+if [[ -z $real ]]; then
+    echo "hyprmon is not installed (only this wrapper is on PATH)" >&2
+    exit 127
+fi
+
+status=0
+"$real" "$@" || status=$?
+
+ls -1t "$HOME/.config/hypr/hyprland.lua.bak."* 2>/dev/null | tail -n +4 | xargs -r rm -- || true
+
+exit $status

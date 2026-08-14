@@ -275,12 +275,14 @@ main() {
             # symlink back into the repo. Machine-local, untracked state lives
             # alongside the tracked files and must not end up physically inside
             # the dotfiles checkout: hypr/ holds monitors.lua (rewritten by
-            # omarchy-hyprland-monitor-scaling) and .luarc.json, and
-            # omarchy/plugins/ gains a directory per shell plugin.
+            # omarchy-hyprland-monitor-scaling), hyprmon.lua (rewritten by
+            # hyprmon on every profile apply) and .luarc.json, hyprmon/ holds
+            # hyprmon's settings.json and UI state, and omarchy/plugins/ gains
+            # a directory per shell plugin.
             if [[ "$DRY_RUN" == "true" ]]; then
-                echo "[DRY RUN] Would ensure ~/.config/{hypr,omarchy/plugins} exist as real directories"
+                echo "[DRY RUN] Would ensure ~/.config/{hypr,hyprmon,omarchy/plugins} exist as real directories"
             else
-                mkdir -p "$HOME/.config/hypr" "$HOME/.config/omarchy/plugins"
+                mkdir -p "$HOME/.config/hypr" "$HOME/.config/hyprmon" "$HOME/.config/omarchy/plugins"
             fi
             if ! stow_package "omarchy"; then
                 if [[ "$DRY_RUN" == "false" ]]; then

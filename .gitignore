@@ -14,8 +14,17 @@ common/.config/jj/repos/
 
 # Machine-local Hyprland state, never tracked. monitors.lua is rewritten in place
 # by omarchy-hyprland-monitor-scaling (SUPER + SLASH) and read by
-# omarchy-hyprland-monitor-clamshell, so it belongs to the machine, not the repo.
+# omarchy-hyprland-monitor-clamshell, and hyprmon.lua is the sidecar hyprmon
+# rewrites on every profile apply, so they belong to the machine, not the repo.
 # Per-host settings that *should* be tracked live in hypr/machines/$HOST.lua.
 omarchy/.config/hypr/monitors.lua
+omarchy/.config/hypr/hyprmon.lua
 omarchy/.config/hypr/.luarc.json
 omarchy/.config/hypr/*.bak.*
+
+# Keep hyprmon's saved profiles, drop its UI/runtime state
+omarchy/.config/hyprmon/*
+!omarchy/.config/hyprmon/profiles/
+omarchy/.config/hyprmon/profiles/*
+!omarchy/.config/hyprmon/profiles/*.json
+!omarchy/.config/hyprmon/profiles/.gitkeep

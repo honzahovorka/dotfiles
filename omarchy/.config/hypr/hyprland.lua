@@ -42,6 +42,24 @@ if host and host ~= "" then
   require("default.hypr.require_optional").module("hypr.machines." .. host)
 end
 
+-- Machine-local monitor layout, owned by hyprmon and untracked. hyprmon's Lua
+-- mode writes its rules to ~/.config/hypr/hyprmon.lua and looks in here for a
+-- line that is exactly `require("hyprmon")` — when found it leaves this file
+-- alone; otherwise it appends its own copy straight through the stow symlink,
+-- dirtying the repo. Loaded after machines/$HOST so an applied profile
+-- outranks per-host monitor rules; only the omarchy toggles below outrank it,
+-- which is intended (that is how `omarchy toggle` can still disable the
+-- internal monitor). The io.open guard keeps a machine that has never run
+-- hyprmon out of Hyprland's emergency config, and clearing package.loaded
+-- keeps `hyprctl reload` re-reading the sidecar (the bootstrap only un-caches
+-- its own module prefixes, and "hyprmon" is not one of them).
+local hyprmon_sidecar = io.open(os.getenv("HOME") .. "/.config/hypr/hyprmon.lua", "r")
+if hyprmon_sidecar then
+  hyprmon_sidecar:close()
+  package.loaded["hyprmon"] = nil
+  require("hyprmon")
+end
+
 -- Toggle config flags dynamically. Last on purpose, so `omarchy toggle ...` still
 -- outranks the per-host settings above (that is how toggling the internal display
 -- off keeps working on a machine that pins a monitor).
