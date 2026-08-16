@@ -16,3 +16,7 @@ o.exec_on_start("omarchy-toggle-idle stay-awake")
 -- Nothing here pins the single-window aspect ratio any more: it is a first-class
 -- Omarchy toggle now (SUPER + CTRL + BACKSPACE), persisted across restarts in
 -- ~/.local/state/omarchy/toggles/hypr/.
+
+-- Omarchy's stock 875x600 float size is dwarfed by the 40" ultrawide. About is
+-- exempt: omarchy-launch-about sizes it to hug the fastfetch content each launch.
+o.window({ tag = "floating-window" }, { size = { 2000, 1300 } })
