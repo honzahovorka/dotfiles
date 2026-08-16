@@ -5,9 +5,8 @@
 --   omarchy menu keybindings --print
 --
 -- Deliberately not repeated here: terminal, file manager, music, editor, docker,
--- Obsidian, passwords and the single-window square aspect toggle. Omarchy now
--- ships all of those on the same keys (SUPER + CTRL + BACKSPACE for the aspect
--- toggle), and omarchy-launch-terminal already opens in the active terminal's cwd.
+-- Obsidian and passwords. Omarchy now ships all of those on the same keys, and
+-- omarchy-launch-terminal already opens in the active terminal's cwd.
 
 -- Vim-style focus movement. All three letters are taken by default: SUPER + J
 -- toggles the window split, SUPER + K opens the keybindings menu, and SUPER + L
@@ -20,6 +19,15 @@ o.bind("SUPER + H", "Focus on left window", hl.dsp.focus({ direction = "l" }))
 o.bind("SUPER + L", "Focus on right window", hl.dsp.focus({ direction = "r" }))
 o.bind("SUPER + J", "Focus on above window", hl.dsp.focus({ direction = "u" }))
 o.bind("SUPER + K", "Focus on below window", hl.dsp.focus({ direction = "d" }))
+
+-- The keybindings menu lost its home to focus movement above; rehouse it.
+o.bind("SUPER + SHIFT + K", "Keybindings", "omarchy-menu-keybindings")
+
+-- Square aspect toggle on a reachable key. SUPER + CTRL + BACKSPACE doesn't
+-- register here, and SUPER + SHIFT + S is Google Maps by default.
+hl.unbind("SUPER + CTRL + BACKSPACE")
+hl.unbind("SUPER + SHIFT + S")
+o.bind("SUPER + SHIFT + S", "Toggle single-window square aspect", "omarchy-hyprland-window-single-square-aspect-toggle")
 
 -- Throw the current workspace at the next/previous monitor.
 o.bind("SUPER + SHIFT + H", "Move workspace to next monitor", hl.dsp.workspace.move({ monitor = "+1" }))
