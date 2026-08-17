@@ -15,10 +15,7 @@
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
-          "verticalFormat": "HH\n\u2014\nmm"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
+          "verticalFormat": "HH\n—\nmm"
         },
         {
           "id": "omarchy.weather"
@@ -40,7 +37,13 @@
           "id": "omarchy.tray"
         },
         {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
           "id": "omarchy.tailscale"
+        },
+        {
+          "id": "local.warp"
         },
         {
           "id": "omarchy.dropbox"
@@ -49,13 +52,13 @@
           "id": "omarchy.agents"
         },
         {
+          "id": "im0001gt.hw-tooltip"
+        },
+        {
           "id": "omarchy.bluetooth"
         },
         {
           "id": "omarchy.network"
-        },
-        {
-          "id": "honzahovorka.warp"
         },
         {
           "id": "omarchy.audio"
