@@ -9,8 +9,8 @@
       "PxW": 2880,
       "PxH": 1800,
       "Hz": 120,
-      "Scale": 1.67,
-      "X": 9120,
+      "Scale": 1.66,
+      "X": 9088,
       "Y": 1056,
       "Active": true,
       "EDIDName": "Lenovo Group Limited ATNA40HQ02-0",
@@ -91,11 +91,11 @@
       "MirrorSource": "",
       "MirrorTargets": [],
       "Dragging": false,
-      "DragOffX": 0,
-      "DragOffY": 0
+      "DragOffX": 290,
+      "DragOffY": 280
     },
     {
-      "name": "DP-7",
+      "name": "DP-6",
       "hardware_id": "Dell Inc./DELL U4025QW/2BKRJ04",
       "make": "Dell Inc.",
       "model": "DELL U4025QW",
@@ -385,5 +385,5 @@
     }
   ],
   "created_at": "2026-06-23T11:17:02.041281683+02:00",
-  "updated_at": "2026-07-17T11:27:39.974545813+02:00"
+  "updated_at": "2026-08-15T07:54:35.727252172+02:00"
 }
