@@ -1,12 +1,9 @@
--- Fixed hardware: one 40" Dell ultrawide, never changes. Matched by description
--- rather than port so a different DP output doesn't need a config change.
-hl.env("GDK_SCALE", "1")
-hl.monitor({
-  output = "desc:Dell Inc. DELL U4025QW 2BKRJ04",
-  mode = "5120x2160@120",
-  position = "auto",
-  scale = 1,
-})
+-- NOTE: no hl.monitor() calls here on purpose. The Dell ultrawide's rule lives
+-- in the machine-local, untracked ~/.config/hypr/monitors.lua so that
+-- omarchy-hyprland-monitor-scaling (topbar display section / SUPER + SLASH) can
+-- manage the scale: it persists into monitors.lua's omarchy_monitor_scale
+-- local, and a desc: rule here loads later and would stomp the scale back on
+-- every config reload. Same policy titan follows.
 
 -- Boot without idle locking. This used to wait for hypridle to appear and then
 -- flip it; quattro runs idle inside omarchy-shell and keeps the answer in a state

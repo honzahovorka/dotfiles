@@ -1,6 +1,3 @@
--- Retina-class 2.8K internal panel.
-hl.env("GDK_SCALE", "2")
-
 -- NOTE: no hl.monitor() calls here on purpose. This laptop's layout changes with
 -- the desk, so it stays in the machine-local, untracked ~/.config/hypr/monitors.lua
 -- that omarchy-hyprland-monitor-scaling writes and omarchy-hyprland-monitor-clamshell
@@ -11,8 +8,8 @@ hl.env("GDK_SCALE", "2")
 -- geometry at runtime instead of hardcoding an eDP-1 mode that would drift.
 
 hl.config({
-  general = {
-    gaps_in = 4,
-    gaps_out = 4,
-  },
+	general = {
+		gaps_in = 4,
+		gaps_out = 4,
+	},
 })
