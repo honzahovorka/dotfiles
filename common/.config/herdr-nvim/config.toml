@@ -1,0 +1,6 @@
+[picker]
+# Default 300 makes herdr replay that much scrollback to satisfy the picker's
+# `pane read --source recent-unwrapped`, which visibly crawls the agent pane
+# to its oldest output before the popup appears. Git-changed files come from a
+# separate layer, so this only bounds the "paths scraped from recent output".
+scan_lines = 40
