@@ -1,5 +1,14 @@
 onboarding = false
 
+[theme]
+name = "terminal"
+
+[theme.custom]
+panel_bg = "black"
+
+[ui]
+accent = "blue"
+
 [ui.toast]
 delivery = "off"
 
