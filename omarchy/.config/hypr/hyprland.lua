@@ -8,6 +8,10 @@ dofile((os.getenv("OMARCHY_PATH") or "/usr/share/omarchy") .. "/default/hypr/boo
 -- Load Omarchy defaults.
 require("default.hypr.omarchy")
 
+-- Temporary backport of the Quake console coming in Omarchy 4.1. The plugin
+-- detects the upstream module and becomes a no-op once the release provides it.
+require("hypr.plugins.qconsole")
+
 -- Personal overrides, loaded after Omarchy's defaults so package updates can
 -- improve the defaults without rewriting these files.
 --
