@@ -133,7 +133,7 @@ the bar moved from Waybar to the Quickshell-based Omarchy shell.
 
 - `hypr/*.lua` holds the personal overrides; `hypr/machines/$HOST.lua` holds
   per-host settings, picked up by hostname
-- `omarchy/shell.json` owns the bar layout and idle timings; three bar widgets
+- `omarchy/shell.json` owns the bar layout and idle timings; five bar widgets
   come from the plugin marketplace (untracked):
   - `local.warp` — Cloudflare WARP toggle:
     [tobi/omarchy-warp](https://github.com/tobi/omarchy-warp)
@@ -141,6 +141,10 @@ the bar moved from Waybar to the Quickshell-based Omarchy shell.
     [IM0001GT/omarchy-hw-tooltip](https://github.com/IM0001GT/omarchy-hw-tooltip)
   - `crmne.mpris` — media controls with album art:
     [crmne/omarchy-mpris](https://github.com/crmne/omarchy-mpris)
+  - `io.github.thisisgm.omapods` — AirPods battery and listening modes:
+    [thisisgm/omarchy-pods](https://github.com/thisisgm/omarchy-pods)
+  - `jankeesvw.notification-center` — notification history in a bar panel:
+    [jankeesvw/omarchy-notification-center](https://github.com/jankeesvw/omarchy-notification-center)
 - `~/.config/hypr/monitors.lua` is deliberately **not** tracked: Omarchy rewrites
   it whenever monitor scaling changes
 
