@@ -47,12 +47,19 @@ o.bind("SUPER + SHIFT + G", "WhatsApp", { webapp = "https://web.whatsapp.com/", 
 hl.unbind("SUPER + SHIFT + A")
 o.bind("SUPER + SHIFT + A", "Claude", { webapp = "https://claude.ai" })
 
--- Screenshots. SUPER + CTRL + 1/2 are "Bar panel 1/2" by default, and are bound
--- by keycode there, so they have to be unbound the same way.
+-- Screenshots. SUPER + CTRL + 1/2/3 are "Bar panel 1/2/3" by default, and are
+-- bound by keycode there, so they have to be unbound the same way.
 hl.unbind("SUPER + CTRL + code:10")
 hl.unbind("SUPER + CTRL + code:11")
+hl.unbind("SUPER + CTRL + code:12")
 o.bind("SUPER + CTRL + code:10", "Screenshot", "omarchy-capture-screenshot smart")
 o.bind("SUPER + CTRL + code:11", "Screenshot (clipboard)", "omarchy-capture-screenshot smart copy")
+
+-- omasnap (https://github.com/tobi/omasnap): capture straight into an annotation
+-- editor. Installed to ~/.local/bin, which is on the session PATH. The overlay is
+-- single-instance and the same key dismisses it, so this is a toggle. See the
+-- layer rule in looknfeel.lua.
+o.bind("SUPER + CTRL + code:12", "Screenshot (annotate)", "omasnap")
 
 -- Keyboard layout switching, on Alt + Shift as always.
 --
@@ -79,18 +86,18 @@ hl.unbind("ALT + SHIFT + TAB")
 
 -- Resize mode: SUPER + R, then arrows or hjkl to resize, ESC or RETURN to leave.
 hl.define_submap("resize", function()
-  hl.bind("LEFT", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
-  hl.bind("UP", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
-  hl.bind("DOWN", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
-  hl.bind("RIGHT", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
+	hl.bind("LEFT", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
+	hl.bind("UP", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
+	hl.bind("DOWN", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
+	hl.bind("RIGHT", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
 
-  hl.bind("H", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
-  hl.bind("J", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
-  hl.bind("K", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
-  hl.bind("L", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
+	hl.bind("H", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
+	hl.bind("J", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
+	hl.bind("K", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
+	hl.bind("L", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
 
-  hl.bind("ESCAPE", hl.dsp.submap("reset"))
-  hl.bind("RETURN", hl.dsp.submap("reset"))
+	hl.bind("ESCAPE", hl.dsp.submap("reset"))
+	hl.bind("RETURN", hl.dsp.submap("reset"))
 end)
 
 o.bind("SUPER + R", "Resize mode", hl.dsp.submap("resize"))
