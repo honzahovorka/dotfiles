@@ -34,22 +34,47 @@
       ],
       "right": [
         {
-          "id": "omarchy.tray"
-        },
-        {
           "id": "crmne.mpris"
         },
         {
-          "id": "omarchy.keyboard-layout"
-        },
-        {
-          "id": "omarchy.tailscale"
-        },
-        {
-          "id": "local.warp"
-        },
-        {
-          "id": "omarchy.dropbox"
+          "id": "io.github.tyrichards.tray",
+          "hidden": [],
+          "order": [
+            "1Password_status_icon_1",
+            "Slack_status_icon_1",
+            "steam",
+            "omarchy.keyboard-layout",
+            "omarchy.dropbox",
+            "omarchy.tailscale",
+            "local.warp",
+            "dropbox-client-5149"
+          ],
+          "widgets": [
+            {
+              "entry": {
+                "id": "omarchy.tailscale"
+              },
+              "listed": true
+            },
+            {
+              "entry": {
+                "id": "local.warp"
+              },
+              "listed": true
+            },
+            {
+              "entry": {
+                "id": "omarchy.dropbox"
+              },
+              "listed": true
+            },
+            {
+              "entry": {
+                "id": "omarchy.keyboard-layout"
+              },
+              "listed": true
+            }
+          ]
         },
         {
           "id": "omarchy.agents"
@@ -83,5 +108,18 @@
     "position": "top",
     "transparent": false
   },
-  "plugins": []
+  "plugins": [
+    {
+      "id": "omarchy.tailscale"
+    },
+    {
+      "id": "local.warp"
+    },
+    {
+      "id": "omarchy.dropbox"
+    },
+    {
+      "id": "omarchy.keyboard-layout"
+    }
+  ]
 }
