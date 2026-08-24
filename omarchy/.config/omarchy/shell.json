@@ -40,14 +40,11 @@
           "id": "io.github.tyrichards.tray",
           "hidden": [],
           "order": [
-            "1Password_status_icon_1",
-            "Slack_status_icon_1",
-            "steam",
             "omarchy.keyboard-layout",
             "omarchy.dropbox",
             "omarchy.tailscale",
             "local.warp",
-            "dropbox-client-5149"
+            "io.github.thisisgm.omapods"
           ],
           "widgets": [
             {
@@ -73,17 +70,21 @@
                 "id": "omarchy.keyboard-layout"
               },
               "listed": true
+            },
+            {
+              "entry": {
+                "id": "io.github.thisisgm.omapods"
+              },
+              "listed": true
             }
-          ]
+          ],
+          "showTrayIcons": false
         },
         {
           "id": "omarchy.agents"
         },
         {
           "id": "im0001gt.hw-tooltip"
-        },
-        {
-          "id": "io.github.thisisgm.omapods"
         },
         {
           "id": "omarchy.bluetooth"
@@ -120,6 +121,9 @@
     },
     {
       "id": "omarchy.keyboard-layout"
+    },
+    {
+      "id": "io.github.thisisgm.omapods"
     }
   ]
 }
