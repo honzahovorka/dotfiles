@@ -6,6 +6,11 @@
   current = yellow reverse
   local = yellow
   remote = green
+[color "decorate"]
+  branch = blue bold
+  remoteBranch = green bold
+  tag = yellow
+  HEAD = blue bold
 [color "diff"]
   meta = yellow bold
   frag = magenta bold
@@ -46,7 +51,7 @@
   last = diff HEAD^                 # diff last committed change
 
   # log
-  l = log --oneline --decorate --date=short
+  l = log --graph
   la = "!git l --all"
   lr = "!git l -30"
   lra = "!git lr --all"
@@ -101,7 +106,8 @@
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
 [format]
-  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+  # neogit-style log line: gray hash, colored refs, subject, author + relative date columns
+  pretty = format:%C(brightblack)%h%C(reset) %C(auto)%(decorate:prefix=,suffix= ,tag=,separator= )%C(reset)%<|(-44,trunc)%s %C(yellow)%<(19,trunc)%an %C(cyan)%>|(-1)%ar%C(reset)
 [mergetool]
   prompt = false
 [mergetool "nvimdiff"]
