@@ -1,5 +1,6 @@
 #!/bin/bash
-# bt-resume-reconnect: get bonded Bluetooth input devices back after suspend.
+# bt-resume-reconnect: get bonded Bluetooth input devices back after suspend
+# or login.
 #
 # librepods (the omapods AirPods plugin) keeps a continuous BLE discovery scan
 # running. While it does, the kernel never auto-connects a bonded BLE HID device
@@ -7,8 +8,13 @@
 # scan for sleep and restarts it 2 s after wake, so the mouse gets a ~3 s window
 # and usually misses it — reconnects then take minutes or never happen.
 #
-# This daemon watches logind's PrepareForSleep signal, the same way
-# omarchy-system-sleep-monitor does. On wake it:
+# The same race happens at login: librepods starts with the graphical session
+# and is scanning within seconds of the adapter powering up, so a mouse that is
+# already awake never gets in either.
+#
+# This daemon opens a reconnect window once at startup, then watches logind's
+# PrepareForSleep signal, the same way omarchy-system-sleep-monitor does, and
+# opens another on every wake. In a window it:
 #   1. pauses librepods so the kernel's passive scan can accept the mouse the
 #      moment it is touched,
 #   2. nudges every trusted input device that is still disconnected with a
@@ -18,6 +24,9 @@
 #
 # Runs as the bt-resume-reconnect.service user unit. Logs go to the journal:
 #   journalctl --user -u bt-resume-reconnect -f
+#
+# Only a suspend/resume cycle is handled after startup; a Bluetooth adapter
+# reset or a librepods restart on their own do not reopen the window.
 
 set -uo pipefail
 
@@ -28,6 +37,11 @@ SETTLE=2                        # seconds to let BlueZ come back after resume
 SCANNER_UNIT=librepods.service  # the unit that owns the permanent BLE scan
 
 log() { printf '%s\n' "$*"; }
+
+# Whether this process stopped SCANNER_UNIT and still owes it a restart. Kept
+# global on purpose: the EXIT trap in handle_wake runs after the function's
+# locals are gone.
+paused=false
 
 # MACs of trusted devices that are HID: BlueZ tags them with an input-* icon,
 # and BLE HID also advertises the HID service UUID.
@@ -46,9 +60,9 @@ is_connected() {
   bluetoothctl info "$1" 2>/dev/null | grep -q 'Connected: yes'
 }
 
-# Runs in a background subshell per wake, so its state is its own.
+# Runs in a background subshell per window, so its state is its own.
 handle_wake() {
-  local paused=false start deadline last_connect mac
+  local start deadline last_connect mac
   local -a devices pending=()
 
   resume_scanner() {
@@ -70,8 +84,16 @@ handle_wake() {
     return 0
   fi
 
+  for mac in "${devices[@]}"; do
+    is_connected "$mac" || pending+=("$mac")
+  done
+  if ((${#pending[@]} == 0)); then
+    log "all input devices already connected, nothing to do"
+    return 0
+  fi
+
   if systemctl --user is-active --quiet "$SCANNER_UNIT"; then
-    log "pausing $SCANNER_UNIT for up to ${WINDOW}s while ${devices[*]} reconnect"
+    log "pausing $SCANNER_UNIT for up to ${WINDOW}s while ${pending[*]} reconnect"
     systemctl --user stop "$SCANNER_UNIT" && paused=true
   fi
 
@@ -107,6 +129,11 @@ handle_wake() {
 monitor() {
   local line handler_pid=
 
+  # Login is the same race as resume: librepods starts alongside us.
+  log "service started, opening reconnect window"
+  handle_wake &
+  handler_pid=$!
+
   while IFS= read -r line; do
     case $line in
       *"boolean true"*) # about to suspend
@@ -140,7 +167,7 @@ case ${1:-} in
     ;;
   -h | --help)
     echo "usage: bt-resume-reconnect [--once]"
-    echo "  (no args)  watch logind PrepareForSleep and run the reconnect window on every resume"
+    echo "  (no args)  run a reconnect window now, then another on every resume (logind PrepareForSleep)"
     echo "  --once     run one reconnect window now and exit"
     ;;
   *)
