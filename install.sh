@@ -167,52 +167,6 @@ setup_pinentry_switch() {
     fi
 }
 
-# Stow only links unit files; systemd still has to be told about them. Enable the
-# units the omarchy package ships so a fresh machine gets them without a manual
-# `systemctl --user enable --now` after stowing.
-OMARCHY_USER_SERVICES=(
-    bt-resume-reconnect.service
-)
-
-enable_user_services() {
-    local unit
-
-    if ! command -v systemctl &> /dev/null; then
-        log "systemctl not found, skipping user service enablement"
-        return 0
-    fi
-
-    if [[ "$DRY_RUN" == "true" ]]; then
-        echo "[DRY RUN] Would run: systemctl --user daemon-reload"
-        for unit in "${OMARCHY_USER_SERVICES[@]}"; do
-            echo "[DRY RUN] Would run: systemctl --user enable --now $unit"
-        done
-        return 0
-    fi
-
-    echo "Enabling user services..."
-    if ! systemctl --user daemon-reload; then
-        log_error "systemctl --user daemon-reload failed, skipping user service enablement"
-        echo "❌ Could not reload the user systemd instance (continuing)"
-        return 0
-    fi
-
-    for unit in "${OMARCHY_USER_SERVICES[@]}"; do
-        if [[ ! -e "$HOME/.config/systemd/user/$unit" ]]; then
-            log_error "Unit $unit not found under ~/.config/systemd/user, skipping"
-            echo "❌ $unit not stowed, skipping"
-            continue
-        fi
-        if systemctl --user enable --now "$unit"; then
-            echo "✓ Enabled $unit"
-            log "Enabled user service: $unit"
-        else
-            log_error "Failed to enable user service: $unit"
-            echo "❌ Failed to enable $unit (continuing)"
-        fi
-    done
-}
-
 main() {
     local os=""
 
@@ -340,7 +294,6 @@ main() {
                     exit 1
                 fi
             fi
-            enable_user_services
             ;;
         ubuntu)
             if ! stow_package "ubuntu"; then

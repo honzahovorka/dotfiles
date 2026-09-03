@@ -144,8 +144,6 @@ the bar moved from Waybar to the Quickshell-based Omarchy shell.
     [IM0001GT/omarchy-hw-tooltip](https://github.com/IM0001GT/omarchy-hw-tooltip)
   - `crmne.mpris` — media controls with album art:
     [crmne/omarchy-mpris](https://github.com/crmne/omarchy-mpris)
-  - `io.github.thisisgm.omapods` — AirPods battery and listening modes:
-    [thisisgm/omarchy-pods](https://github.com/thisisgm/omarchy-pods)
   - `jankeesvw.notification-center` — notification history in a bar panel:
     [jankeesvw/omarchy-notification-center](https://github.com/jankeesvw/omarchy-notification-center)
 - The Tailscale, WARP, Dropbox and keyboard-layout widgets are tucked into the

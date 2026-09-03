@@ -42,20 +42,12 @@
           "order": [
             "omarchy.keyboard-layout",
             "omarchy.dropbox",
-            "omarchy.tailscale",
-            "local.warp",
-            "io.github.thisisgm.omapods"
+            "omarchy.tailscale"
           ],
           "widgets": [
             {
               "entry": {
                 "id": "omarchy.tailscale"
-              },
-              "listed": true
-            },
-            {
-              "entry": {
-                "id": "local.warp"
               },
               "listed": true
             },
@@ -70,15 +62,12 @@
                 "id": "omarchy.keyboard-layout"
               },
               "listed": true
-            },
-            {
-              "entry": {
-                "id": "io.github.thisisgm.omapods"
-              },
-              "listed": true
             }
           ],
           "showTrayIcons": false
+        },
+        {
+          "id": "local.warp"
         },
         {
           "id": "omarchy.agents"
@@ -114,16 +103,10 @@
       "id": "omarchy.tailscale"
     },
     {
-      "id": "local.warp"
-    },
-    {
       "id": "omarchy.dropbox"
     },
     {
       "id": "omarchy.keyboard-layout"
-    },
-    {
-      "id": "io.github.thisisgm.omapods"
     }
   ]
 }
