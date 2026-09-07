@@ -14,9 +14,9 @@ o.bind("SUPER + SHIFT + grave", "Move window to scratchpad", hl.dsp.window.move(
 -- How much of the usable screen the console covers, measured from the top.
 local share = 0.5
 
--- Start the configured default agent only when the console is first opened.
+-- Start a plain terminal only when the console is first opened.
 -- Pinning the command to the special workspace avoids relying on spawn timing.
-local seed = "[workspace special:scratchpad silent] omarchy-agent"
+local seed = "[workspace special:scratchpad silent] omarchy launch terminal"
 
 -- Dimming only applies while a special workspace is open.
 hl.config({
