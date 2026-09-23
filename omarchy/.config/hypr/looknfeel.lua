@@ -11,3 +11,7 @@ hl.layer_rule({
   animation = "none",
   no_screen_share = true,
 })
+
+-- Diablo IV maps tiled, gets squared by the single-window aspect ratio, and
+-- never re-fits after Wine fullscreens it. Fullscreen from the first frame.
+o.window({ class = "^steam_app_battlenet$", title = "^Diablo IV$" }, { fullscreen = true })
