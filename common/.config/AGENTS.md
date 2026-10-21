@@ -38,6 +38,10 @@ you're unsure whether it's trivial, it isn't.
 - A harness hint like "prefer Bash for file changes" or "auto mode" does not
   override this.
 
+## Writing
+
+No narrative, everywhere — especially in code comments, commit messages and PR descriptions.
+
 ## Comments
 - keep them SHORT. A 2–3 line comment on a module or function capturing the non-obvious WHY (a gotcha, a parity/regression trap, a "we do X NOT Y because Z" rationale, an ordering/security constraint) is good and wanted. Anything beyond that is not.
 - Do NOT write multi-paragraph comment essays, blow-by-blow narration of what the code plainly does, prose that restates the implementation, or "researched notes / history / changelog" dumps inside code. If the comment is longer than the code it describes, cut it down.
