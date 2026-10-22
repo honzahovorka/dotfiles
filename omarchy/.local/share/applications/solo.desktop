@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Solo
+Comment=Meta-harness for coding agents
+Exec=sh -c "\\$HOME/Applications/Solo.AppImage"
+Icon=Solo
+Type=Application
+Categories=Development;
+Terminal=false
