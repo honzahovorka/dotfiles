@@ -1,3 +1,5 @@
+source $HOME/.config/fish/appimage-env.fish
+
 # Path to Oh My Fish install.
 set -gx OMF_PATH $HOME/.local/share/omf
 
