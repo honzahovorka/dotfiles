@@ -1,0 +1,26 @@
+// Catppuccin colours on ribbon's shape: Mocha for dark, Latte for light.
+name "Catppuccin"
+theme "ribbon"
+
+// Square, like Omarchy's windows (Hyprland rounding = 0).
+tokens {
+    radius 0
+}
+
+tokens "dark" {
+    fill "#1e1e2e"
+    text "#cdd6f4"
+    muted "#a6adc8"
+    faint "#6c7086"
+    border 1 "#45475a"
+    accent "#89b4fa"
+}
+
+tokens "light" {
+    fill "#eff1f5"
+    text "#4c4f69"
+    muted "#6c6f85"
+    faint "#9ca0b0"
+    border 1 "#bcc0cc"
+    accent "#1e66f5"
+}

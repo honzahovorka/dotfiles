@@ -1,5 +1,8 @@
 {
   "version": 1,
+  "disabledPlugins": [
+    "omarchy.notifications"
+  ],
   "idle": {
     "lock": 300,
     "screensaver": 150

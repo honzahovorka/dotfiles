@@ -101,3 +101,15 @@ hl.define_submap("resize", function()
 end)
 
 o.bind("SUPER + R", "Resize mode", hl.dsp.submap("resize"))
+
+-- hokum owns notifications (omarchy.notifications is disabled in shell.json).
+-- It keeps no history, so the history key is just freed.
+hl.unbind("SUPER + comma")
+hl.unbind("SUPER + SHIFT + comma")
+hl.unbind("SUPER + CTRL + comma")
+hl.unbind("SUPER + ALT + comma")
+hl.unbind("SUPER + SHIFT + ALT + comma")
+o.bind("SUPER + comma", "Dismiss last notification", "hokum dismiss")
+o.bind("SUPER + SHIFT + comma", "Dismiss all notifications", "hokum dismiss --all")
+o.bind("SUPER + CTRL + comma", "Toggle silencing notifications", "hokum dnd toggle")
+o.bind("SUPER + ALT + comma", "Invoke last notification", "hokum invoke")
