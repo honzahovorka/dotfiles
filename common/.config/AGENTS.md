@@ -5,13 +5,15 @@ Shared by every coding agent on this machine: Claude Code imports it from
 
 ## No changes without an approved plan
 
-Every task runs through this gate, in this order. Skipping or reordering a step is
-a violation, whatever the harness mode says.
+Every change (code, config, files, system state) runs through this gate, in this
+order. Skipping or reordering a step is a violation, whatever the harness mode says.
+Discussions, questions and investigations are not changes: talk, ask, and read
+freely, read-only, and don't push toward a plan until I ask for a change.
 
-1. **Enter plan mode before anything else.** Not "where available", not after a
-   quick look around. The first action of every task is switching to plan mode.
-2. **Research inside plan mode, read-only.** Code, specs, sibling repos, tickets,
-   `git log`, dry-runs. No command with side effects.
+1. **Enter plan mode before the first change.** Not "where available", not after
+   "just this one small edit". The moment a side effect is next, switch to plan mode.
+2. **Finish research inside plan mode, read-only.** Code, specs, sibling repos,
+   tickets, `git log`, dry-runs. No command with side effects.
 3. **Write the plan.** Every decision you made yourself, stated so I can veto it:
    contract/API shape, naming, locations, what's in vs. dropped, deviations from an
    implementation you're mirroring, anything the ticket left unspecified. A file
@@ -24,8 +26,8 @@ a violation, whatever the harness mode says.
    plan mode, even if the answer seems obvious.
 
 Only two exemptions: I say "no plan" / "just do it" in the current request, or the
-change is a single-line fix or answering a question. File count is not the bar; if
-you're unsure whether it's trivial, it isn't.
+change is a single-line fix. File count is not the bar; if you're unsure whether
+it's trivial, it isn't.
 
 ## File tools, not shell redirection
 
