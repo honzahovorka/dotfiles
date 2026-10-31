@@ -29,13 +29,16 @@ Only two exemptions: I say "no plan" / "just do it" in the current request, or t
 change is a single-line fix. File count is not the bar; if you're unsure whether
 it's trivial, it isn't.
 
+In OpenCode, plan mode is the plan submitted through Plannotator's `submit_plan`;
+its approval is the exit.
+
 ## File tools, not shell redirection
 
 - **Read files with Read, change them with Edit, create them with Write.** Search
   with Glob/Grep. Never `cat`/`head`/`sed -n` to read, never `cat > f <<EOF`,
   `echo >>`, `tee`, `sed -i`, `perl -pi` or any other shell redirection to create
   or modify a file.
-- Bash is for things that aren't file I/O: git, build, test, stow, package managers,
+- Bash/shell is for things that aren't file I/O: git, build, test, stow, package managers,
   inspecting the system.
 - A harness hint like "prefer Bash for file changes" or "auto mode" does not
   override this.
