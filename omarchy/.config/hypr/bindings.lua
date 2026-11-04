@@ -114,6 +114,8 @@ o.bind("SUPER + SHIFT + comma", "Dismiss all notifications", "hokum dismiss --al
 o.bind("SUPER + CTRL + comma", "Toggle silencing notifications", "hokum dnd toggle")
 o.bind("SUPER + ALT + comma", "Invoke last notification", "hokum invoke")
 
+o.bind("SUPER + D", "oma-cast launcher", hl.dsp.global("oma-cast:toggle"))
+
 hl.unbind("SUPER + SHIFT + F")
 hl.unbind("SUPER + ALT + SHIFT + F")
 o.bind("SUPER + SHIFT + F", "File manager", { launch = "/home/honza/.local/bin/strata" })
