@@ -113,3 +113,12 @@ o.bind("SUPER + comma", "Dismiss last notification", "hokum dismiss")
 o.bind("SUPER + SHIFT + comma", "Dismiss all notifications", "hokum dismiss --all")
 o.bind("SUPER + CTRL + comma", "Toggle silencing notifications", "hokum dnd toggle")
 o.bind("SUPER + ALT + comma", "Invoke last notification", "hokum invoke")
+
+hl.unbind("SUPER + SHIFT + F")
+hl.unbind("SUPER + ALT + SHIFT + F")
+o.bind("SUPER + SHIFT + F", "File manager", { launch = "/home/honza/.local/bin/strata" })
+o.bind(
+	"SUPER + ALT + SHIFT + F",
+	"File manager (cwd)",
+	'uwsm-app -- /home/honza/.local/bin/strata "$(omarchy-cmd-terminal-cwd)"'
+)
