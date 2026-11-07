@@ -8,26 +8,13 @@
     "screensaver": 150
   },
   "bar": {
-    "centerAnchor": "omarchy.clock",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.indicators"
-        },
         {
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
           "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.elsewhen"
-        },
-        {
-          "id": "omarchy.weather"
-        },
-        {
-          "id": "omarchy.system-update"
         }
       ],
       "left": [
@@ -43,34 +30,7 @@
           "id": "crmne.mpris"
         },
         {
-          "id": "io.github.tyrichards.tray",
-          "hidden": [],
-          "order": [
-            "omarchy.keyboard-layout",
-            "omarchy.dropbox",
-            "omarchy.tailscale"
-          ],
-          "widgets": [
-            {
-              "entry": {
-                "id": "omarchy.tailscale"
-              },
-              "listed": true
-            },
-            {
-              "entry": {
-                "id": "omarchy.dropbox"
-              },
-              "listed": true
-            },
-            {
-              "entry": {
-                "id": "omarchy.keyboard-layout"
-              },
-              "listed": true
-            }
-          ],
-          "showTrayIcons": false
+          "id": "omarchy.tray"
         },
         {
           "id": "local.warp"
@@ -98,6 +58,55 @@
         },
         {
           "id": "jankeesvw.notification-center"
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Prague",
+              "zone": "Europe/Prague"
+            },
+            {
+              "name": "Dubai",
+              "zone": "Asia/Dubai"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "New York",
+              "zone": "America/New_York"
+            }
+          ]
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        }
+      ],
+      "tray": [
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "omarchy.dropbox"
+        },
+        {
+          "id": "omarchy.tailscale"
         }
       ]
     },

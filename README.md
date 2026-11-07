@@ -133,11 +133,8 @@ the bar moved from Waybar to the Quickshell-based Omarchy shell.
 
 - `hypr/*.lua` holds the personal overrides; `hypr/machines/$HOST.lua` holds
   per-host settings, picked up by hostname
-- `omarchy/shell.json` owns the bar layout and idle timings; six bar widgets
+- `omarchy/shell.json` owns the bar layout and idle timings; four bar widgets
   come from the plugin marketplace (untracked):
-  - `io.github.tyrichards.tray` — drop-in replacement for the stock tray, with a
-    slide-out drawer that holds other bar widgets:
-    [TyRichards/omarchy-tray](https://github.com/TyRichards/omarchy-tray)
   - `local.warp` — Cloudflare WARP toggle:
     [tobi/omarchy-warp](https://github.com/tobi/omarchy-warp)
   - `im0001gt.hw-tooltip` — hardware stats tooltip:
@@ -146,8 +143,8 @@ the bar moved from Waybar to the Quickshell-based Omarchy shell.
     [crmne/omarchy-mpris](https://github.com/crmne/omarchy-mpris)
   - `jankeesvw.notification-center` — notification history in a bar panel:
     [jankeesvw/omarchy-notification-center](https://github.com/jankeesvw/omarchy-notification-center)
-- The Tailscale, WARP, Dropbox and keyboard-layout widgets are tucked into the
-  tray drawer instead of sitting directly on the bar
+- The Tailscale, Dropbox and keyboard-layout widgets sit in the stock
+  `omarchy.tray` drawer (the `tray` layout section) instead of directly on the bar
 - `~/.config/hypr/monitors.lua` is deliberately **not** tracked: Omarchy rewrites
   it whenever monitor scaling changes
 
