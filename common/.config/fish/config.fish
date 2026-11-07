@@ -33,7 +33,7 @@ bind \cr _atuin_search
 bind -M insert \cr _atuin_search
 
 # Mise
-$HOME/.local/bin/mise activate fish | source
+mise activate fish | source
 
 set -gx  LC_ALL en_US.UTF-8
 
