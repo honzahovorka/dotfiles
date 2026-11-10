@@ -275,9 +275,10 @@ main() {
     # Create these as real directories first, or stow folds them into a single
     # symlink and apps (e.g. Claude Code) write machine state into the repo.
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo "[DRY RUN] Would ensure ~/.config and ~/.claude exist as real directories"
+        echo "[DRY RUN] Would ensure ~/.config, ~/.claude and ~/.ssh exist as real directories"
     else
-        mkdir -p "$HOME/.config" "$HOME/.claude"
+        mkdir -p "$HOME/.config" "$HOME/.claude" "$HOME/.ssh"
+        chmod 700 "$HOME/.ssh"
     fi
 
     # Always install common configs

@@ -11,6 +11,8 @@ dotfiles-backup/
 common/.gnupg/*
 !common/.gnupg/gpg-agent.conf
 !common/.gnupg/pinentry-switch
+macos/.ssh/*
+!macos/.ssh/config
 common/.config/jj/repos/
 
 # Machine-local Hyprland state, never tracked. monitors.lua is rewritten in place
