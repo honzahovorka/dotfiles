@@ -13,34 +13,42 @@ set -Ux FZF_DEFAULT_OPTS '--height=90% --layout=reverse --info=inline --border -
 set -x EDITOR 'nvim'
 
 # Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
+test -f $OMF_PATH/init.fish; and source $OMF_PATH/init.fish
 
 # Starship
-function starship_transient_rprompt_func
-  starship module time
+if type -q starship
+  function starship_transient_rprompt_func
+    starship module time
+  end
+  starship init fish | source
+  enable_transience
 end
-starship init fish | source
-enable_transience
 
 # Zoxide
-zoxide init fish | source
+if type -q zoxide
+  zoxide init fish | source
+end
 
 # Atuin
-set -gx ATUIN_NOBIND "true"
-atuin init fish | source
+if type -q atuin
+  set -gx ATUIN_NOBIND "true"
+  atuin init fish | source
 
-bind \cr _atuin_search
-bind -M insert \cr _atuin_search
+  bind \cr _atuin_search
+  bind -M insert \cr _atuin_search
+end
 
 # Mise
-mise activate fish | source
+if type -q mise
+  mise activate fish | source
+end
 
 set -gx  LC_ALL en_US.UTF-8
 
 set -x GPG_TTY (tty)
 
 # Load secrets
-source $HOME/.config/fish/secrets.fish
+test -f $HOME/.config/fish/secrets.fish; and source $HOME/.config/fish/secrets.fish
 
 set -x HOST (hostname)
 
@@ -60,5 +68,5 @@ fish_add_path $ANDROID_HOME/tools/bin
 
 set -x ANDROID_AVD_HOME $HOME/.config/.android/avd
 
-set -x JAVA_HOME /usr/lib/jvm/java-17-openjdk
+test -d /usr/lib/jvm/java-17-openjdk; and set -x JAVA_HOME /usr/lib/jvm/java-17-openjdk
 

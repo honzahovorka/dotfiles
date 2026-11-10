@@ -5,6 +5,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DRY_RUN=false
 BACKUP_DIR="$SCRIPT_DIR/dotfiles-backup"
+BACKUP_ROOT="$BACKUP_DIR/$(date +%Y%m%d-%H%M%S)"
 BACKUP_ENABLED=true
 LOG_FILE="$SCRIPT_DIR/install.log"
 
@@ -78,6 +79,31 @@ get_package_files() {
     done
 }
 
+# Move pre-existing targets aside instead of `stow --adopt`, which would copy
+# them over the tracked files in the repo. -ef skips targets that already
+# resolve to the repo file (including through a folded parent directory).
+backup_conflicts() {
+    local package="$1"
+    local rel target source
+
+    [[ "$BACKUP_ENABLED" == "true" ]] || return 0
+
+    while read -r rel; do
+        target="$HOME/$rel"
+        source="$SCRIPT_DIR/$package/$rel"
+        [[ -e "$target" || -L "$target" ]] || continue
+        [[ "$target" -ef "$source" ]] && continue
+
+        if [[ "$DRY_RUN" == "true" ]]; then
+            echo "[DRY RUN] Would back up $target"
+        else
+            mkdir -p "$(dirname "$BACKUP_ROOT/$rel")"
+            mv "$target" "$BACKUP_ROOT/$rel"
+            log "Backed up $target -> $BACKUP_ROOT/$rel"
+        fi
+    done < <(get_package_files "$package")
+}
+
 stow_package() {
     local package="$1"
 
@@ -93,13 +119,15 @@ stow_package() {
 
     log "Processing package: $package"
 
+    backup_conflicts "$package"
+
     if [[ "$DRY_RUN" == "true" ]]; then
         echo "[DRY RUN] Would install $package configs..."
         cd "$SCRIPT_DIR"
         echo "[DRY RUN] Command: stow -t '$HOME' '$package'"
         if command -v stow &> /dev/null; then
             echo "[DRY RUN] Stow output:"
-            if ! stow -n -t "$HOME" "$package" --adopt 2>&1; then
+            if ! stow -n -t "$HOME" "$package" 2>&1; then
                 log_error "Dry-run stow failed for package: $package"
             fi
         fi
@@ -112,10 +140,9 @@ stow_package() {
 
         # Run stow and check exit code properly
         local stow_output
-        local stow_exit_code
+        local stow_exit_code=0
 
-        stow_output=$(stow -t "$HOME" "$package" --adopt 2>&1)
-        stow_exit_code=$?
+        stow_output=$(stow -t "$HOME" "$package" 2>&1) || stow_exit_code=$?
 
         echo "$stow_output" | tee -a "$LOG_FILE"
 
@@ -126,8 +153,6 @@ stow_package() {
             log_error "Failed to install package: $package (exit code: $stow_exit_code)"
             echo "❌ Failed to install $package configs"
             echo "Stow output logged to $LOG_FILE"
-            echo ""
-            echo "This shouldn't happen after cleanup. Please check the log for details."
             return 1
         fi
     fi
@@ -147,13 +172,13 @@ setup_pinentry_switch() {
     fi
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo "[DRY RUN] Would symlink $link -> $target (sudo)"
+        echo "[DRY RUN] Would create $(dirname "$link") and symlink $link -> $target (sudo)"
         echo "[DRY RUN] Would reload gpg-agent"
         return 0
     fi
 
     echo "Setting up GPG pinentry dispatcher..."
-    if sudo ln -sf "$target" "$link"; then
+    if sudo mkdir -p "$(dirname "$link")" && sudo ln -sf "$target" "$link"; then
         echo "✓ Linked $link"
         log "Linked pinentry dispatcher: $link -> $target"
     else
@@ -179,6 +204,10 @@ main() {
         case $1 in
             -n|--dry-run)
                 DRY_RUN=true
+                shift
+                ;;
+            -b|--no-backup)
+                BACKUP_ENABLED=false
                 shift
                 ;;
             -h|--help)
@@ -242,6 +271,14 @@ main() {
     esac
 
     check_stow
+
+    # Create these as real directories first, or stow folds them into a single
+    # symlink and apps (e.g. Claude Code) write machine state into the repo.
+    if [[ "$DRY_RUN" == "true" ]]; then
+        echo "[DRY RUN] Would ensure ~/.config and ~/.claude exist as real directories"
+    else
+        mkdir -p "$HOME/.config" "$HOME/.claude"
+    fi
 
     # Always install common configs
     if ! stow_package "common"; then
