@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/honza/.docker/bin"
+# End of Docker Desktop section.
+
 source $HOME/.config/fish/appimage-env.fish
 
 # Path to Oh My Fish install.
@@ -60,13 +64,20 @@ fish_add_path $HOME/.opencode/bin
 # plannotator
 fish_add_path $HOME/.local/bin
 
-set -x ANDROID_HOME $HOME/Android/Sdk
+switch (uname)
+  case Darwin
+    set -x ANDROID_HOME $HOME/Library/Android/sdk
+  case '*'
+    set -x ANDROID_HOME $HOME/Android/Sdk
+    set -x ANDROID_AVD_HOME $HOME/.config/.android/avd
+end
 fish_add_path $ANDROID_HOME/emulator
 fish_add_path $ANDROID_HOME/platform-tools
 fish_add_path $ANDROID_HOME/tools
 fish_add_path $ANDROID_HOME/tools/bin
 
-set -x ANDROID_AVD_HOME $HOME/.config/.android/avd
-
 test -d /usr/lib/jvm/java-17-openjdk; and set -x JAVA_HOME /usr/lib/jvm/java-17-openjdk
 
+
+# uv
+fish_add_path "/Users/honza/.local/bin"
