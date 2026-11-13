@@ -192,6 +192,34 @@ setup_pinentry_switch() {
     fi
 }
 
+# Reads the Brewfile from the repo, not the stowed ~/.Brewfile: this runs
+# before stow, which the Brewfile itself installs.
+install_brew_packages() {
+    local brewfile="$SCRIPT_DIR/macos/.Brewfile"
+
+    if ! command -v brew &> /dev/null; then
+        echo "Homebrew not found, skipping packages (install it from https://brew.sh)"
+        log "Homebrew not found, skipping $brewfile"
+        return 0
+    fi
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        echo "[DRY RUN] Would run: brew bundle install --no-upgrade --file='$brewfile'"
+        brew bundle check --verbose --no-upgrade --file="$brewfile" || true
+        return 0
+    fi
+
+    echo "Installing Homebrew packages..."
+    log "Running: brew bundle install --no-upgrade --file='$brewfile'"
+    if brew bundle install --no-upgrade --file="$brewfile"; then
+        echo "✓ Homebrew packages installed"
+        log "Installed Homebrew packages from $brewfile"
+    else
+        log_error "brew bundle failed for $brewfile"
+        echo "❌ Some Homebrew packages failed to install (continuing)"
+    fi
+}
+
 main() {
     local os=""
 
@@ -269,6 +297,10 @@ main() {
             fi
             ;;
     esac
+
+    if [[ "$os" == "macos" ]]; then
+        install_brew_packages
+    fi
 
     check_stow
 
@@ -366,6 +398,7 @@ main() {
         echo "Packages that would be installed:"
         echo "  ✓ common (cross-platform configs)"
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
+        [[ "$os" == "macos" ]] && echo "  ✓ Homebrew packages (macos/.Brewfile)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy-wallpapers (shared catppuccin wallpapers)"
@@ -378,6 +411,7 @@ main() {
         echo "Installed packages:"
         echo "  ✓ common (cross-platform configs)"
         [[ "$os" == "macos" ]] && echo "  ✓ macos (sketchybar, aerospace)"
+        [[ "$os" == "macos" ]] && echo "  ✓ Homebrew packages (macos/.Brewfile)"
         [[ "$os" == "arch" ]] && echo "  ✓ arch (arch-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy (omarchy-specific configs)"
         [[ "$os" == "omarchy" ]] && echo "  ✓ omarchy-wallpapers (shared catppuccin wallpapers)"
