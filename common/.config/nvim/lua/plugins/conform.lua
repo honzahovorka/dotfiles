@@ -21,8 +21,27 @@ return {
 
 		-- Use the same Deno/Node ownership decision as the language servers.
 		-- A package may still explicitly choose `deno fmt` while using vtsls for
-		-- type checking. Within other Node projects, prefer an explicit Biome
-		-- config and otherwise use the first available Prettier implementation.
+		-- type checking. Within other Node projects, oxfmt wins when its config is
+		-- the closest formatter config (monorepos mix it with Prettier), then an
+		-- explicit Biome config, otherwise the first available Prettier.
+		local oxfmt_markers = { ".oxfmtrc.json", ".oxfmtrc.jsonc", "oxfmt.config.ts" }
+		local prettier_markers = {
+			".prettierrc",
+			".prettierrc.json",
+			".prettierrc.json5",
+			".prettierrc.yaml",
+			".prettierrc.yml",
+			".prettierrc.toml",
+			".prettierrc.js",
+			".prettierrc.cjs",
+			".prettierrc.mjs",
+			".prettierrc.ts",
+			"prettier.config.js",
+			"prettier.config.cjs",
+			"prettier.config.mjs",
+			"prettier.config.ts",
+		}
+
 		local function package_uses_deno_fmt(dir)
 			local package_root = vim.fs.root(dir, { "package.json" })
 			if not package_root then
@@ -49,6 +68,13 @@ return {
 			local runtime = ts_runtime.resolve(bufnr)
 			if runtime == "deno" then
 				return { "deno_fmt" }
+			end
+
+			local oxfmt_root = vim.fs.root(dir, oxfmt_markers)
+			local prettier_root = vim.fs.root(dir, prettier_markers)
+			if oxfmt_root and (not prettier_root or #oxfmt_root >= #prettier_root) then
+				-- No LSP fallback: a missing binary must not reformat with vtsls.
+				return { "oxfmt", lsp_format = "never" }
 			end
 
 			if vim.fs.root(dir, { "biome.json", "biome.jsonc" }) then
