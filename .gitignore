@@ -14,6 +14,8 @@ common/.gnupg/*
 macos/.ssh/*
 !macos/.ssh/config
 common/.config/jj/repos/
+common/.config/herdr/session.json
+common/.config/herdr/session-snapshots/
 
 # Machine-local Hyprland state, never tracked. monitors.lua is rewritten in place
 # by omarchy-hyprland-monitor-scaling (SUPER + SLASH) and read by
