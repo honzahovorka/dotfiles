@@ -79,7 +79,20 @@ local function catppuccin_integrations()
 			operators = {},
 		},
 		color_overrides = {},
-		custom_highlights = {},
+		-- Neogit derives these from Normal's bg, which is transparent here, so it
+		-- falls back to grey / dark-biased colors that look off in latte.
+		custom_highlights = function(C)
+			local U = require("catppuccin.utils.colors")
+			return {
+				NeogitHunkHeaderCursor = { bg = U.darken(C.blue, 0.30, C.base), fg = C.blue, style = { "bold" } },
+				NeogitDiffContextCursor = { bg = C.surface1 },
+				NeogitDiffAddCursor = { bg = U.darken(C.green, 0.45, C.base), fg = U.lighten(C.green, 0.85, C.text) },
+				NeogitDiffDeleteCursor = { bg = U.darken(C.red, 0.45, C.base), fg = U.lighten(C.red, 0.85, C.text) },
+				NeogitActiveItem = { bg = U.darken(C.peach, 0.30, C.base), fg = C.peach, style = { "bold" } },
+				NeogitFloatHeader = { bg = C.mantle, style = { "bold" } },
+				NeogitFloatHeaderHighlight = { bg = C.surface0, fg = C.sky, style = { "bold" } },
+			}
+		end,
 		integrations = {
 			blink_cmp = true,
 			gitsigns = true,
