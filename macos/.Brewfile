@@ -1,5 +1,8 @@
+tap "cormacrelf/tap"
+
 brew "atuin"
 brew "btop"
+brew "cormacrelf/tap/dark-notify"
 brew "eza"
 brew "fastfetch"
 brew "fish"
