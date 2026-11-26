@@ -1,6 +1,7 @@
 tap "cormacrelf/tap"
 
 brew "atuin"
+brew "bat"
 brew "btop"
 brew "cormacrelf/tap/dark-notify"
 brew "eza"
